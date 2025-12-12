@@ -1,96 +1,19 @@
-# --- Frontend ---
-Frontend/.angular/
+# Node modules
+node_modules/
 
-# --- Backend .NET build folders ---
-bin/
-obj/
-[Bb]uild/
-[Ll]og/
-[Ll]ogs/
+# Build output
+dist/
+out-tsc/
 
-# --- .NET / EF Core ---
-**/bin/
-**/obj/
-**/*.dll
-**/*.pdb
-**/*.sourcelink.json
-**/*.cache
-**/*.GeneratedMSBuildEditorConfig.editorconfig
-**/*.AssemblyInfo*.cs
-
-# --- User-specific files ---
-*.user
-*.userosscache
-*.suo
-*.sln.docstates
-*.userprefs
-*.rsuser
-
-# --- Visual Studio caches ---
-.vs/
-*.dbmdl
-*.dbproj.schemaview
-
-# --- Rider / JetBrains ---
-.idea/
-*.sln.iml
-
-# --- Test results ---
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-*.VisualState.xml
-TestResult.xml
-*.coverage
-*.coveragexml
-
-# --- NuGet ---
-*.nupkg
-*.snupkg
-*.nuget.props
-*.nuget.targets
-.nuget/
-
-# --- Package restore ---
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-# --- Entity Framework Migrations temp ---
-*.edmx.diagram
-*.edmx.deploy*
-*.edmx.sql
-
-# --- Other temp files ---
-*.swp
-*.sw?
-*.swn
-*.swo
-*.tmp
-*.bak
-*.log
-*.vspscc
-*.vssscc
-*_i.c
-*_p.c
-*_h.h
-*.db
-
-# --- OS-specific ---
-.DS_Store
-Thumbs.db
-ehthumbs.db
-desktop.ini
-
-# Local configuration files
-docker-compose.override.yml
-
+# Environment files
 .env
 
-# --- Frontend build & deps ---
-Frontend/dist/
-Frontend/node_modules/
-Frontend/.angular/
-Frontend/.vscode/
-
-# --- Mobile app ---
+# Backend і інші великі локальні папки
+Backend/
 Android/
+..bfg-report/
+Frontend.rar
+files-to-delete.txt
+
+# Не ігнорувати Frontend
+!Frontend/
