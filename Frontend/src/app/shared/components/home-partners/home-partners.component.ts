@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   Component,
   HostListener,
@@ -35,10 +35,14 @@ export class HomePartnersComponent implements OnInit {
   // слухаємо ресайз вікна
   @HostListener('window:resize')
   onResize() {
-    this.updateVisibleCount();
+    if (isPlatformBrowser(this.platformId)) {
+      this.updateVisibleCount(); // встановлюємо одразу при завантаженні
+    }
   }
   ngOnInit() {
-    this.updateVisibleCount(); // встановлюємо одразу при завантаженні
+    if (isPlatformBrowser(this.platformId)) {
+      this.updateVisibleCount(); // встановлюємо одразу при завантаженні
+    }
   }
   private updateVisibleCount() {
     const width = window.innerWidth;
