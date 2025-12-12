@@ -38,7 +38,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'shelters/:slug', renderMode: RenderMode.Server },
   { path: 'shelters/:slug/animals', renderMode: RenderMode.Server },
   { path: 'animal-aid-requests/:id', renderMode: RenderMode.Server },
-  { path: 'news/:id', renderMode: RenderMode.Prerender },
+  { path: 'news/:id', renderMode: RenderMode.Server },
 
   { path: 'profile', renderMode: RenderMode.Server },
   { path: 'profile/edit', renderMode: RenderMode.Server },
