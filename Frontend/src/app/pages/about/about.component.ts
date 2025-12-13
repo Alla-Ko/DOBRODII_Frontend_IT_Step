@@ -8,7 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { Article } from '../../core/models/article';
-import { ArticleCardComponent } from '../../features/articles/article-card/article-card.component';
+import { ArticlesComponent } from '../../shared/components/articles/articles.component';
 import { SecondaryLargeButtonComponent } from '../../shared/components/buttons/blue/secondary-large-button.component';
 import { HomePartnersComponent } from '../../shared/components/home-partners/home-partners.component';
 import { IconComponent } from '../../shared/components/icon.component';
@@ -21,9 +21,9 @@ import { IconComponent } from '../../shared/components/icon.component';
     UpperCasePipe,
     IconComponent,
     LowerCasePipe,
-    ArticleCardComponent,
     SecondaryLargeButtonComponent,
     HomePartnersComponent,
+    ArticlesComponent,
   ],
   templateUrl: './about.component.html',
   styleUrl: './about.component.css',

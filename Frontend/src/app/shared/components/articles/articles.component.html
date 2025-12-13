@@ -1,0 +1,5 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 w-full mt-10 gap-5 max-w-[1600px]">
+  @for (item of articles(); track item) {
+    <app-article-card [article]="item" class="max-w-[800px]"></app-article-card>
+  }
+</div>

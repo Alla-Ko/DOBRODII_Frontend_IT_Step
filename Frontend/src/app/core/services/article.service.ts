@@ -1,110 +1,88 @@
-import { inject, Injectable } from '@angular/core';
-import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { Article } from '../models/article';
-import { ApiService } from './api.service';
-import { CategoryService } from './category.service';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleService {
-  private api = inject(ApiService);
-  private endpoint = `articles`;
-  private categoryService = inject(CategoryService);
-  private userService = inject(UserService);
-
-  getArticles(): Observable<Article[]> {
-    return this.api.get<Article[]>(this.endpoint).pipe(
-      switchMap(articles => {
-        const enriched$ = articles.map(article => {
-          const author$ = article.authorId
-            ? this.userService.getUserById(article.authorId)
-            : of(undefined);
-          const category$ = article.categoryId
-            ? this.categoryService.getCategoryById(article.categoryId)
-            : of(undefined);
-
-          return forkJoin({ author: author$, category: category$ }).pipe(
-            map(({ author, category }) => ({
-              ...article,
-              author,
-              category,
-            }))
-          );
-        });
-
-        return forkJoin(enriched$);
-      })
-    );
+  getUkAriticles() {
+    return this.historiesUk;
+  }
+  getEnAriticles() {
+    return this.historiesEn;
   }
 
-  getArticleById(id: string): Observable<Article | undefined> {
-    return this.api.getById<Article>(this.endpoint, id).pipe(
-      switchMap(article => {
-        if (!article) return of(undefined);
-
-        const category$ = article.categoryId
-          ? this.categoryService.getCategoryById(article.categoryId)
-          : of(undefined);
-
-        const author$ = article.authorId
-          ? this.userService.getUserById(article.authorId)
-          : of(undefined);
-
-        return forkJoin({ category: category$, author: author$ }).pipe(
-          map(({ category, author }) => {
-            if (!category || !author) return undefined;
-
-            return {
-              ...article,
-              category,
-              author,
-            } as Article;
-          })
-        );
-      })
-    );
+  getUkAriticleBySlug(slug: string) {
+    const res = this.historiesUk.find(article => article.slug === slug);
+    if (!res) {
+      return null;
+    } else {
+      return res;
+    }
   }
-  getArticleBySlug(slug: string): Observable<Article | undefined> {
-    return this.api.getBySlug<Article>(this.endpoint, slug).pipe(
-      switchMap(article => {
-        if (!article) return of(undefined);
-
-        const category$ = article.categoryId
-          ? this.categoryService.getCategoryById(article.categoryId)
-          : of(undefined);
-
-        const author$ = article.authorId
-          ? this.userService.getUserById(article.authorId)
-          : of(undefined);
-
-        return forkJoin({ category: category$, author: author$ }).pipe(
-          map(({ category, author }) => {
-            if (!category || !author) return undefined;
-
-            return {
-              ...article,
-              category,
-              author,
-            } as Article;
-          })
-        );
-      })
-    );
+  getEnAriticleBySlug(slug: string) {
+    const res = this.historiesEn.find(article => article.slug === slug);
+    if (!res) {
+      return null;
+    } else {
+      return res;
+    }
   }
-  getArticlesByAuthorId(authorId: string): Observable<Article[]> {
-    return this.getArticles().pipe(
-      map(articles => articles.filter(article => article.authorId === authorId))
-    );
-  }
-  createArticle(article: Partial<Article>): Observable<Article> {
-    return this.api.post<Article>(this.endpoint, article);
-  }
-  updateArticle(id: string, article: Partial<Article>): Observable<Article> {
-    return this.api.put<Article>(this.endpoint, id, article);
-  }
-  deleteArticle(id: string): Observable<void> {
-    return this.api.delete<void>(this.endpoint, id);
-  }
+  private historiesEn: Partial<Article>[] = [];
+  private historiesUk: Partial<Article>[] = [
+    {
+      title: 'Історія Сібаса',
+      updatedAt: '2025-11-10',
+      slug: 'sibas-2025-11-10',
+      shortContent:
+        'Сібас - котик з Херсонської області. Малюка знайшли після обстрілу - він лежав під уламками цегли біля зруйнованого будинку, тремтів і тихо нявчав. Його господаря нестало, і ще кілька днів тваринка не відходила від місця, де востаннє його бачив. Ми витягли його , годували з рук, лікували рани. Спочатку він боявся навіть звуку мотору авто, але з часом почав довіряти, муркотіти та іти на ручки.  Сьогодні Сібас - улюбленець нової родини. Він знову грається, спокійно спить на дивані та вірить людям.',
+      image:
+        'https://i.pinimg.com/1200x/01/bb/3e/01bb3ee009f986c81541a017251eee9f.jpg',
+    },
+    {
+      title: 'Історія Міри',
+      updatedAt: '2025-09-07',
+      slug: 'mira-2025-09-07',
+      shortContent:
+        'Міру вивезли під обстрілами. Виснажена, замерзша, вся в болоті і колючках, вона стояла в занедбаному сараї на околиці окупованого села, з пораненою лапою, ланцюгом замість повідка і в очах — лише страх. Після тривалого лікування, кількох місяців турботи й відновлення, її фото побачила німецька родина — фермери з невеликого мальовничого селища в Баварії. Вони сказали: «Ми не шукаємо породистої собаки, ми хочемо подарувати дім тій, хто потребує в даний момент його найбільше». Сьогодні Міра в безпеці , в люблячій і турботливій сім’ї .',
+      image:
+        'https://i.pinimg.com/1200x/ae/cc/69/aecc69202a906dad9a65be6f1fd1dc0d.jpg',
+    },
+    {
+      title: 'Історія Бруно',
+      updatedAt: '2025-08-19',
+      slug: 'bruno-2025-08-19',
+      shortContent:
+        'Бруно знайшли на узбіччі траси після нічного обстрілу. Він сидів, притискаючись до понівеченого від вибуху дерева, і не намагався тікати — лише дивився на людей великими, втомленими очима. Пес був сильно виснажений, з пораненою спиною та слідами старого ланцюга на шиї. Перші тижні він боявся різких рухів і гучних звуків, здригався від кожного хлопка дверей. Завдяки лікуванню, турботі волонтерів і терпінню, Бруно поступово почав довіряти. Сьогодні він живе у приватному будинку під Києвом, любить довгі прогулянки полями та щоранку зустрічає свою сім’ю, радісно махаючи хвостом.',
+      image:
+        'https://i.pinimg.com/736x/d8/7a/ae/d87aae3e0a0cbf1fb08dad3047f8cb6c.jpg',
+    },
+    {
+      title: 'Історія Луни',
+      updatedAt: '2025-06-02',
+      slug: 'luna-2025-06-02',
+      shortContent:
+        'Луну знайшли у підвалі багатоповерхівки, де вона провела кілька тижнів разом із кошенятами без світла, води та нормальної їжі. Кішка була виснажена, але до останнього оберігала своїх малюків, не підпускаючи нікого близько. Після евакуації та огляду ветеринарів Луна нарешті змогла розслабитися. Кошенят швидко прилаштували, а сама Луна довго чекала на свою людину. Вона виявилася дуже ніжною і спокійною, любила тишу та сонячні підвіконня. Зараз Луна живе у квартирі в Львові, де стала справжньою господинею дому і улюбленицею всієї родини.',
+      image:
+        'https://i.pinimg.com/1200x/e7/85/70/e7857019d739481e38e85381a5385b44.jpg',
+    },
+    {
+      title: 'Історія Рекса',
+      updatedAt: '2025-05-11',
+      slug: 'rex-2025-05-11',
+      shortContent:
+        'Рекса евакуювали з прифронтового села, де він кілька місяців самотужки виживав біля зруйнованого будинку своїх господарів. Пес охороняв подвір’я, ніби чекав, що люди ось-ось повернуться. Він був худий, з пораненими лапами та сильним виснаженням. Перший час Рекс не дозволяв себе торкатися, але ніколи не проявляв агресії. З часом він почав впізнавати голоси волонтерів і виходив назустріч. Після реабілітації Рекса забрала родина з Черкас. Тепер він знову має дім, теплу будку і людей, яким віддано служить.',
+      image:
+        'https://i.pinimg.com/1200x/cd/39/14/cd3914aa818f176045825cfd272eba84.jpg',
+    },
+    {
+      title: 'Історія Соні',
+      updatedAt: '2025-04-18',
+      slug: 'sonia-2025-04-18',
+      shortContent:
+        'Соню знайшли біля зупинки громадського транспорту — маленьку, тремтячу і зовсім розгублену. Вона підбігала до кожної людини, сподіваючись знайти захист. Собака була налякана, але надзвичайно контактна, ніби знала, що порятунок поруч. Після огляду ветеринарів з’ясувалося, що Соня давно жила на вулиці. Волонтери допомогли їй відновитися, навчили знову довіряти світу. Сьогодні Соня живе у молодої пари, супроводжує їх у подорожах і щоразу радіє новому дню, який більше не починається зі страху.',
+      image:
+        'https://i.pinimg.com/1200x/c1/a0/4c/c1a04c34c5428ec57ff177d7a93b4f51.jpg',
+    },
+  ];
 }

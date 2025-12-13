@@ -31,21 +31,9 @@
       {{ error() ?? '' | translate }}
     </div>
   } @else {
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-7">
-      @for (story of successStories(); track story.id) {
-        <a [routerLink]="['/successStories', story.slug]" class="sm:w-[611px]">
-          <app-article-card [article]="story"></app-article-card>
-        </a>
-      }
+    <div class="flex flex-col w-full items-center">
+      <app-articles [numberOfArticles]="50"></app-articles>
     </div>
   }
-
-  <div class="text-primary-beige mt-5">
-    <app-pagination
-      [currentPage]="currentPage()"
-      [totalPages]="totalPages()"
-      (pageChange)="setPage($event)"
-    ></app-pagination>
-  </div>
 </div>
 <app-home-partners></app-home-partners>

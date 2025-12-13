@@ -2,20 +2,23 @@
   class="flex flex-col hover:bg-secondary-chileanFire-2 bg-primary-light-orange w-full h-full p-10 rounded-40 items-start justify-between text-secondary-neutral-mineShaft"
 >
   <h3 class="font-inter font-bold text-base">
-    {{ article?.title || '' | translate | uppercase }}
+    {{ article().title | uppercase }}
   </h3>
-  <p class="mt-6 w-full">
-    {{ article?.shortContent || '' | translate }}
+  <p class="mt-4 w-full text-left text-sm text-primary-beige">
+    {{ article().updatedAt | date: 'dd.MM.yyyy' }}
   </p>
-  @if (article?.image) {
+  <p class="mt-1 w-full">
+    {{ article().shortContent }}
+  </p>
+  @if (article().image) {
     <div
-      class="mt-[44px] rounded-[12px] overflow-hidden w-full max-h-[600px] aspect-square"
+      class="mt-[44px] rounded-[12px] overflow-hidden w-full aspect-square flex flex-col items-center justify-center"
     >
       <!-- Фото -->
       <img
-        [src]="article?.image"
-        [alt]="article?.title"
-        class="w-full object-cover center"
+        [src]="article().image"
+        [alt]="article().title"
+        class="w-full h-full object-cover object-center"
       />
     </div>
   }
