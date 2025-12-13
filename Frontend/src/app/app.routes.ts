@@ -143,28 +143,6 @@ export const routes: Routes = [
     },
   },
 
-  // {
-  //   path: 'articles',
-  //   loadComponent: () =>
-  //     import('./features/articles/article-list/article-list.component').then(
-  //       c => c.ArticleListComponent
-  //     ),
-  //   resolve: { meta: metaResolver },
-  //   data: {
-  //     title: 'Добродій — щасливі історії❤️',
-  //     description:
-  //       'Тут живуть спогади про котиків і песиків, які знайшли свою родину, любов і турботу. Вони доводять: добро перемагає!',
-  //     image: '/assets/images/adoption-rules/hugs.png',
-  //   },
-  // },
-  // {
-  //   path: 'articles/:slug',
-  //   loadComponent: () =>
-  //     import(
-  //       './features/articles/article-detail/article-detail.component'
-  //     ).then(c => c.ArticleDetailComponent),
-  //   resolve: { meta: metaResolver },
-  // },
   {
     path: 'success-stories',
     loadComponent: () =>
@@ -179,14 +157,7 @@ export const routes: Routes = [
       image: '/assets/images/adoption-rules/hugs.png',
     },
   },
-  // {
-  //   path: 'success-stories/:slug',
-  //   loadComponent: () =>
-  //     import(
-  //       './features/successStories/succes-story-detail/succes-story-detail.component'
-  //     ).then(c => c.SuccesStoryDetailComponent),
-  //   resolve: { meta: metaResolver },
-  // },
+
   {
     path: `adoption`,
     loadComponent: () =>
@@ -201,14 +172,7 @@ export const routes: Routes = [
         'https://i.pinimg.com/1200x/fa/5d/fb/fa5dfb37d1fb28991dd6a468508f5091.jpg',
     },
   },
-  // {
-  //   path: 'lost-pets/:slug',
-  //   loadComponent: () =>
-  //     import(
-  //       './features/lost-pets/lost-pets-detail/lost-pets-detail.component'
-  //     ).then(c => c.LostPetsDetailComponent),
-  //   resolve: { meta: metaResolver },
-  // },
+
   {
     path: 'animal-aid-requests',
     loadComponent: () =>
