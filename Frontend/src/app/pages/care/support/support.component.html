@@ -67,8 +67,13 @@
     ></app-icon>
   </div>
   <!-- Фінанси -->
-  <section class="flex flex-col w-full scroll-mt-[0px]" id="section-3">
-    <app-financial-support></app-financial-support>
+  <section
+    class="flex flex-col w-full scroll-mt-[0px] bg-primary-lightBlue"
+    id="section-3"
+  >
+    <app-financial-support
+      (selectionConfirmed)="onSelectionConfirmed($event)"
+    ></app-financial-support>
   </section>
   <!-- Волонтери -->
   <section class="flex flex-col w-full scroll-mt-[0px]" id="section-1">

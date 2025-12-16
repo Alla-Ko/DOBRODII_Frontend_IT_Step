@@ -1,1 +1,105 @@
-<p>live-donation-collection works!</p>
+<div class="flex flex-col items-center justify-start w-full leading-none">
+  <!-- Мета і назва -->
+  <div
+    class="flex flex-wrap gap-1 items-center justify-center mx-2 xl:mx-[28px]"
+  >
+    <app-icon [name]="'aim'"></app-icon>
+    <p
+      class="text-[40px] font-bold"
+      style="font-size: clamp(16px, 6.5vw, 40px)"
+    >
+      {{ 'AIM' | translate | uppercase }}:
+    </p>
+    <p
+      class="text-[40px] font-bold text-primary-blue"
+      style="font-size: clamp(16px, 6.5vw, 40px)"
+    >
+      {{ animalAidRequest()?.estimatedCost | number: '1.0-2' : 'uk' }} UAH
+    </p>
+    <p
+      class="text-[40px] font-bold"
+      style="font-size: clamp(16px, 6.5vw, 40px)"
+    >
+      {{ 'TO_PROJECT' | translate }}
+    </p>
+    <p
+      class="text-[40px] font-bold text-center"
+      style="font-size: clamp(16px, 6.5vw, 40px)"
+    >
+      "{{ animalAidRequest()?.title }}"
+    </p>
+  </div>
+  <!-- Прогрес бар -->
+  <div class="w-full mt-6">
+    <app-progress-bar [progress]="progress()"></app-progress-bar>
+  </div>
+  <div
+    class="flex flex-col sm:flex-row justify-between items-center sm:items-end w-full px-2 xl:px-[28px] mt-6"
+  >
+    <!-- Зліва дані -->
+    <div class="flex flex-col gap-1">
+      <!-- Зібрано -->
+      <div class="w-full flex flex-wrap gap-2 items-center justify-start">
+        <app-icon [name]="'orangeSmallTick'"></app-icon>
+        <p class="text-base pl-[6px]">{{ 'COLLECTED' | translate }}:</p>
+        <p class="text-base">
+          {{ animalAidRequest()?.collectedAmount | number: '1.0-2' : 'uk' }} UAH
+        </p>
+      </div>
+      <!-- Залишилося -->
+      <div class="w-full flex flex-wrap gap-2 items-center justify-start">
+        <app-icon [name]="'orangeClocks'"></app-icon>
+        <p class="text-base">{{ 'REMAIN' | translate }}:</p>
+        <p class="text-base">{{ remain() | number: '1.0-2' : 'uk' }} UAH</p>
+      </div>
+      <!-- Всього донатів -->
+      <div class="w-full flex flex-wrap gap-2 items-center justify-start">
+        <app-icon [name]="'blueDonors'"></app-icon>
+        <p class="text-base">{{ 'TOTAL_DONATIONS' | translate }}:</p>
+        <p class="text-base pl-1">
+          {{ animalAidRequest()?.donationsCount | number: '1.0' : 'uk' }}
+        </p>
+      </div>
+    </div>
+    <!-- Справа кнопка -->
+    <div>
+      <app-primary-large-button
+        class="w-[260px] mt-6"
+        buttonTitle="DONATE"
+        (pressButton)="toDonate()"
+      ></app-primary-large-button>
+    </div>
+  </div>
+  <!-- Останні донати -->
+  @if (payments().length > 0) {
+    <div
+      class="flex flex-row justify-between items-end w-full px-2 xl:px-[28px] mt-6"
+    >
+      <p class="text-primary-orange font-bold text-base">
+        {{ 'LAST_DONATIONS' | translate }}:
+      </p>
+    </div>
+    <div class="flex flex-col w-full px-2 xl:px-[28px] mt-6">
+      @for (payment of payments(); track payment; let i = $index) {
+        @if (i > 0) {
+          <hr
+            class="border-secondary-neutral-silverChalice mt-1 mb-1 ml-[50px]"
+          />
+        }
+        <app-project-payment-item
+          [payment]="payment"
+        ></app-project-payment-item>
+      }
+    </div>
+  }
+  <div class="flex px-2 xl:px-[28px] w-full mt-6 mb-7">
+    <button class="w-full" (click)="toAnimalAidRequests()">
+      <div
+        class="flex justify-between w-full bg-primary-lightBlue rounded-[12px] cursor-pointer h-[80px] items-center p-5 text-primary-beige font-bold"
+      >
+        {{ 'OTHER_PROJECTS' | translate | uppercase }}
+        <app-icon [name]="'arrowRight'"></app-icon>
+      </div>
+    </button>
+  </div>
+</div>

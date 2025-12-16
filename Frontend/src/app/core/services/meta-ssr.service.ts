@@ -1,4 +1,4 @@
-// src/app/services/meta-ssr.service.ts
+// src/app/core/services/meta-ssr.service.ts
 import { isPlatformServer } from '@angular/common';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
@@ -10,27 +10,34 @@ export class MetaSsrService {
   private readonly platformId = inject(PLATFORM_ID);
 
   update(
-    ogTitle: string,
-    ogDescription: string,
-    ogImage = '/assets/images/background1.png',
-    ogUrl = 'https://dobrodii.onrender.com'
+    titleText: string,
+    description: string,
+    image = 'https://dobrodii.onrender.com/assets/images/background1.png',
+    url = 'https://dobrodii.onrender.com'
   ) {
-    if (isPlatformServer(this.platformId)) {
-      this.title.setTitle(ogTitle);
+    if (!isPlatformServer(this.platformId)) return;
 
-      const tags: MetaDefinition[] = [
-        { property: 'og:title', content: ogTitle },
-        { property: 'og:description', content: ogDescription },
-        { property: 'og:image', content: ogImage },
-        { property: 'og:url', content: ogUrl },
-        { property: 'og:type', content: 'website' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: ogTitle },
-        { name: 'twitter:description', content: ogDescription },
-        { name: 'twitter:image', content: ogImage },
-      ];
+    this.title.setTitle(titleText);
 
-      this.meta.addTags(tags, true); // true = replace existing
-    }
+    const tags: MetaDefinition[] = [
+      // BASIC SEO
+      { name: 'description', content: description },
+
+      // OPEN GRAPH
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'Добродій' },
+      { property: 'og:title', content: titleText },
+      { property: 'og:description', content: description },
+      { property: 'og:image', content: image },
+      { property: 'og:url', content: url },
+
+      // TWITTER
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: titleText },
+      { name: 'twitter:description', content: description },
+      { name: 'twitter:image', content: image },
+    ];
+
+    tags.forEach(tag => this.meta.updateTag(tag));
   }
 }

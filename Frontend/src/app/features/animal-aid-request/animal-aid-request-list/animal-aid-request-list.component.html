@@ -22,7 +22,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
     @for (animalAidRequest of animalAidRequests(); track animalAidRequest.id) {
       <a
-        [routerLink]="['/animal-aid-requests', animalAidRequest.id]"
+        [routerLink]="['/projects', animalAidRequest.slug]"
         class="block p-4 bg-white rounded-2xl shadow hover:shadow-lg transition"
       >
         <h2
@@ -33,15 +33,17 @@
         </h2>
         <p class="text-gray-600">
           {{ 'AID_REQUEST_CATEGORY' | translate }}:
-          {{ animalAidRequest.category || ('UNKNOWN' | translate) }}
+          {{ animalAidRequest.category || 'UNKNOWN' | translate }}
         </p>
         <p class="text-gray-600">
           {{ 'AID_REQUEST_STATUS' | translate }}:
-          {{ animalAidRequest.status || ('UNKNOWN' | translate) }}
+          {{ animalAidRequest.status || 'UNKNOWN' | translate }}
         </p>
         <p class="text-gray-600">
           {{ 'AID_REQUEST_ESTIMATED_COST' | translate }}:
-          {{ animalAidRequest.estimatedCost || ('UNKNOWN' | translate) }}
+          {{
+            animalAidRequest.estimatedCost.toString() || 'UNKNOWN' | translate
+          }}
           {{ 'CURRENCY' | translate }}
         </p>
       </a>

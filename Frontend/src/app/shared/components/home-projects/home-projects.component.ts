@@ -20,13 +20,13 @@ import { HomeProjectCardComponent } from '../home-project-card/home-project-card
 })
 export class HomeProjectsComponent {
   onProjectDetailClick(animalAidRequest: AnimalAidRequest) {
-    this.router.navigate(['/animal-aid-requests', animalAidRequest.id]);
+    this.router.navigate(['/projects', animalAidRequest.slug]);
   }
   private router = inject(Router);
   animalAidRequests: AnimalAidRequest[] = [];
   animalAidRequestService = inject(AnimalAidRequestService);
   onSeeAllProjectsClick() {
-    this.router.navigate(['/animal-aid-requests']);
+    this.router.navigate(['/projects']);
   }
   constructor() {
     try {

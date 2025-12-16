@@ -3,6 +3,8 @@ import { Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { filter } from 'rxjs';
+import { PaymentScope } from '../../../core/models/liqPayCheckoutRequest';
+import { LiqPayService } from '../../../core/services/liq-pay-service.service';
 import { AnimalsForCareComponent } from '../../../shared/components/animals-for-care/animals-for-care.component';
 import { PrimaryLargeButtonComponent } from '../../../shared/components/buttons/blue/primary-large-button.component';
 import { PrimarySmallButtonComponent } from '../../../shared/components/buttons/blue/primary-small-button.component';
@@ -31,6 +33,33 @@ import { SupportVolunteeringComponent } from '../../../shared/components/support
   styleUrl: './support.component.css',
 })
 export class SupportComponent {
+  private selectedAmount: number | null = null;
+  private isRecurring = false;
+  private liqPay = inject(LiqPayService);
+  onSelectionConfirmed(selection: { amount: number; isOnce: boolean }) {
+    this.selectedAmount = selection.amount;
+    this.isRecurring = !selection.isOnce;
+    if (this.selectedAmount !== null) {
+      this.startGlobalPayment();
+    } else {
+      console.warn('Selected amount is null');
+    }
+  }
+  private startGlobalPayment() {
+    // Очищаємо старий контекст + записуємо новий глобальний
+    this.liqPay.startPayment({
+      scope: 'global' as PaymentScope,
+      amount: this.selectedAmount!,
+      isRecurring: this.isRecurring,
+      description: this.isRecurring
+        ? 'Щомісячна підтримка притулку'
+        : 'Разова підтримка притулку',
+    });
+
+    // Переходимо до форми з контактами
+    //поміняти потім
+    this.router.navigate(['/payment/details']);
+  }
   callEventSpecialist() {
     window.location.href = 'tel:+380509997766';
   }

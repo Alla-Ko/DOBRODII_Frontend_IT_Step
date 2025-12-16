@@ -327,6 +327,7 @@ for (let i = 0; i < 50; i++) {
     subscribedAt: '2025-07-10T12:00:00Z',
   });
 }
+
 const aidCategories = ['Food', 'Medical', 'Equipment', 'Other'];
 const aidStatuses = ['Open', 'InProgress', 'Fulfilled', 'Cancelled'];
 

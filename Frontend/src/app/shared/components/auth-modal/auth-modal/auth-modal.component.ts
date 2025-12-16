@@ -65,11 +65,11 @@ import { WelcomeComponent } from '../welcome/welcome.component';
   template: `
     @if (modalState().isOpen) {
       <div
-        class="overflow-x-hidden fixed inset-0 z-[99999] bg-secondary-neutral-mineShaft bg-opacity-50 flex items-center justify-center p-2"
+        class="overflow-x-hidden fixed inset-0 z-[99999] bg-secondary-neutral-mineShaft bg-opacity-50 flex items-center justify-center p-2 "
       >
         <div
           class="bg-secondary-neutral-white text-secondary-neutral-mineShaft p-4 rounded-[40px] shadow-2xl
-           w-full max-w-[400px] sm:max-w-[560px] min-w-[320px] max-h-[90vh] overflow-auto mx-2"
+           w-full max-w-[400px] sm:max-w-[560px] xl:min-w-[900px] min-w-[320px] max-h-[90vh] overflow-auto mx-2 "
         >
           <div class="flex justify-end">
             <app-icon

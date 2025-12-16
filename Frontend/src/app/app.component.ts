@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
 import { AuthService } from './core/services/auth.service';
+
 import { AuthModalComponent } from './shared/components/auth-modal/auth-modal/auth-modal.component';
 @Component({
   selector: 'app-root',

@@ -8,18 +8,23 @@ export type AidRequestStatus =
   | 'Cancelled';
 export interface AnimalAidRequest {
   id: string;
+  slug: string;
   // userId: string;
   // user?: User; // якщо потрібно
-  shelterId: string;
+  shelterId?: string;
   shelter?: Shelter;
   title: string;
-  description: string;
+  shortDescription?: string;
+  description?: string;
   category: AidCategory;
   status: AidRequestStatus;
   estimatedCost: number; // Орієнтовна  вартість
   allreadyDonated?: number;
-  photos: string[]; // Масив URL або ідентифікаторів фото
+  collectedAmount?: number;
+  donationsCount?: number;
+  photo?: string;
+  photos?: string[]; // Масив URL або ідентифікаторів фото
 
-  createdAt: string; // ISO дата рядка
-  updatedAt: string; // ISO дата рядка
+  // createdAt: string; // ISO дата рядка
+  // updatedAt: string; // ISO дата рядка
 }

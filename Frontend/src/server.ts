@@ -1,3 +1,5 @@
+import { registerLocaleData } from '@angular/common';
+import localeUk from '@angular/common/locales/uk';
 import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
@@ -9,6 +11,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { REQUEST_ORIGIN } from './app/core/tokens/request-origin.token';
+registerLocaleData(localeUk);
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 

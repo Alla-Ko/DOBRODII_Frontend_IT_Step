@@ -710,5 +710,14 @@
   "NO_PAYMENTS": "Немає платежів",
   "SUBSCRIBE_TO_NEWSLETTER_CONFIRMATION": "Ви підписуєтеся на новини сайту!",
   "INVALID_SMS_CODE": "Невірний код",
-  "YOU_CAN_HELP": "Ви можете допомогти тваринкам в цю хвилину!"
+  "YOU_CAN_HELP": "Ви можете допомогти тваринкам в цю хвилину!",
+
+  "AIM": "Мета",
+  "TO_PROJECT": "на проєкт",
+  "COLLECTED": "Зібрано",
+  "REMAIN": "Залишилося",
+  "TOTAL_DONATIONS": "Всього донатів",
+  "LAST_DONATIONS": "Останні донати",
+  "OTHER_PROJECTS": "Інші проєкти",
+  "NO_PURPOSE": "Благодійна допомога на потреби притулку"
 }

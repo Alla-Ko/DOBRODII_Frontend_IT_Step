@@ -174,7 +174,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'animal-aid-requests',
+    path: 'projects',
     loadComponent: () =>
       import(
         './features/animal-aid-request/animal-aid-request-list/animal-aid-request-list.component'
@@ -187,11 +187,19 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'animal-aid-requests/:id',
+    path: 'projects/:slug',
     loadComponent: () =>
       import(
         './features/animal-aid-request/animal-aid-request-detail/animal-aid-request-detail.component'
       ).then(c => c.AnimalAidRequestDetailComponent),
+    resolve: { meta: metaResolver },
+  },
+  {
+    path: 'search-results',
+    loadComponent: () =>
+      import('./pages/search-results/search-results.component').then(
+        c => c.SearchResultsComponent
+      ),
     resolve: { meta: metaResolver },
   },
   {

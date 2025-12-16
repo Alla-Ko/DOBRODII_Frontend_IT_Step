@@ -3,15 +3,15 @@
     {{ 'EMAIL_NOT_CONFIRMED_TITLE' | translate | uppercase }}
   </h5>
 
-  <p class="mt-8 text-2xl">{{ 'EMAIL_NOT_CONFIRMED_MESSAGE' | translate }}</p>
-  <div class="mt-8 flex-1 flex flex-col w-[360px]">
+  <p class="mt-4 text-2xl">{{ 'EMAIL_NOT_CONFIRMED_MESSAGE' | translate }}</p>
+  <div class="mt-8 flex-1 flex flex-col max-w-[360px]">
     <p
       class="text-sm text-secondary-neutral-doveGray ml-3 leading-snug text-left"
     >
       {{ 'EMAIL_NOT_CONFIRMED_DESCRIPTION' | translate }}
     </p>
-    <div class="w-full flex flex-col justify-center items-center mt-4 mb-4">
-      <div class="mt-8 text-sm text-secondary-neutral-doveGray ml-3">
+    <div class="w-full flex flex-col justify-center items-center mt-6 mb-4">
+      <div class="text-sm text-secondary-neutral-doveGray ml-3">
         <a
           (click)="emitResendVerificationEmail()"
           (keyup.enter)="emitResendVerificationEmail()"
@@ -23,15 +23,15 @@
           class="hover:text-primary-orange underline cursor-pointer font-semibold font-inter"
         >
           @if (resendTimer() > 0) {
-            {{ 'RESEND_VERIFICATION_EMAIL_IN' | translate }} {{ resendTimer() }}s
+            {{ 'RESEND_VERIFICATION_EMAIL_IN' | translate }}
+            {{ resendTimer() }}s
           } @else {
             {{ 'RESEND_VERIFICATION_EMAIL' | translate }}
           }
-          {{ 'RESEND_VERIFICATION_EMAIL' | translate }}
         </a>
       </div>
     </div>
-    <div class="flex-1 flex justify-center items-center w-ful h-full">
+    <div class="flex-1 flex justify-center items-center w-ful h-full mt-5">
       <app-icon
         [name]="'logoFailure'"
         class="relative -top-5 text-secondary-neutral-mineShaft"

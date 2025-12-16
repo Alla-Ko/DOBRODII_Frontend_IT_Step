@@ -1,0 +1,21 @@
+<div class="w-full px-2 xl:px-[40px]">
+  <!-- батьківський padding -->
+  <div class="relative w-full flex">
+    <!-- Track -->
+    <div
+      class="flex h-2 w-full rounded-full overflow-hidden bg-secondary-dodgerBlue-2"
+    >
+      <!-- Completed -->
+      <div
+        class="h-full bg-primary-orange"
+        [style.width.%]="clampedProgress"
+      ></div>
+    </div>
+
+    <!-- Circle -->
+    <div
+      class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-primary-orange"
+      [style.left.%]="clampedProgress"
+    ></div>
+  </div>
+</div>

@@ -725,6 +725,26 @@ export const ICONS = {
   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" d="M36.666 46.667h6.667a6.666 6.666 0 1 0 0-13.334h-10c-2 0-3.667.667-4.667 2l-18.667 18m13.334 13.334L28.666 62c1-1.333 2.667-2 4.667-2h13.333c3.667 0 7-1.333 9.333-4l15.334-14.667a6.673 6.673 0 1 0-9.167-9.7l-14 13M6.666 50l20 20m38.333-41.667c2.333-2.333 5-5.333 5-9a9.1 9.1 0 0 0-16.667-6 9.267 9.267 0 0 0-16.666 6c0 4 2.666 6.667 5 9.334L53.332 40 65 28.333Z"/>
 </svg>
 `,
+  aim: `<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="none" viewBox="0 0 34 34">
+  <path stroke="#4F7FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.6 14.6a3.167 3.167 0 0 0-.934 2.233A3.167 3.167 0 0 0 16.834 20a3.167 3.167 0 0 0 2.234-.934"/>
+  <path stroke="#4F7FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.834 7.333a9.5 9.5 0 1 0 9.5 9.5"/>
+  <path stroke="#4F7FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.833 1a15.833 15.833 0 1 0 15.834 15.833m-9.959-5.873-4.291 4.29"/>
+  <path stroke="#4F7FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m31.733 6.574-5.4.76.76-5.4a.317.317 0 0 0-.521-.269l-3.58 3.562a3.166 3.166 0 0 0-.855 2.867l.57 2.866 2.866.569a3.167 3.167 0 0 0 2.867-.855L32 7.095a.316.316 0 0 0-.27-.521"/>
+</svg>
+
+`,
+  orangeSmallTick: `<svg xmlns="http://www.w3.org/2000/svg" width="29" height="21" fill="none" viewBox="0 0 29 21">
+  <path stroke="#F86F03" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M27.667 1 9.333 19.333 1 11"/>
+</svg>
+`,
+  orangeClocks: `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 36 36">
+  <path stroke="#FFA41B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M27.817 14.95A10 10 0 1 1 14.9 27.667m-5.567-20H11v6.666M25.517 20.8l1.166 1.183-4.7 4.7M21 11c0 5.523-4.477 10-10 10S1 16.523 1 11 5.477 1 11 1s10 4.477 10 10Z"/>
+</svg>
+`,
+  blueDonors: `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="32" fill="none" viewBox="0 0 36 32">
+  <path stroke="#4F7FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M27.667 31a13.333 13.333 0 0 0-13.334-13.333m0 0A13.333 13.333 0 0 0 1 31m13.333-13.333a8.333 8.333 0 1 0 0-16.667 8.333 8.333 0 0 0 0 16.667Zm20 11.666C34.333 23.717 31 18.5 27.667 16a8.333 8.333 0 0 0-.75-13.833"/>
+</svg>
+`,
 };
 
 export default ICONS;

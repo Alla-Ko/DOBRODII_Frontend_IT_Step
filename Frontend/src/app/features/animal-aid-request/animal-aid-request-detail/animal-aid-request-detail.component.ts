@@ -40,9 +40,9 @@ export class AnimalAidRequestDetailComponent {
 
   loading = signal<boolean>(true);
 
-  animalAidRequestId = toSignal(
+  animalAidRequestSlug = toSignal(
     this.route.paramMap.pipe(
-      switchMap(params => [params.get('id')]),
+      switchMap(params => [params.get('slug')]),
       filter((id): id is string => id !== null && id !== undefined)
     )
   );
@@ -52,11 +52,11 @@ export class AnimalAidRequestDetailComponent {
 
   constructor() {
     effect(() => {
-      const animalAidRequestIdValue = this.animalAidRequestId();
-      if (!animalAidRequestIdValue) return;
+      const animalAidRequestSlugValue = this.animalAidRequestSlug();
+      if (!animalAidRequestSlugValue) return;
 
       this.animalAidRequestService
-        .getAnimalAidRequestById(animalAidRequestIdValue)
+        .getAnimalAidRequestBySlug(animalAidRequestSlugValue)
         .pipe(
           tap(() => this.loading.set(true)),
           finalize(() => this.loading.set(false))
@@ -69,7 +69,6 @@ export class AnimalAidRequestDetailComponent {
             }
 
             this.animalAidRequest.set(animalAidRequest);
-            this.cdr.detectChanges();
 
             // НОВІ мета-теги (вже з MetaSsrService)
             this.updateMetaTags(animalAidRequest);
@@ -96,7 +95,7 @@ export class AnimalAidRequestDetailComponent {
       request.photos?.[0] ||
       'https://i.pinimg.com/1200x/4f/53/64/4f5364ff9ca98be71bbe2445e53ab17c.jpg';
 
-    const url = `https://dobrodii.onrender.com/animal-aid-requests/${request.id}`;
+    const url = `https://dobrodii.onrender.com/animal-aid-requests/${request.slug}`;
 
     this.metaSsr.update(title, description, image, url);
   }
@@ -119,7 +118,6 @@ export class AnimalAidRequestDetailComponent {
       '@type': 'Demand',
       name: animalAidRequest.title,
       description: shortDescription,
-      datePosted: new Date(animalAidRequest.createdAt).toISOString(),
       category: animalAidRequest.category,
       availability: 'https://schema.org/InStock',
     };

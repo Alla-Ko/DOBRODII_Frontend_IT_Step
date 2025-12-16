@@ -1,5 +1,5 @@
 import { CommonModule, UpperCasePipe } from '@angular/common';
-import { Component, effect, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Article } from '../../../core/models/article';
 
@@ -12,10 +12,4 @@ import { Article } from '../../../core/models/article';
 })
 export class ArticleCardComponent {
   article = input.required<Partial<Article>>();
-
-  constructor() {
-    effect(() => {
-      console.log('article value:', this.article());
-    });
-  }
 }

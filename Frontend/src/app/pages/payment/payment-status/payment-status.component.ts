@@ -26,7 +26,7 @@ export class PaymentStatusComponent {
     this.router.navigate(['payment/amount']);
   }
   goToProjects() {
-    this.router.navigate(['/animal-aid-requests']);
+    this.router.navigate(['/projects']);
   }
   goToGuardianships() {
     this.router.navigate(['guardianships']);

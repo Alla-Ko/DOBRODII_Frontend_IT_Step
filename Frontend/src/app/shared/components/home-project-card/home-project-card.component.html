@@ -16,7 +16,7 @@
   >
     <img
       class="w-full h-full object-cover object-center"
-      src="{{ animalAidRequest.photos[0] }}"
+      src="{{ animalAidRequest.photo }}"
       alt="{{ animalAidRequest.title }}"
     />
     <div class="absolute bottom-0 left-0 bg-primary-blue m-5">
@@ -37,12 +37,11 @@
     </h3>
     <p class="mb-4 leading-[1.2] xl:max-w-[360px]">
       <span class="font-bold"> {{ 'LOCATION' | translate }}:</span>
-      {{ animalAidRequest.shelter?.name }},
-      {{ animalAidRequest.shelter?.address }}
+      {{ animalAidRequest.shelter?.name }}
     </p>
     <p class="mb-4 leading-[1.2] xl:max-w-[360px]">
       <span class="font-bold"> {{ 'DESCRIPTION' | translate }}:</span>
-      {{ animalAidRequest.description }}
+      {{ animalAidRequest.shortDescription }}
     </p>
     <p class="mb-4 bg-primary-light-orange p-1 font-bold xl:max-w-[360px]">
       {{ 'DONATED' | translate }}:

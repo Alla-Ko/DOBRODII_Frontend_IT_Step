@@ -1,5 +1,5 @@
 <header
-  class="fixed top-0 m-4 left-0 w-[calc(100vw-20px)] sm:w-[calc(100vw-40px)] z-50 text-secondary-neutral-white rounded-[40px] font-inter p-[20px] transition-all duration-300"
+  class="fixed top-0 m-4 left-0 w-[calc(100vw-20px)] sm:w-[calc(100vw-40px)] z-50 text-secondary-neutral-white rounded-[40px] font-inter p-[20px] transition-all duration-300 leading-none"
   id="mainHeader"
   [ngClass]="{
     'bg-transparent': !isFloating() && !isHidden(),
@@ -7,7 +7,7 @@
     '-translate-y-full opacity-0 pointer-events-none': isHidden(),
   }"
 >
-  <div class="flex items-center justify-between w-full gap-7">
+  <div class="flex items-center justify-between w-full gap-2">
     <!-- Logo & Title -->
     <div
       class="ml-4 cursor-pointer hover:text-primary-orange"
@@ -17,7 +17,42 @@
     >
       <app-icon [name]="'logoUkr'"></app-icon>
     </div>
-
+    <div
+      #searchInput
+      class="fixed top-[90px] m-4 left-0 w-[calc(100vw-20px)] sm:w-[calc(100vw-40px)] z-50 rounded-[40px] font-inter p-[15px] bg-opacity-80 transition-all duration-300 bg-primary-beige text-secondary-neutral-mineShaft shadow-md"
+      [class.hidden]="!isSearchOpen()"
+    >
+      <div class="flex justify-between items-center">
+        <form
+          #formRef
+          [formGroup]="searchForm"
+          (ngSubmit)="onSubmitSearchButton()"
+          class="group w-full flex justify-between items-center"
+        >
+          <!-- searchString -->
+          <div class="flex flex-1 w-full">
+            <input
+              id="searchString"
+              type="text"
+              formControlName="searchString"
+              [placeholder]=""
+              class="rounded-[40px] h-10 focus:outline-none mr-2 w-full text-center bg-transparent"
+            />
+          </div>
+          <!-- Submit -->
+          <div class="space-y-2 content-center">
+            <div class="flex justify-center w-full">
+              <app-primary-small-button
+                class="w-full"
+                [disabled]="isSearchButtonDisabled"
+                buttonTitle="SEARCH"
+                (pressButton)="onSubmitSearchButton()"
+              ></app-primary-small-button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="flex flex-row justify-items-start gap-4">
       <div class="hidden sm:flex sm:flex-row gap-3">
         <!-- Search -->

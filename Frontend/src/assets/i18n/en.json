@@ -474,7 +474,7 @@
   "SUPPORT_LINE_DESCRIPTION3": "The most needy cannot ask for help - do it for them",
   "SUPPORT_LINE_DESCRIPTION4": "Make a donation - it's a few clicks, and for whom it's life.",
   "DONATE": "Donate",
-  "THEY_SEARCH_FOR_LOVE": "Вони шукають любові",
+  "THEY_SEARCH_FOR_LOVE": "They search for love",
   "CAT": "Cats",
   "DOG": "Dogs",
   "OTHER_SPECIES": "Other species",
@@ -704,5 +704,13 @@
   "NO_PAYMENTS": "No payments",
   "SUBSCRIBE_TO_NEWSLETTER_CONFIRMATION": "You subscribe to the newsletter!",
   "INVALID_SMS_CODE": "Invalid code",
-  "YOU_CAN_HELP": "You can help pets in this moment!"
+  "YOU_CAN_HELP": "You can help pets in this moment!",
+  "AIM": "Goal",
+  "TO_PROJECT": "for project",
+  "COLLECTED": "Collected",
+  "REMAIN": "Remaining",
+  "TOTAL_DONATIONS": "Total donations",
+  "LAST_DONATIONS": "Last donations",
+  "OTHER_PROJECTS": "Other projects",
+  "NO_PURPOSE": "General help for shelter"
 }

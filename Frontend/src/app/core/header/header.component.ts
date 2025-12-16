@@ -2,6 +2,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   Component,
   computed,
+  effect,
   ElementRef,
   HostListener,
   inject,
@@ -10,10 +11,12 @@ import {
   Signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router, RouterModule } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { filter, fromEvent } from 'rxjs';
 import { AuthButtonsComponent } from '../../shared/components/auth-buttons.component';
+import { PrimarySmallButtonComponent } from '../../shared/components/buttons/blue/primary-small-button.component';
 import { RoundButtonWithIconComponent } from '../../shared/components/buttons/round-button-with-icon.component';
 import { IconComponent } from '../../shared/components/icon.component';
 import { UserMenuComponent } from '../../shared/components/user-menu.component';
@@ -23,6 +26,7 @@ import { AuthService } from '../services/auth.service';
   selector: 'app-header',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     RouterModule,
     TranslateModule,
@@ -30,11 +34,20 @@ import { AuthService } from '../services/auth.service';
     UserMenuComponent,
     RoundButtonWithIconComponent,
     IconComponent,
+
+    PrimarySmallButtonComponent,
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  onSubmitSearchButton() {
+    this.router.navigate(['search-results'], {
+      queryParams: this.searchForm.value,
+    });
+    this.isSearchOpen.set(false);
+    this.searchForm.reset();
+  }
   home() {
     this.router.navigate(['/']);
   }
@@ -45,7 +58,7 @@ export class HeaderComponent {
     throw new Error('Method not implemented.');
   }
   openSearch() {
-    throw new Error('Method not implemented.');
+    this.isSearchOpen.set(!this.isSearchOpen());
   }
   private authService = inject(AuthService);
   private translate = inject(TranslateService);
@@ -57,9 +70,9 @@ export class HeaderComponent {
     // '/animals': 'ANIMALS',
     // '/articles': 'ARTICLES',
     // '/lost-pets': 'LOST_PETS',
-    // '/animal-aid-requests': 'ANIMAL_AID_REQUEST',
 
     '/about': 'ABOUT',
+    '/projects': 'PROJECTS',
     '/support': 'SUPPORT',
     '/news': 'NEWS',
     '/reports': 'REPORTS',
@@ -67,12 +80,20 @@ export class HeaderComponent {
   };
   isHidden = signal(false);
   isFloating = signal(false);
+  isSearchOpen = signal(false);
+  fb = new FormBuilder();
+  searchForm = this.fb.group({
+    searchString: ['', [Validators.required, Validators.minLength(3)]],
+  });
+  isSearchButtonDisabled = signal(true);
+
   get menuItemKeys(): string[] {
     return Object.keys(this.menuItems);
   }
 
   router = inject(Router);
   isMenuOpen = false;
+
   private lastScrollTop = 0;
   isAuthenticated: Signal<boolean> = this.authService.isLoggedIn;
   userName: Signal<string | null> = computed(() => {
@@ -103,6 +124,7 @@ export class HeaderComponent {
     }
 
     this.lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+    this.isSearchOpen.set(false);
   }
   changeLanguage(lang: string) {
     this.translate.use(lang);
@@ -115,6 +137,19 @@ export class HeaderComponent {
     this.authService.logout();
   }
   constructor() {
+    effect(() => {
+      // Тут беремо значення форми через signal-обгортку
+      this.searchForm.valueChanges.subscribe(() => {
+        this.isSearchButtonDisabled.set(!this.searchForm.valid);
+      });
+    });
+    if (isPlatformBrowser(this.platformId)) {
+      this.router.events
+        .pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe(() => {
+          window.scrollTo({ top: 0, behavior: 'auto' });
+        });
+    }
     // Підписка на кліки по документу
     if (isPlatformBrowser(this.platformId)) {
       fromEvent<MouseEvent>(document, 'click')
@@ -128,6 +163,19 @@ export class HeaderComponent {
           })
         )
         .subscribe(() => (this.isMenuOpen = false));
+      fromEvent<MouseEvent>(document, 'click')
+        .pipe(
+          takeUntilDestroyed(),
+          filter(event => {
+            const searchInput =
+              this.elementRef.nativeElement.querySelector('#searchInput') ||
+              this.elementRef.nativeElement;
+            return (
+              !searchInput.contains(event.target as Node) && this.isSearchOpen()
+            );
+          })
+        )
+        .subscribe(() => this.isSearchOpen.set(false));
     }
   }
 }
