@@ -6,11 +6,14 @@ import {
   signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { catchError, finalize, of, tap } from 'rxjs';
 import { AnimalAidRequestService } from '../../../core/services/animal-aid-request.service';
+import { IconComponent } from '../../../shared/components/icon.component';
 import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
+import { AnimalAidRequestCardComponent } from '../animal-aid-request-card/animal-aid-request-card.component';
+import { HomePartnersComponent } from "../../../shared/components/home-partners/home-partners.component";
 
 @Component({
   selector: 'app-animal-aid-request-list',
@@ -20,7 +23,10 @@ import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading
     RouterModule,
     TranslateModule,
     LoadingSpinnerComponent,
-  ],
+    AnimalAidRequestCardComponent,
+    IconComponent,
+    HomePartnersComponent
+],
 
   templateUrl: './animal-aid-request-list.component.html',
   styleUrl: './animal-aid-request-list.component.css',
@@ -28,6 +34,7 @@ import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading
 })
 export class AnimalAidRequestListComponent {
   private animalAidRequestService = inject(AnimalAidRequestService);
+  router = inject(Router);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
   animalAidRequests = toSignal(
@@ -46,4 +53,7 @@ export class AnimalAidRequestListComponent {
     ),
     { initialValue: [] }
   );
+  backBottomClick() {
+    this.router.navigate(['']);
+  }
 }

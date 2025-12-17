@@ -82,8 +82,6 @@ export class ApiService {
       // Server-side or HTTP error
       console.error(`Backend returned code, body was:`, error.error);
     }
-    return throwError(
-      () => new Error('Something bad happened; please try again later.')
-    );
+    return throwError(() => new Error(''));
   }
 }

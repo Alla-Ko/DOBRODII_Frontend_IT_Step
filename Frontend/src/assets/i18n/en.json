@@ -136,8 +136,9 @@
   "NONE": "None",
   "POSTED_BY": "Posted by",
   "RETURN_TO_LOST_PET_LIST": "Return to lost pet list",
-  "ANIMAL_AID_REQUEST": "Animal aid requests",
-  "FAILED_TO_LOAD_ANIMAL_AID_REQUESTS": "Failed to load animal aid requests",
+  "ANIMAL_AID_REQUEST": "All requests",
+  "ANIMAL_AID_REQUESTS_DESCRIPTION": "Here you will find examples of projects that we have successfully implemented, as well as those for which we are currently collecting funds",
+  "FAILED_TO_LOAD_ANIMAL_AID_REQUESTS": "Failed to load projects",
   "NO_REQUESTS_FOUND": "No requests found",
   "AID_REQUEST_CATEGORY": "Category of request",
   "AID_REQUEST_STATUS": "Request status",
@@ -712,5 +713,10 @@
   "TOTAL_DONATIONS": "Total donations",
   "LAST_DONATIONS": "Last donations",
   "OTHER_PROJECTS": "Other projects",
-  "NO_PURPOSE": "General help for shelter"
+  "NO_PURPOSE": "General help for shelter",
+  "OF": "Of",
+  "FOOD": "Food",
+  "MEDICAL": "Medical",
+  "EQUIPMENT": "Equipment",
+  "OTHER": "Other"
 }

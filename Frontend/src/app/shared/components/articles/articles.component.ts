@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Article } from '../../../core/models/article';
 import { ArticleService } from '../../../core/services/article.service';
-import { ArticleCardComponent } from '../../../features/articles/article-card/article-card.component';
+import { ArticleCardComponent } from '../../../features/successStories/article-card/article-card.component';
 
 @Component({
   selector: 'app-articles',

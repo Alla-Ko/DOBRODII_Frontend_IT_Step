@@ -1,20 +1,29 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   inject,
+  PLATFORM_ID,
   signal,
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { filter, finalize, switchMap, tap } from 'rxjs/operators';
 import { AnimalAidRequest } from '../../../core/models/animalAidRequest';
+import { PaymentScope } from '../../../core/models/liqPayCheckoutRequest';
+import { ProjectPayment } from '../../../core/models/projectPayment';
 import { AnimalAidRequestService } from '../../../core/services/animal-aid-request.service';
+import { LiqPayService } from '../../../core/services/liq-pay-service.service';
 import { MetaSsrService } from '../../../core/services/meta-ssr.service'; // Новий сервіс
+import { PrimaryLargeButtonComponent } from '../../../shared/components/buttons/blue/primary-large-button.component';
+import { IconComponent } from '../../../shared/components/icon.component';
+import { PhotoCollectionsComponent } from '../../../shared/components/photo-collections/photo-collections.component';
+import { ProgressBarComponent } from '../../../shared/components/progress-bar/progress-bar.component';
+import { ProjectPaymentItemComponent } from '../../../shared/components/project-payment-item/project-payment-item.component';
 import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
@@ -25,6 +34,11 @@ import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading
     RouterModule,
     TranslateModule,
     LoadingSpinnerComponent,
+    PhotoCollectionsComponent,
+    IconComponent,
+    ProjectPaymentItemComponent,
+    ProgressBarComponent,
+    PrimaryLargeButtonComponent,
   ],
   templateUrl: './animal-aid-request-detail.component.html',
   styleUrl: './animal-aid-request-detail.component.css',
@@ -33,11 +47,40 @@ import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading
 export class AnimalAidRequestDetailComponent {
   private route = inject(ActivatedRoute);
   public router = inject(Router);
-  private cdr = inject(ChangeDetectorRef);
+
   private animalAidRequestService = inject(AnimalAidRequestService);
   public translate = inject(TranslateService);
   private metaSsr = inject(MetaSsrService); // Новий сервіс
+  private liqpayService = inject(LiqPayService);
+  progress = computed(() => {
+    const request = this.animalAidRequest();
 
+    let allreadyDonated = request?.allreadyDonated;
+    console.log(allreadyDonated);
+    if (!allreadyDonated) {
+      allreadyDonated = 0;
+    }
+    if (!request || !request.estimatedCost) {
+      return 0;
+    }
+    console.log((allreadyDonated / request.estimatedCost) * 100);
+    return (allreadyDonated / request.estimatedCost) * 100;
+  });
+  remain = computed(() => {
+    const request = this.animalAidRequest();
+    if (!request || !request.estimatedCost) {
+      return 0;
+    }
+    const allreadyDonated = request.allreadyDonated;
+    if (!allreadyDonated) {
+      return request.estimatedCost;
+    }
+    const remain = request.estimatedCost - allreadyDonated;
+    if (remain < 0) {
+      return 0;
+    }
+    return request.estimatedCost - allreadyDonated;
+  });
   loading = signal<boolean>(true);
 
   animalAidRequestSlug = toSignal(
@@ -48,7 +91,8 @@ export class AnimalAidRequestDetailComponent {
   );
 
   animalAidRequest = signal<AnimalAidRequest | undefined>(undefined);
-  error = signal<string | null>(null);
+  lastPayments = signal<ProjectPayment[]>([]);
+  private platformId = inject(PLATFORM_ID);
 
   constructor() {
     effect(() => {
@@ -69,6 +113,11 @@ export class AnimalAidRequestDetailComponent {
             }
 
             this.animalAidRequest.set(animalAidRequest);
+            this.animalAidRequestService
+              .getLastPaymentsByAnimalAidRequestId(animalAidRequest.id)
+              .subscribe(payments => {
+                this.lastPayments.set(payments);
+              });
 
             // НОВІ мета-теги (вже з MetaSsrService)
             this.updateMetaTags(animalAidRequest);
@@ -76,14 +125,26 @@ export class AnimalAidRequestDetailComponent {
             // Твій JSON-LD
             this.addJsonLd(animalAidRequest);
           },
-          error: error => {
-            this.error.set(error);
-            this.cdr.detectChanges();
-          },
         });
     });
   }
-
+  backBottomClick() {
+    this.router.navigate(['projects']);
+  }
+  toDonate() {
+    const request = this.animalAidRequest();
+    if (!request) return;
+    try {
+      this.liqpayService.startPayment({
+        scope: 'aidRequest' as PaymentScope,
+        isRecurring: true,
+        entityId: request.id,
+      });
+      this.router.navigate(['/payment/amount']);
+    } catch (err) {
+      console.error(err);
+    }
+  }
   // НОВА ФУНКЦІЯ — заміна всіх старих meta.updateTag + title.setTitle
   private updateMetaTags(request: AnimalAidRequest) {
     const title = `${request.title} — Добродій`;

@@ -1,0 +1,48 @@
+<div
+  class="flex flex-1 flex-col justify-between w-full h-full bg-primary-beige rounded-40 p-10 text-secondary-neutral-mineShaft leading-none"
+>
+  <div class="flex flex-col">
+    <h2 class="font-bold font-inter text-base">
+      {{ 'PROJECT' | translate | uppercase }} "{{
+        project().title | uppercase
+      }}"
+    </h2>
+    <div class="flex mt-[24px] flex-wrap gap-1">
+      <span class="font-bold">{{ 'LOCATION' | translate }}: </span>
+      {{ 'SHELTER' | translate }}
+      "{{ project().shelter?.name }}"
+    </div>
+    <div class="flex mt-[24px] flex-wrap gap-1">
+      <span class="font-bold">{{ 'DESCRIPTION' | translate }}: </span>
+      {{ project().shortDescription }}
+    </div>
+    @if (project().estimatedCost && project().estimatedCost > 0) {
+      <div class="flex mt-[24px] flex-wrap gap-1 font-bold text-primary-orange">
+        {{ 'COLLECTED' | translate }}: {{ progress() | number: '1.0-0' }}%
+        {{ 'OF' | translate | lowercase }}
+        {{ project().estimatedCost | number: '1.0-0' }} UAH
+      </div>
+    }
+
+    <div class="flex mt-[24px] flex-wrap gap-1">
+      <span class="font-bold">{{ 'TYPE_OF_HELP' | translate }}: </span>
+      {{ project().category.toUpperCase() | translate }}
+    </div>
+  </div>
+  <div class="relative flex flex-col">
+    <div class="flex mt-[24px] overflow-hidden rounded-[12px] aspect-[4/3]">
+      <img
+        class="w-full h-full object-cover"
+        [src]="project().photo"
+        alt="women with dogs"
+      />
+    </div>
+    <div class="flex flex-col w-full items-center">
+      <app-secondary-large-button
+        class="w-full max-w-[400px] absolute bottom-0 left-[50%] translate-x-[-50%] translate-y-[-20px]"
+        buttonTitle="FIND_OUT_MORE"
+        (pressButton)="onClick()"
+      ></app-secondary-large-button>
+    </div>
+  </div>
+</div>

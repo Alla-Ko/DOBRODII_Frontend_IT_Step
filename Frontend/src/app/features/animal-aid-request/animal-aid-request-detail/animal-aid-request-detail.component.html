@@ -1,74 +1,228 @@
-@if (loading()) {
-  <div class="text-center text-gray-500 text-lg mt-10">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-} @else if (animalAidRequest()) {
-  <div class="max-w-4xl mx-auto p-6">
-    <div
-      class="bg-white rounded-2xl shadow-xl p-6 flex flex-col md:flex-row gap-6"
-    >
-      <div class="flex-1 space-y-2 sm:space-y-4 content-center">
-        <!-- Фото -->
-        <div
-          *ngIf="animalAidRequest() as data"
-          class="flex items-center justify-center"
-        >
-          <img
-            *ngIf="data.photos && data.photos.length > 0"
-            [src]="data.photos[0]"
-            [alt]="data.title"
-            class="w-full md:w-1/2 h-auto object-cover center rounded-xl shadow-md"
-          />
-        </div>
-        <h1
-          class="text-3xl font-bold text-gray-800 text-center"
-          style="font-size: clamp(16px, 20vw, 30px)"
-        >
-          {{ animalAidRequest()?.title }}
-        </h1>
-        <p class="text-gray-600">
-          {{ 'AID_REQUEST_CATEGORY' | translate }}:
-          {{ animalAidRequest()?.category || ('UNKNOWN' | translate) }}
-        </p>
-        <p class="text-gray-600">
-          {{ 'AID_REQUEST_STATUS' | translate }}:
-          {{ animalAidRequest()?.status || ('UNKNOWN' | translate) }}
-        </p>
-        <p class="text-gray-600">
-          {{ 'AID_REQUEST_DESCRIPTION' | translate }}:
-          {{
-            animalAidRequest()?.description || ('NO_DESCRIPTION' | translate)
-          }}
-        </p>
+<div
+  class="flex w-full flex-col justify-between items-center text-secondary-neutral-mineShaft bg-primary-lightBlue pt-[100px] xl:pt-[150px] px-4 xl:px-[50px]"
+>
+  @if (loading()) {
+    <div class="text-center text-gray-500 text-lg mt-10">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+  } @else {}
 
-        <p class="text-gray-600">
-          {{ 'AID_REQUEST_ESTIMATED_COST' | translate }}:
-          {{ animalAidRequest()?.estimatedCost || ('UNKNOWN' | translate) }}
-          {{ 'CURRENCY' | translate }}
-        </p>
-        <div class="mt-4 space-y-1 text-gray-600 text-sm">
-          <p class="text-gray-600">
-            {{ 'SHELTER' | translate }}:
-            <a
-              [routerLink]="['/shelters', animalAidRequest()?.shelter?.slug]"
-              class="text-blue-600 hover:underline"
-            >
-              {{ animalAidRequest()?.shelter?.name || ('UNKNOWN' | translate) }}
-            </a>
-          </p>
-          <p class="text-gray-600">
-            {{ 'CONTACT_ALTERNATIVE' | translate }}:
-            {{
-              animalAidRequest()?.shelter?.contactPhone ||
-                ('UNKNOWN' | translate)
-            }}
-          </p>
-        </div>
+  @if (animalAidRequest(); as data) {
+    <!-- Кнопка назад -->
+    <div class="inline-flex items-center w-full">
+      <div
+        class="hover:text-primary-orange inline-flex items-center cursor-pointer -translate-y-1/2 focus:outline-none focus:ring-2 focus:ring-primary-orange focus:ring-opacity-50"
+        (click)="backBottomClick()"
+        (keyup.enter)="backBottomClick()"
+        (keyup.space)="backBottomClick()"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'BACK' | translate"
+      >
+        <app-icon [name]="'arrowLeft'" class=""></app-icon>
+        <span class="ml-2">{{ 'BACK' | translate | uppercase }}</span>
       </div>
     </div>
-  </div>
-} @else if (error()) {
-  <div class="p-4 text-red-600 font-medium">
-    {{ error() ?? '' | translate }}
-  </div>
-}
+    <h1
+      class="flex font-bold font-fixel"
+      style="font-size: clamp(16px, 6.5vw, 40px)"
+    >
+      {{ 'PROJECT' | translate }}: {{ data.title }}
+    </h1>
+    <div
+      class="flex w-full flex-col pb-[50px] justify-between items-center mt-10"
+    >
+      <div class="grid grid-cols-1 xl:grid-cols-2 xl:auto-rows-fr gap-4 w-full">
+        <!-- Каруселька фото -->
+        <div class="flex flex-col bg-transparent w-full">
+          @if (data.photos! && data.photos.length > 0) {
+            <div class="flex text-primary-beige max-h-[100vh]">
+              <app-photo-collections
+                [photos]="data.photos"
+              ></app-photo-collections>
+            </div>
+          } @else {
+            <div
+              class="w-full h-64 flex items-center justify-center rounded-40"
+            >
+              <app-loading-spinner></app-loading-spinner>
+            </div>
+          }
+        </div>
+        <div
+          class="flex flex-col gap-2 bg-primary-beige rounded-40 p-2 xl:p-[22px] w-full"
+        >
+          @if (data.estimatedCost && data.estimatedCost > 0) {
+            <!-- Короткі відомості -->
+            <!-- Мета і назва -->
+            <div
+              class="flex flex-wrap gap-1 items-center justify-center mx-2 xl:mx-[28px]"
+            >
+              <app-icon [name]="'aim'"></app-icon>
+              <p
+                class="text-[40px] font-bold"
+                style="font-size: clamp(16px, 6.5vw, 40px)"
+              >
+                {{ 'AIM' | translate | uppercase }}:
+              </p>
+              <p
+                class="text-[40px] font-bold text-primary-blue"
+                style="font-size: clamp(16px, 6.5vw, 40px)"
+              >
+                {{ animalAidRequest()?.estimatedCost | number: '1.0-2' : 'uk' }}
+                UAH
+              </p>
+            </div>
+
+            <!-- Прогрес бар -->
+            <div class="w-full mt-6">
+              <app-progress-bar [progress]="progress()"></app-progress-bar>
+            </div>
+            <div
+              class="flex flex-col gap-4 sm:gap-0 sm:flex-row justify-start sm:justify-between items-center sm:items-end w-full px-2 xl:px-[28px] mt-6"
+            >
+              <!-- Зліва дані -->
+              <div class="flex flex-col gap-1 w-full">
+                <!-- Зібрано -->
+                <div
+                  class="w-full flex flex-wrap gap-2 items-center justify-start"
+                >
+                  <app-icon [name]="'orangeSmallTick'"></app-icon>
+                  <p class="text-base pl-[6px]">
+                    {{ 'COLLECTED' | translate }}:
+                  </p>
+                  <p class="text-base">
+                    {{
+                      animalAidRequest()?.allreadyDonated
+                        | number: '1.0-2' : 'uk'
+                    }}
+                    UAH
+                    <span class="font-bold"
+                      >&#40;{{
+                        progress() | number: '1.0-0' : 'uk'
+                      }}%&#41;</span
+                    >
+                  </p>
+                </div>
+                <!-- Залишилося -->
+                <div
+                  class="w-full flex flex-wrap gap-2 items-center justify-start"
+                >
+                  <app-icon [name]="'orangeClocks'"></app-icon>
+                  <p class="text-base">{{ 'REMAIN' | translate }}:</p>
+                  <p class="text-base">
+                    {{ remain() | number: '1.0-2' : 'uk' }} UAH
+                  </p>
+                </div>
+                <!-- Всього донатів -->
+                <div
+                  class="w-full flex flex-wrap gap-2 items-center justify-start"
+                >
+                  <app-icon [name]="'blueDonors'"></app-icon>
+                  <p class="text-base">{{ 'TOTAL_DONATIONS' | translate }}:</p>
+                  <p class="text-base pl-1">
+                    {{
+                      animalAidRequest()?.donationsCount | number: '1.0' : 'uk'
+                    }}
+                  </p>
+                </div>
+              </div>
+              <!-- Справа кнопка -->
+              <div>
+                <app-primary-large-button
+                  class="w-[260px] mt-6"
+                  buttonTitle="DONATE"
+                  (pressButton)="toDonate()"
+                ></app-primary-large-button>
+              </div>
+            </div>
+          }
+          <!-- Інша інформація -->
+          <!-- Категорія -->
+          <div
+            class="w-full flex flex-wrap gap-2 items-center justify-start mt-4 px-2 xl:px-[28px]"
+          >
+            <div class="transform scale-105">
+              <app-icon [name]="'bluePawOutline'"></app-icon>
+            </div>
+            <p class="text-base pl-[6px] font-bold">
+              {{ 'CATEGORY' | translate }}:
+            </p>
+            <p class="text-base">
+              {{ data.category.toUpperCase() | translate }}
+            </p>
+          </div>
+
+          <!-- Статус -->
+          <div
+            class="w-full flex flex-wrap gap-2 items-center justify-start mx-2 xl:mx-[28px]"
+          >
+            <div class="transform scale-105">
+              <app-icon [name]="'bluePawOutline'"></app-icon>
+            </div>
+            <p class="text-base pl-[6px] font-bold">
+              {{ 'STATUS' | translate }}:
+            </p>
+            <p class="text-base">
+              {{ data.status.toUpperCase() | translate }}
+            </p>
+          </div>
+          <!-- Притулок -->
+          <div
+            class="w-full flex flex-wrap gap-2 items-center justify-start mx-2 xl:mx-[28px]"
+          >
+            <div class="transform scale-105">
+              <app-icon [name]="'bluePawOutline'"></app-icon>
+            </div>
+            <p class="text-base pl-[6px] font-bold">
+              {{ 'SHELTER' | translate }}:
+            </p>
+            <a
+              [routerLink]="['/shelters', data.shelter?.slug]"
+              class="text-primary-blue hover:underline"
+            >
+              {{ data.shelter?.name || ('UNKNOWN' | translate) }}
+            </a>
+          </div>
+          <div
+            class="w-full flex flex-1 flex-wrap gap-2 items-center justify-start px-2 xl:px-[28px]"
+          >
+            {{ data.description }}
+          </div>
+        </div>
+      </div>
+      <!--Нижній текст -->
+      @if (lastPayments().length > 0) {
+        <div
+          class="flex flex-col w-full bg-primary-beige rounded-40 p-4 xl:p-[50px] mt-4"
+        >
+          <div class="flex flex-row justify-between items-end w-full">
+            <p class="text-primary-orange font-bold text-base">
+              {{ 'LAST_DONATIONS' | translate }}:
+            </p>
+          </div>
+          <div class="flex flex-col w-full mt-4">
+            @for (payment of lastPayments(); track payment; let i = $index) {
+              @if (i > 0) {
+                <hr
+                  class="border-secondary-neutral-silverChalice mt-1 mb-1 ml-[50px]"
+                />
+              }
+              <app-project-payment-item
+                [payment]="payment"
+              ></app-project-payment-item>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="flex w-full justify-center mt-4">
+        <app-primary-large-button
+          class="w-[260px]"
+          buttonTitle="OTHER_PROJECTS"
+          (pressButton)="backBottomClick()"
+        ></app-primary-large-button>
+      </div>
+    </div>
+  }
+</div>

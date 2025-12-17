@@ -98,84 +98,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
       thirdDiv: 'THIRD_DIV_VET',
     },
   ];
-  reports = [
-    { month: 1, year: 2024, link: 'тут буде посилання на звіт за січень 2024' },
-    { month: 2, year: 2024, link: 'тут буде посилання на звіт за лютий 2024' },
-    {
-      month: 3,
-      year: 2024,
-      link: 'тут буде посилання на звіт за березень 2024',
-    },
-    {
-      month: 4,
-      year: 2024,
-      link: 'тут буде посилання на звіт за квітень 2024',
-    },
-    {
-      month: 5,
-      year: 2024,
-      link: 'тут буде посилання на звіт за травень 2024',
-    },
-    {
-      month: 6,
-      year: 2024,
-      link: 'тут буде посилання на звіт за червень 2024',
-    },
-    { month: 7, year: 2024, link: 'тут буде посилання на звіт за липень 2024' },
-    {
-      month: 8,
-      year: 2024,
-      link: 'тут буде посилання на звіт за серпень 2024',
-    },
-    {
-      month: 9,
-      year: 2024,
-      link: 'тут буде посилання на звіт за вересень 2024',
-    },
-    {
-      month: 10,
-      year: 2024,
-      link: 'тут буде посилання на звіт за жовтень 2024',
-    },
-    {
-      month: 11,
-      year: 2024,
-      link: 'тут буде посилання на звіт за листопад 2024',
-    },
-    {
-      month: 12,
-      year: 2024,
-      link: 'тут буде посилання на звіт за грудень 2024',
-    },
-    { month: 1, year: 2025, link: 'тут буде посилання на звіт за січень 2025' },
-    { month: 2, year: 2025, link: 'тут буде посилання на звіт за лютий 2025' },
-    {
-      month: 3,
-      year: 2025,
-      link: 'тут буде посилання на звіт за березень 2025',
-    },
-    {
-      month: 4,
-      year: 2025,
-      link: 'тут буде посилання на звіт за квітень 2025',
-    },
-    {
-      month: 5,
-      year: 2025,
-      link: 'тут буде посилання на звіт за травень 2025',
-    },
-    {
-      month: 6,
-      year: 2025,
-      link: 'тут буде посилання на звіт за червень 2025',
-    },
-    { month: 7, year: 2025, link: 'тут буде посилання на звіт за липень 2025' },
-    {
-      month: 8,
-      year: 2025,
-      link: 'тут буде посилання на звіт за серпень 2025',
-    },
-  ];
 
   constructor() {
     effect(() => {
@@ -266,13 +188,26 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   onDownloadMonthlyReportClick() {
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
-    let link = '';
-    this.reports.forEach(report => {
-      if (report.month === month && report.year === year) {
-        link = report.link;
-      }
-    });
-    window.open(link, '_blank');
+    let monthNumber = month;
+    let yearNumber = year;
+    if (monthNumber === 0) {
+      yearNumber = year - 1;
+      monthNumber = 12;
+    }
+
+    const fileName = `${yearNumber}-${monthNumber}.pdf`;
+    const specificPath = `../../../assets/files/reports/${fileName}`;
+    const fallbackPath = '../../../assets/files/reports/universal.pdf';
+    // Спробуємо перевірити, чи існує конкретний файл
+    fetch(specificPath, { method: 'HEAD' })
+      .then(response => {
+        const url = response.ok ? specificPath : fallbackPath;
+        window.open(url, '_blank');
+      })
+      .catch(() => {
+        // Якщо fetch впав (наприклад, через CORS або мережеву помилку) — на всяк випадок fallback
+        window.open(fallbackPath, '_blank');
+      });
   }
   onAllReportsClick() {
     this.router.navigate(['/reports']);
