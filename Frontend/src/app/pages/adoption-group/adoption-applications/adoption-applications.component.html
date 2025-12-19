@@ -21,39 +21,43 @@
   >
     {{ 'ADOPTION_APPLICATIONS_TITLE' | translate }}
   </h1>
-  @if (adoptionApplications().length > 0) {
-    <p class="max-w-[660px] mt-6">
-      {{ 'FOUND' | translate }}: {{ adoptionApplications().length }}
-    </p>
-    <div class="flex flex-col gap-6 mt-6">
-      @for (a of adoptionApplications(); track a.animal.id) {
-        <app-adoption-application-card
-          [adoptionApplication]="a"
-          (toggleFavourite)="toggleFavourite($event)"
-          (deleteAdoptionApplication)="toDeleteAdoptionApplication(a.id)"
-        ></app-adoption-application-card>
-      }
-    </div>
+  @if (loading()) {
+    <app-loading-spinner></app-loading-spinner>
   } @else {
-    <p class="max-w-[660px] text-[24px] font-bold mt-[100px]">
-      {{ 'NO_ADOPTION_APPLICATIONS' | translate }}
-    </p>
-    <div class="flex mt-10">
-      <app-primary-large-orange-button
-        class="w-[260px]"
-        buttonTitle="SEE_ALL_ANIMALS"
-        (pressButton)="toAllAnimals()"
-      ></app-primary-large-orange-button>
-    </div>
-  }
-  @if (showModal()) {
-    <div>
-      <app-confirm-modal
-        [text]="'CANCEL_ADOPTION_APPLICATION'"
-        [titleSubmit]="'CANCEL_APPLICATION'"
-        [titleCancel]="'DONT_CANCEL_APPLICATION'"
-        (confirmAction)="toSubmitCancel($event)"
-      ></app-confirm-modal>
-    </div>
+    @if (adoptionApplications().length > 0) {
+      <p class="max-w-[660px] mt-6">
+        {{ 'FOUND' | translate }}: {{ adoptionApplications().length }}
+      </p>
+      <div class="flex flex-col gap-6 mt-6">
+        @for (a of adoptionApplications(); track a.id) {
+          <app-adoption-application-card
+            [adoptionApplication]="a"
+            (toggleFavourite)="toggleFavourite($event)"
+            (deleteAdoptionApplication)="toDeleteAdoptionApplication(a.id)"
+          ></app-adoption-application-card>
+        }
+      </div>
+    } @else {
+      <p class="max-w-[660px] text-[24px] font-bold mt-[100px]">
+        {{ 'NO_ADOPTION_APPLICATIONS' | translate }}
+      </p>
+      <div class="flex mt-10">
+        <app-primary-large-orange-button
+          class="w-[260px]"
+          buttonTitle="SEE_ALL_ANIMALS"
+          (pressButton)="toAllAnimals()"
+        ></app-primary-large-orange-button>
+      </div>
+    }
+    @if (showModal()) {
+      <div>
+        <app-confirm-modal
+          [text]="'CANCEL_ADOPTION_APPLICATION'"
+          [titleSubmit]="'CANCEL_APPLICATION'"
+          [titleCancel]="'DONT_CANCEL_APPLICATION'"
+          (confirmAction)="toSubmitCancel($event)"
+        ></app-confirm-modal>
+      </div>
+    }
   }
 </div>

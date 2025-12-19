@@ -24,7 +24,7 @@ export class AnimalAidRequestCardComponent {
     const project = this.project();
 
     let allreadyDonated = project?.allreadyDonated;
-    console.log(allreadyDonated);
+
     if (!allreadyDonated) {
       allreadyDonated = 0;
     }

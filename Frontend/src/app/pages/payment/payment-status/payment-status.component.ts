@@ -2,7 +2,10 @@ import { UpperCasePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { PaymentStatusResponse } from '../../../core/models/liqPayCheckoutRequest';
+import {
+  PaymentScope,
+  PaymentStatusResponse,
+} from '../../../core/models/liqPayCheckoutRequest';
 import { LiqPayService } from '../../../core/services/liq-pay-service.service';
 import { PrimaryLargeButtonComponent } from '../../../shared/components/buttons/blue/primary-large-button.component';
 import { IconComponent } from '../../../shared/components/icon.component';
@@ -23,7 +26,15 @@ import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading
 })
 export class PaymentStatusComponent {
   goToDonations() {
-    this.router.navigate(['payment/amount']);
+    try {
+      this.liqPayService.startPayment({
+        scope: 'global' as PaymentScope,
+        isRecurring: false,
+      });
+      this.router.navigate(['/payment/amount']);
+    } catch (err) {
+      console.error(err);
+    }
   }
   goToProjects() {
     this.router.navigate(['/projects']);

@@ -9,7 +9,7 @@
         class="m-y-[3px] absolute top-4 left-0 w-[112px] h-auto rounded-tr-[12px] rounded-br-[12px] font-bold text-sm text-center p-[2px] pl-1"
         [ngClass]="getStatusClass(data.status)"
       >
-        {{ data.status.toUpperCase() | translate | lowercase }}
+        {{ getStatusText(data.status) | translate | lowercase }}
       </div>
 
       <div class="absolute top-4 right-4">

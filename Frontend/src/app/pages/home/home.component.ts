@@ -106,13 +106,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
       } else {
         this.isCharityButtonHidden.set(false);
       }
-      // if (isPlatformBrowser(this.platformId)) {
-      //   this.router.events
-      //     .pipe(filter(event => event instanceof NavigationEnd))
-      //     .subscribe(() => {
-      //       window.scrollTo({ top: 0, behavior: 'auto' });
-      //     });
-      // }
     });
   }
   ngOnInit() {
@@ -135,10 +128,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
           ? decodeURIComponent(params['email']).trim()
           : '';
         const currentPath = this.route.snapshot.routeConfig?.path;
-
-        // Перевірка валідності Base64
-        // const isValidBase64 = token ? /^[A-Za-z0-9+/=]+$/.test(token) : false;
-        // console.log('Is token valid Base64?', isValidBase64);
 
         if (email && token && currentPath === 'verify-email') {
           this.isProcessed = true; // Помічаємо, що запит оброблено
@@ -182,9 +171,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   onSupportClick() {
     this.router.navigate(['/support']);
   }
-  // onTempClick() {
-  //   this.router.navigate(['/public-offer']);
-  // }
+
   onDownloadMonthlyReportClick() {
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
@@ -198,14 +185,13 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
     const fileName = `${yearNumber}-${monthNumber}.pdf`;
     const specificPath = `../../../assets/files/reports/${fileName}`;
     const fallbackPath = '../../../assets/files/reports/universal.pdf';
-    // Спробуємо перевірити, чи існує конкретний файл
+
     fetch(specificPath, { method: 'HEAD' })
       .then(response => {
         const url = response.ok ? specificPath : fallbackPath;
         window.open(url, '_blank');
       })
       .catch(() => {
-        // Якщо fetch впав (наприклад, через CORS або мережеву помилку) — на всяк випадок fallback
         window.open(fallbackPath, '_blank');
       });
   }

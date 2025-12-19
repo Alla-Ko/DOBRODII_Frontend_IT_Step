@@ -14,6 +14,7 @@ import { AnimalSubscriptionService } from '../../../core/services/animal-subscri
 import { AnimalService } from '../../../core/services/animal.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { AdoptionApplicationCardComponent } from '../adoption-application-card/adoption-application-card.component';
+import { LoadingSpinnerComponent } from "../../../shared/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-adoption-applications',
@@ -25,7 +26,8 @@ import { AdoptionApplicationCardComponent } from '../adoption-application-card/a
     TranslateModule,
     UpperCasePipe,
     AdoptionApplicationCardComponent,
-  ],
+    LoadingSpinnerComponent
+],
   templateUrl: './adoption-applications.component.html',
   styleUrl: './adoption-applications.component.css',
 })
@@ -37,7 +39,7 @@ export class AdoptionApplicationsComponent {
   animalSubscriptionService = inject(AnimalSubscriptionService);
 
   router = inject(Router);
-
+  loading = signal(false);
   showModal = signal(false);
   private rawadoptionApplications = signal<AdoptionApplication[]>([]);
   private favoriteAnimalIds = signal<Set<string>>(new Set());
@@ -58,6 +60,7 @@ export class AdoptionApplicationsComponent {
   }
   loadAdoptionApplications() {
     if (!this.isAuthenticated()) return;
+    this.loading.set(true);
     this.adoptionApplicationService.getMyAdoptionApplications().subscribe({
       next: adoptionApplications => {
         adoptionApplications.forEach(adoptionApplication => {
@@ -77,17 +80,19 @@ export class AdoptionApplicationsComponent {
         });
 
         this.rawadoptionApplications.set(adoptionApplications);
-        console.log(this.rawadoptionApplications()[0]);
+
       },
       error: () => {
         this.rawadoptionApplications.set([]);
       },
+      complete: () => this.loading.set(false),
     });
   }
   loadAnimal(id: string): Observable<Animal> {
     return this.animalService.getAnimalById(id);
   }
   private loadFavoriteAnimalIds() {
+    this.loading.set(true);
     if (!this.isAuthenticated()) return;
     this.animalSubscriptionService.getFavoriteAnimals().subscribe({
       next: favs => {
@@ -96,6 +101,7 @@ export class AdoptionApplicationsComponent {
       error: () => {
         this.favoriteAnimalIds.set(new Set());
       },
+      complete: () => this.loading.set(false),
     });
   }
   toDeleteAdoptionApplication(id: string) {

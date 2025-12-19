@@ -39,14 +39,14 @@ export class LiveDonationCollectionComponent {
     const request = this.animalAidRequest();
 
     let collectedAmount = request?.collectedAmount;
-    console.log(collectedAmount);
+
     if (!collectedAmount) {
       collectedAmount = 0;
     }
     if (!request || !request.estimatedCost) {
       return 0;
     }
-    console.log((collectedAmount / request.estimatedCost) * 100);
+
     return (collectedAmount / request.estimatedCost) * 100;
   });
   remain = computed(() => {

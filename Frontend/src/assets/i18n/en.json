@@ -487,9 +487,9 @@
   "Female": "Female",
   "WITHOUT_SPECIES": "Without species",
   "ADOPTION_STATUS": "Adoption status",
-  "Pending": "Pending",
-  "Approved": "Approved",
-  "Rejected": "Rejected",
+
+  "APPROVED": "Approved",
+  "REJECTED": "Rejected",
   "AID_CATEGORY": "Aid category",
   "Food": "Food",
   "Medical": "Medical",

@@ -24,6 +24,9 @@ export class AnimalCardComponent {
   animal = input.required<Animal>();
   @Output() animalDetailClick = new EventEmitter();
   @Output() heartClick = new EventEmitter();
+  getStatusText(status?: string) {
+    return (status || '').toUpperCase();
+  }
   getStatusClass(status?: string) {
     const s = status?.toLowerCase();
     return {

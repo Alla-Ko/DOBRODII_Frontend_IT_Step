@@ -21,6 +21,13 @@ export class AppComponent implements OnInit {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
-    this.authService.refreshToken();
+    this.authService.refreshToken().subscribe({
+      next: () => {
+        console.log('Refresh token response +');
+      },
+      error: () => {
+        console.error('Refresh token error -');
+      },
+    });
   }
 }

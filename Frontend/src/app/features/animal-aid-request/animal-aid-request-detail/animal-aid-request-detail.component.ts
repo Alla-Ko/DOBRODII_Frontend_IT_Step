@@ -56,14 +56,14 @@ export class AnimalAidRequestDetailComponent {
     const request = this.animalAidRequest();
 
     let allreadyDonated = request?.allreadyDonated;
-    console.log(allreadyDonated);
+
     if (!allreadyDonated) {
       allreadyDonated = 0;
     }
     if (!request || !request.estimatedCost) {
       return 0;
     }
-    console.log((allreadyDonated / request.estimatedCost) * 100);
+
     return (allreadyDonated / request.estimatedCost) * 100;
   });
   remain = computed(() => {
