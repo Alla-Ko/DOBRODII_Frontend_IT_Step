@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Guardianship } from '../../core/models/guardianship';
 import { PaymentScope } from '../../core/models/liqPayCheckoutRequest';
+import { AdoptionApplicationService } from '../../core/services/adoption-application.service';
 import { AnimalSubscriptionService } from '../../core/services/animal-subscription.service';
 import { AuthService } from '../../core/services/auth.service';
 import { GuardianshipService } from '../../core/services/guardianship.service';
@@ -29,6 +30,7 @@ import { GuardianshipCardComponent } from './guardianship-card/guardianship-card
 })
 export class GuardianshipsComponent {
   authService = inject(AuthService);
+  private adoptionApplicationService = inject(AdoptionApplicationService);
   router = inject(Router);
   isAuthenticated: Signal<boolean> = this.authService.isLoggedIn;
   showModal = signal(false);
@@ -49,9 +51,11 @@ export class GuardianshipsComponent {
       },
     }));
   });
+  showAdoptModalWindow = signal(false);
   cancelationGuardianshipId = signal('');
   animalSubscriptionService = inject(AnimalSubscriptionService);
   liqpayService = inject(LiqPayService);
+  animalIdForAdoption = signal('');
   constructor() {
     this.loadGuardianships();
     this.loadFavoriteAnimalIds();
@@ -94,7 +98,6 @@ export class GuardianshipsComponent {
     this.cancelationGuardianshipId.set('');
   }
   toChangePayment(guardianship: Guardianship) {
-
     this.createPayment(guardianship);
   }
 
@@ -143,9 +146,35 @@ export class GuardianshipsComponent {
       console.error(err);
     }
   }
-  toAdoption(animalId: string) {
-    console.log('toAdoption', animalId);
-    throw new Error('Method not implemented.');
+  onAdopt($event: boolean) {
+    const animalIdForAdoption = this.animalIdForAdoption();
+    if (animalIdForAdoption == '') {
+      return;
+    }
+    if ($event) {
+      try {
+        this.adoptionApplicationService
+          .createAdoptionApplication({
+            animalId: animalIdForAdoption,
+          })
+          .subscribe(adoptionApplication => {
+            if (!adoptionApplication)
+              this.router.navigate([`adoption-applications-failed`]);
+            this.router.navigate([`profile/adoption-applications`]);
+          });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    this.showAdoptModalWindow.set(false);
+  }
+
+  showAdoptModal($event: string) {
+    if (!this.isAuthenticated()) {
+      return;
+    }
+    this.animalIdForAdoption.set($event);
+    this.showAdoptModalWindow.set(true);
   }
   toggleFavourite(animalId: string) {
     const isFavorite = this.favoriteAnimalIds().has(animalId);

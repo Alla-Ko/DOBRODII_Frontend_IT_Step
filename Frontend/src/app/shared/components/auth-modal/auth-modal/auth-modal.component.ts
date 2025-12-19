@@ -69,7 +69,7 @@ import { WelcomeComponent } from '../welcome/welcome.component';
       >
         <div
           class="bg-secondary-neutral-white text-secondary-neutral-mineShaft p-4 rounded-[40px] shadow-2xl
-           w-full max-w-[400px] sm:max-w-[560px] xl:min-w-[900px] min-w-[320px] max-h-[90vh] overflow-auto mx-2 "
+           w-full max-w-[400px] sm:max-w-[560px]  min-w-[320px] max-h-[90vh] overflow-auto mx-2 pb-7"
         >
           <div class="flex justify-end">
             <app-icon

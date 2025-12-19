@@ -146,7 +146,7 @@
               </a>
               <p class="flex text-primary-beige">{{ 'STATUS' | translate }}</p>
               <p class="flex">
-                {{ data.status || 'UNKNOWN' | translate }}
+                {{ data.status.toUpperCase() || 'UNKNOWN' | translate }}
               </p>
               <p class="flex text-primary-beige">
                 {{ 'CARE_COST' | translate }}
@@ -174,12 +174,12 @@
         <!-- 1 колонка -->
         <div class="flex flex-col gap-5">
           <!-- Усиновитии -->
-          @if (animal()?.status === 'Available') {
+          @if (animal()?.status?.toUpperCase() === 'AVAILABLE') {
             <div class="flex flex-row gap-5 items-center">
               <app-primary-large-button
                 class="w-[260px]"
                 buttonTitle="TAKE_HOME"
-                (pressButton)="onTakeHome()"
+                (pressButton)="showAdoptModal()"
               ></app-primary-large-button>
               <a
                 [routerLink]="['/adoption-rules']"
@@ -194,14 +194,14 @@
           <!-- Взяти під опіку -->
           @if (
             !animal()?.isUnderCare &&
-            (animal()?.status === 'Available' ||
-              animal()?.status === 'InTreatment')
+            (animal()?.status?.toUpperCase() === 'AVAILABLE' ||
+              animal()?.status?.toUpperCase() === 'INTREANMENT')
           ) {
             <div class="flex flex-row gap-5 items-center">
               <app-primary-large-orange-button
                 class="w-[260px]"
                 buttonTitle="TAKE_CARE"
-                (pressButton)="showModal()"
+                (pressButton)="showTakeCareModal()"
               ></app-primary-large-orange-button>
               <a
                 [routerLink]="['/care-rules']"
@@ -222,7 +222,7 @@
               </div>
             } @else {
               <div class="text-primary-orange flex ml-[60px]">
-                {{ animal()!.status | translate | uppercase }}
+                {{ animal()!.status!.toUpperCase() | translate | uppercase }}
               </div>
             }
           }
@@ -310,5 +310,13 @@
     [titleCancel]="'CANCEL'"
     [titleSubmit]="'CONTINUE'"
     (confirmAction)="onTakeCare($event)"
+  ></app-confirm-modal>
+}
+@if (showAdoptModalWindow()) {
+  <app-confirm-modal
+    [text]="'ARE_YOU_SURE_YOU_WANT_TO_ADOPT'"
+    [titleCancel]="'CANCEL'"
+    [titleSubmit]="'CONTINUE'"
+    (confirmAction)="onAdopt($event)"
   ></app-confirm-modal>
 }

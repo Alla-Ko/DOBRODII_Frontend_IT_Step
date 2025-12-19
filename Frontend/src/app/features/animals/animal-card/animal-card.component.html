@@ -1,63 +1,60 @@
-<div
-  class="font-inter text-base text-primary-beige bg-primary-light-orange rounded-40 p-3 w-[284px] h-full"
->
+@if (animal(); as data) {
   <div
-    class="relative rounded-tl-40 rounded-tr-40 rounded-bl-[136px] rounded-br-[136px] overflow-hidden bg-primary-beige h-[256px] w-full"
+    class="font-inter text-base text-primary-beige bg-primary-light-orange rounded-40 p-3 w-[284px] h-full"
   >
     <div
-      class="m-y-[3px] absolute top-4 left-0 w-[112px] h-auto rounded-tr-[12px] rounded-br-[12px] font-bold text-sm text-center p-[2px] pl-1"
-      [ngClass]="{
-        'bg-primary-blue text-white':
-          animal().status.toLowerCase() === 'available',
-        'bg-secondary-jordyBlue-1 text-primary-blue':
-          animal().status.toLowerCase() !== 'available',
-      }"
+      class="relative rounded-tl-40 rounded-tr-40 rounded-bl-[136px] rounded-br-[136px] overflow-hidden bg-primary-beige h-[256px] w-full"
     >
-      {{ animal().status | translate | lowercase }}
-    </div>
+      <div
+        class="m-y-[3px] absolute top-4 left-0 w-[112px] h-auto rounded-tr-[12px] rounded-br-[12px] font-bold text-sm text-center p-[2px] pl-1"
+        [ngClass]="getStatusClass(data.status)"
+      >
+        {{ data.status.toUpperCase() | translate | lowercase }}
+      </div>
 
-    <div class="absolute top-4 right-4">
-      @if (animal().isFavorite) {
-        <app-round-filled-white-blue-button-with-icon
-          (click)="onFilledHeartClick()"
-        ></app-round-filled-white-blue-button-with-icon>
-      } @else {
-        <app-round-white-blue-button-with-icon
-          (click)="onHeartClick()"
-        ></app-round-white-blue-button-with-icon>
-      }
-    </div>
+      <div class="absolute top-4 right-4">
+        @if (data.isFavorite) {
+          <app-round-filled-white-blue-button-with-icon
+            (click)="onFilledHeartClick()"
+          ></app-round-filled-white-blue-button-with-icon>
+        } @else {
+          <app-round-white-blue-button-with-icon
+            (click)="onHeartClick()"
+          ></app-round-white-blue-button-with-icon>
+        }
+      </div>
 
-    <img
-      src="{{ animal().photo }}"
-      alt="{{ animal().name }}"
-      class="w-full h-full object-cover"
-    />
+      <img
+        [src]="data.photo"
+        [alt]="data.name"
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <div class="mt-[18px] flex-col">
+      <h5 class="font-bold">{{ data.name }}</h5>
+      <p class="mt-2">
+        {{ data.species?.name || ('WITHOUT_SPECIES' | translate) }},
+        {{ data.age?.[0] ?? 0 }}
+        {{
+          data.age?.[0] === 1
+            ? ('YEAR_SINGULAR' | translate)
+            : ('YEAR_PLURAL' | translate)
+        }},
+        {{ data.age?.[1] ?? 0 }}
+        {{
+          data.age?.[1] === 1
+            ? ('MONTH_SINGULAR' | translate)
+            : ('MONTH_PLURAL' | translate)
+        }},
+        {{ data.gender | translate }}
+      </p>
+    </div>
+    <div class="mt-[14px] flex-col">
+      <app-primary-large-button
+        class="w-[260px]"
+        buttonTitle="ANIMAL_DETAIL_BUTTON"
+        (pressButton)="onAnimalDetailClick()"
+      ></app-primary-large-button>
+    </div>
   </div>
-  <div class="mt-[18px] flex-col">
-    <h5 class="font-bold">{{ animal().name }}</h5>
-    <p class="mt-2">
-      {{ animal().species?.name || 'WITHOUT_SPECIES' | translate }},
-      {{ animal().age![0] }}
-      {{
-        animal().age![0] === 1
-          ? ('YEAR_SINGULAR' | translate)
-          : ('YEAR_PLURAL' | translate)
-      }},
-      {{ animal().age![1] }}
-      {{
-        animal().age![1] === 1
-          ? ('MONTH_SINGULAR' | translate)
-          : ('MONTH_PLURAL' | translate)
-      }},
-      {{ animal().gender | translate }}
-    </p>
-  </div>
-  <div class="mt-[14px] flex-col">
-    <app-primary-large-button
-      class="w-[260px]"
-      buttonTitle="ANIMAL_DETAIL_BUTTON"
-      (pressButton)="onAnimalDetailClick()"
-    ></app-primary-large-button>
-  </div>
-</div>
+}

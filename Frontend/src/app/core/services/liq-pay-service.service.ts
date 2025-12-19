@@ -118,14 +118,6 @@ export class LiqPayService {
         })
       );
   }
-  // getPaymentStatus(orderId: string) {
-  //   const params = new HttpParams().set('orderId', orderId);
-
-  //   return this.api.get<PaymentStatusResponse>(
-  //     `${this.endpoint}/status`,
-  //     params
-  //   );
-  // }
 
   getPaymentStatus(orderId: string) {
     return this.api.getById<PaymentStatusResponse>(`payments/intents`, orderId);
@@ -140,7 +132,7 @@ export class LiqPayService {
       .get<PaymentSubscription[]>(`payments/me/subscriptions`)
       .pipe(
         map(subscriptions =>
-          subscriptions.filter(sub => sub.status !== 'canceled')
+          subscriptions.filter(sub => sub.status.toUpperCase() !== 'CANCELED')
         )
       );
   }

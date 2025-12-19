@@ -18,7 +18,7 @@
   </div>
   <!-- Другий рядок - статус -->
   <p class="text-primary-light-orange text-start">
-    {{ payment().status | translate }}
+    {{ payment().status.toUpperCase() | translate }}
   </p>
   <hr class="border-secondary-neutral-silverChalice mt-4" />
   <!-- Призначення -->

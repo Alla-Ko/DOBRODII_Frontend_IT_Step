@@ -42,7 +42,7 @@
             : '—'
         }}
       </p>
-      @if (guardianship().status === 'RequiresPayment') {
+      @if (guardianship().status.toUpperCase() === 'REQUIRESPAYMENT') {
         <p class="font-bold text-secondary-semantic-error">
           {{ 'PAYMENT_ERROR_RETRY' | translate }}
         </p>

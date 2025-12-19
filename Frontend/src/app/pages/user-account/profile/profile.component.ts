@@ -74,7 +74,7 @@ export class ProfileComponent {
   }
   toApplications() {
     //дописати компонент заявки на усиновлення і заявки на волонтерство
-    throw new Error('Method not implemented.');
+    this.router.navigate(['profile/adoption-applications']);
   }
   toGuardianships() {
     this.router.navigate(['guardianships']);

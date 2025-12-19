@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  DestroyRef,
   ElementRef,
   EventEmitter,
+  inject,
   Output,
   signal,
   ViewChild,
@@ -68,6 +70,7 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
   `,
 })
 export class UserMenuComponent implements AfterViewInit {
+  private destroyRef = inject(DestroyRef);
   @Output() logout = new EventEmitter<void>();
 
   showLogoutModal = signal(false);
@@ -77,7 +80,7 @@ export class UserMenuComponent implements AfterViewInit {
   ngAfterViewInit() {
     fromEvent<MouseEvent>(document, 'click')
       .pipe(
-        takeUntilDestroyed(),
+        takeUntilDestroyed(this.destroyRef),
         filter(event => {
           if (!this.menuOpen) return false;
           return !this.menuWrapper.nativeElement.contains(event.target as Node);
@@ -85,7 +88,6 @@ export class UserMenuComponent implements AfterViewInit {
       )
       .subscribe(() => (this.menuOpen = false));
   }
-
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }

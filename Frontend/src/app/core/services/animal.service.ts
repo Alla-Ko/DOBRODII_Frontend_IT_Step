@@ -31,6 +31,9 @@ export class AnimalService {
       })
     );
   }
+  getAnimalById(id: string): Observable<Animal> {
+    return this.api.get<Animal>(`${this.endpoint}/${id}`);
+  }
 
   getAnimals(filters: AnimalFiltersDto): Observable<AnimalListResult> {
     // clean перед відправкою — видаляємо undefined

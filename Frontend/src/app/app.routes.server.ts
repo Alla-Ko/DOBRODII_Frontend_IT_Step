@@ -32,7 +32,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'access-denied', renderMode: RenderMode.Prerender },
   { path: 'internal-server-error', renderMode: RenderMode.Prerender },
   { path: 'service-unavailable', renderMode: RenderMode.Prerender },
-
+  { path: 'adoption-applications-failed', renderMode: RenderMode.Prerender },
   // 2. УСІ динамічні + авторизовані + решта — SSR (обов’язково вказати!)
   { path: 'animals/:slug', renderMode: RenderMode.Server },
   { path: 'shelters/:slug', renderMode: RenderMode.Server },
@@ -43,6 +43,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'profile', renderMode: RenderMode.Server },
   { path: 'profile/edit', renderMode: RenderMode.Server },
   { path: 'profile/security', renderMode: RenderMode.Server },
+  { path: 'profile/adoption-applications', renderMode: RenderMode.Server },
   { path: 'favorites', renderMode: RenderMode.Server },
   { path: 'my-payments', renderMode: RenderMode.Server },
   { path: 'guardianships', renderMode: RenderMode.Server },

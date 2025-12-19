@@ -7,7 +7,10 @@
         <div
           class="flex-1 flex justify-center items-center w-ful h-full text-primary-beige"
         >
-          @if (data.status === 'success' || data.status === 'pending') {
+          @if (
+            data.status.toUpperCase() === 'SUCCESS' ||
+            data.status.toUpperCase() === 'PENDING'
+          ) {
             <app-icon [name]="'logoCheerful'"></app-icon>
           } @else {
             <app-icon [name]="'logoFailure'"></app-icon>
@@ -18,39 +21,52 @@
           class="font-fixel text-[24px] font-bold text-center mt-10"
           style="font-size: clamp(16px, 6.5vw, 24px)"
         >
-          @if (data.status === 'success') {
+          @if (data.status.toUpperCase() === 'SUCCESS') {
             {{ 'PAYMENT_SUCCESS_TITLE' | translate }}
           }
-          @if (data.status === 'pending') {
+          @if (data.status.toUpperCase() === 'PENDING') {
             {{ 'PAYMENT_PENDING_TITLE' | translate }}
           }
-          @if (data.status === 'failure') {
+          @if (data.status.toUpperCase() === 'FAILURE') {
             {{ 'PAYMENT_FAILURE_TITLE' | translate }}
           }
         </h2>
         <p
           class="text-sm text-secondary-neutral-mineShaft mt-5 leading-snug text-center"
         >
-          @if (data.status === 'failure') {
+          @if (data.status.toUpperCase() === 'FAILURE') {
             {{ 'PAYMENT_FAILURE_DESCRIPTION' | translate }}
           }
-          @if (data.scope === 'guardianship' && data.status === 'success') {
+          @if (
+            data.scope === 'guardianship' &&
+            data.status.toUpperCase() === 'SUCCESS'
+          ) {
             {{ 'PAYMENT_SUCCESS_DESCRIPTION_GUARDIANSHIP' | translate }}
           }
-          @if (data.scope === 'guardianship' && data.status === 'pending') {
+          @if (
+            data.scope === 'guardianship' &&
+            data.status.toUpperCase() === 'PENDING'
+          ) {
             {{ 'PAYMENT_PENDING_DESCRIPTION_GUARDIANSHIP' | translate }}
           }
-          @if (data.scope !== 'guardianship' && data.status === 'success') {
+          @if (
+            data.scope !== 'guardianship' &&
+            data.status.toUpperCase() === 'SUCCESS'
+          ) {
             {{ 'PAYMENT_SUCCESS_DESCRIPTION_GLOBAL' | translate }}
           }
-          @if (data.scope !== 'guardianship' && data.status === 'pending') {
+          @if (
+            data.scope !== 'guardianship' &&
+            data.status.toUpperCase() === 'PENDING'
+          ) {
             {{ 'PAYMENT_SUCCESS_DESCRIPTION_GLOBAL' | translate }}
           }
         </p>
         @if (
           data.scope === 'guardianship' &&
           data.guardianship &&
-          (data.status === 'success' || data.status === 'pending')
+          (data.status.toUpperCase() === 'SUCCESS' ||
+            data.status.toUpperCase() === 'PENDING')
         ) {
           <div
             class="flex flex-col items-center justify-center rounded-40 bg-primary-beige lg:w-[600px] p-2 mt-8"
@@ -79,7 +95,7 @@
           @if (data.scope === 'aidRequest') {
             <app-primary-large-button
               class="w-[260px]"
-              buttonTitle="HOME"
+              buttonTitle="HELP_MORE"
               (pressButton)="goToProjects()"
             ></app-primary-large-button>
           }

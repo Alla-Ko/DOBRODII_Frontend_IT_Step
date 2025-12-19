@@ -28,7 +28,7 @@ export class FooterComponent {
   }
   fb = new FormBuilder();
   subscriptionForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    footerEmail: ['', [Validators.required, Validators.email]],
   });
   isDisabled = signal(true);
   submitted = signal(false);

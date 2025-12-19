@@ -19,18 +19,20 @@
       {{ text | translate }}
     </h3>
     <div
-      class="grid grid-cols-2 justify-center items-center mt-10 gap-4 text-secondary-neutral-mineShaft"
+      class="w-full grid grid-cols-2 justify-center items-center mt-10 gap-6 text-secondary-neutral-mineShaft"
     >
-      <app-secondary-large-orange-button-with-border
-        class="min-w-[170px]"
-        buttonTitle="{{ titleCancel }}"
-        (click)="confirmLogout(false)"
-      ></app-secondary-large-orange-button-with-border>
-      <app-primary-large-orange-button-with-border
-        class="min-w-[170px]"
-        buttonTitle="{{ titleSubmit }}"
-        (click)="confirmLogout(true)"
-      ></app-primary-large-orange-button-with-border>
+      <div class="w-full">
+        <app-secondary-large-orange-button-with-border
+          buttonTitle="{{ titleCancel }}"
+          (click)="confirmLogout(false)"
+        ></app-secondary-large-orange-button-with-border>
+      </div>
+      <div class="w-full">
+        <app-primary-large-orange-button-with-border
+          buttonTitle="{{ titleSubmit }}"
+          (click)="confirmLogout(true)"
+        ></app-primary-large-orange-button-with-border>
+      </div>
     </div>
   </div>
 </div>

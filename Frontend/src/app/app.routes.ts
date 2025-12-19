@@ -88,6 +88,14 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'adoption-applications-failed',
+    loadComponent: () =>
+      import(
+        './pages/adoption-group/adoption-applications-failed/adoption-applications-failed.component'
+      ).then(c => c.AdoptionApplicationsFailedComponent),
+    resolve: { meta: metaResolver },
+  },
+  {
     path: 'volunteer-application-confirmation',
     loadComponent: () =>
       import(
@@ -243,6 +251,15 @@ export const routes: Routes = [
       description: 'Ваша особиста сторінка на сайті притулку Добродій🐱',
       image: '/assets/images/support/support1_cat.png',
     },
+  },
+  {
+    path: 'profile/adoption-applications',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import(
+        './pages/adoption-group/adoption-applications/adoption-applications.component'
+      ).then(c => c.AdoptionApplicationsComponent),
+    resolve: { meta: metaResolver },
   },
   {
     path: 'profile/security',

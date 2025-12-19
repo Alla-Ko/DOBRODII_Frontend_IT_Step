@@ -17,6 +17,7 @@ import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Animal } from '../../../core/models/animal';
 import { PaymentScope } from '../../../core/models/liqPayCheckoutRequest';
+import { AdoptionApplicationService } from '../../../core/services/adoption-application.service';
 import { AnimalSubscriptionService } from '../../../core/services/animal-subscription.service';
 import { AnimalService } from '../../../core/services/animal.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -75,8 +76,10 @@ export class AnimalDetailComponent implements OnInit {
   private translate = inject(TranslateService);
   private metaSsr = inject(MetaSsrService); // Новий сервіс для SSR-мета-тегів
   private platformId = inject(PLATFORM_ID);
+  private adoptionApplicationService = inject(AdoptionApplicationService);
 
   showTakeCareModalWindow = signal(false);
+  showAdoptModalWindow = signal(false);
   shareInsta = signal<IconName>('shareInsta');
   shareFacebook = signal<IconName>('shareFacebook');
   isAuthenticated: Signal<boolean> = this.authService.isLoggedIn;
@@ -180,7 +183,7 @@ export class AnimalDetailComponent implements OnInit {
         this.guardianshipService
           .createGuardianship(this.animal()!.id)
           .subscribe(guardianship => {
-            if (guardianship.status === 'RequiresPayment') {
+            if (guardianship.status.toUpperCase() === 'REQUIRESPAYMENT') {
               this.liqPayService.startPayment({
                 scope: 'guardianship' as PaymentScope,
                 isRecurring: true,
@@ -196,12 +199,36 @@ export class AnimalDetailComponent implements OnInit {
     }
     this.showTakeCareModalWindow.set(false);
   }
+  onAdopt($event: boolean) {
+    const pet = this.animal();
+    if (!pet) {
+      return;
+    }
 
-  onTakeHome() {
-    throw new Error('Method not implemented.');
+    if ($event) {
+      if (!this.isAuthenticated()) {
+        this.authModalService.openModal('welcome');
+        return;
+      }
+      try {
+        this.adoptionApplicationService
+          .createAdoptionApplication({
+            animalId: pet.id,
+          })
+          .subscribe(adoptionApplication => {
+            if (!adoptionApplication)
+              this.router.navigate([`adoption-applications-failed`]);
+            this.router.navigate([`profile/adoption-applications`]);
+          });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    this.showAdoptModalWindow.set(false);
   }
 
   getAnimals() {
+    const currentAnimal = this.animal(); // забираємо сигнал один раз
     this.animalService
       .getAnimals({
         pageSize: 5,
@@ -210,10 +237,10 @@ export class AnimalDetailComponent implements OnInit {
       })
       .subscribe(result => {
         const animals = result.animals
-          .filter(animal => animal.id !== this.animal()!.id)
+          .filter(a => !currentAnimal || a.id !== currentAnimal.id) // безпечна перевірка
           .slice(0, 4)
-          .map(animal => ({
-            ...animal,
+          .map(a => ({
+            ...a,
             isChecked: true,
             isFavorite: false,
           }));
@@ -372,7 +399,18 @@ export class AnimalDetailComponent implements OnInit {
       });
   }
 
-  showModal() {
+  showTakeCareModal() {
+    if (!this.isAuthenticated()) {
+      this.authModalService.openModal('welcome');
+      return;
+    }
     this.showTakeCareModalWindow.set(true);
+  }
+  showAdoptModal() {
+    if (!this.isAuthenticated()) {
+      this.authModalService.openModal('welcome');
+      return;
+    }
+    this.showAdoptModalWindow.set(true);
   }
 }

@@ -16,6 +16,7 @@ import { PrimaryLargeOrangeButtonComponent } from '../../../shared/components/bu
 
 @Component({
   selector: 'app-guardianship-card',
+  standalone: true,
   imports: [
     AnimalCardComponent,
     TranslateModule,

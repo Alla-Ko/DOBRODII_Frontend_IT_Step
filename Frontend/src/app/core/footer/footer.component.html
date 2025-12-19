@@ -89,23 +89,23 @@
       <!-- Email -->
       <div class="flex flex-row items-end">
         <div class="relative flex flex-col">
-          <label for="email" class="text-left">
+          <label for="footerEmail" class="text-left">
             {{ 'SUBSCRIBE_TO_NEWSLETTER' | translate }}
           </label>
           <input
-            id="email"
+            id="footerEmail"
             type="email"
-            formControlName="email"
+            formControlName="footerEmail"
             [placeholder]="'Email'"
             class="relative text-secondary-neutral-mineShaft mt-2 px-3 py-2 border rounded-[12px] h-12 focus:outline-none group-invalid:ring-2 group-invalid:ring-secondary-semantic-error pr-10"
             aria-label="Email"
             autocomplete="email"
           />
           @if (
-            subscriptionForm.controls.email.touched &&
-            subscriptionForm.controls.email.invalid
+            subscriptionForm.controls.footerEmail.touched &&
+            subscriptionForm.controls.footerEmail.invalid
           ) {
-            @if (!subscriptionForm.controls.email.errors?.['required']) {
+            @if (!subscriptionForm.controls.footerEmail.errors?.['required']) {
               <div
                 class="text-red-600 text-sm mt-3 absolute bottom-[-30px] left-0 w-full"
               >

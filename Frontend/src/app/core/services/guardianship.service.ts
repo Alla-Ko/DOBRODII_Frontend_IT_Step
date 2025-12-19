@@ -17,7 +17,9 @@ export class GuardianshipService {
   getGuardianships(): Observable<Guardianship[]> {
     return this.api
       .get<Guardianship[]>(`${this.endpoint}/me`)
-      .pipe(map(g => g.filter(data => data.status !== 'Completed')));
+      .pipe(
+        map(g => g.filter(data => data.status.toUpperCase() !== 'COMPLETED'))
+      );
   }
   cancelGuardianship(guardianshipId: string) {
     return this.api.delete<GuardianshipCancelationResponse>(

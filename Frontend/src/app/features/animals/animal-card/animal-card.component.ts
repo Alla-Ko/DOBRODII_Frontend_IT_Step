@@ -24,6 +24,13 @@ export class AnimalCardComponent {
   animal = input.required<Animal>();
   @Output() animalDetailClick = new EventEmitter();
   @Output() heartClick = new EventEmitter();
+  getStatusClass(status?: string) {
+    const s = status?.toLowerCase();
+    return {
+      'bg-primary-blue text-white': s === 'available',
+      'bg-secondary-jordyBlue-1 text-primary-blue': s !== 'available',
+    };
+  }
   // readonly isChecked = computed(() => {
   //   const checked = this.animal.isChecked;
 

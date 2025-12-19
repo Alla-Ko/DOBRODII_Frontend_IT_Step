@@ -2,6 +2,7 @@
   <!-- Мета і назва -->
   <div
     class="flex flex-wrap gap-1 items-center justify-center mx-2 xl:mx-[28px]"
+    style="font-size: clamp(12px, 2.5vw, 40px)"
   >
     <app-icon [name]="'aim'"></app-icon>
     <p
@@ -12,7 +13,7 @@
     </p>
     <p
       class="text-[40px] font-bold text-primary-blue"
-      style="font-size: clamp(16px, 6.5vw, 40px)"
+      style="font-size: clamp(12px, 2.5vw, 40px)"
     >
       {{ animalAidRequest()?.estimatedCost | number: '1.0-2' : 'uk' }} UAH
     </p>

@@ -1,0 +1,131 @@
+<div class="flex flex-col lg:flex-row w-full items-center justify-center gap-4">
+  @if (adoptionApplication(); as adoptionApplication) {
+    <!-- картка тварини -->
+    <div
+      class="flex flex-col items-center bg-primary-light-orange lg:bg-transparent w-[284px] sm:w-[320px] lg:w-full rounded-40"
+    >
+      <app-animal-card
+        [animal]="animalSignal()"
+        (animalDetailClick)="onAnimalDetailClick()"
+        (heartClick)="onHeartClick()"
+      ></app-animal-card>
+    </div>
+    <!-- деталі опіки -->
+    <div
+      class="flex flex-col rounded-40 bg-primary-beige px-[10px] py-5 gap-2 justify-start min-w-[284px] h-full sm:min-w-[320px] min-h-[420px]"
+    >
+      @if (adoptionApplication.applicationDate) {
+        <p>
+          <span class="font-bold">{{ 'CREATED_AT' | translate }}: </span>
+          {{ adoptionApplication.applicationDate | date: 'dd.MM.yyyy' }}
+        </p>
+      }
+
+      @if (adoptionApplication.status) {
+        <p>
+          <span class="font-bold">{{ 'STATUS' | translate }}: </span>
+          {{ adoptionApplication.status.toUpperCase() | translate }}
+        </p>
+      }
+      @if (adoptionApplication.updatedAt) {
+        <p>
+          <span class="font-bold">{{ 'UPDATED_AT' | translate }}: </span>
+          {{ adoptionApplication.updatedAt | date: 'dd.MM.yyyy' }}
+        </p>
+      } @else {
+        <p>
+          <span class="font-bold">{{ 'UPDATED_AT' | translate }}: </span>
+          {{ adoptionApplication.applicationDate | date: 'dd.MM.yyyy' }}
+        </p>
+      }
+      @if (
+        adoptionApplication.adminNotes &&
+        adoptionApplication.adminNotes.length > 0
+      ) {
+        <p>
+          <span class="font-bold">{{ 'ADMIN_NOTES' | translate }}: </span>
+          {{ adoptionApplication.adminNotes }}
+        </p>
+      }
+
+      @if (adoptionApplication.animal.shelter) {
+        <p>
+          <span class="font-bold">{{ 'SHELTER' | translate }}: </span>
+
+          <a
+            (click)="toShelter(adoptionApplication.animal.shelter.slug)"
+            (keyup.enter)="toShelter(adoptionApplication.animal.shelter.slug)"
+            (keyup.space)="toShelter(adoptionApplication.animal.shelter.slug)"
+            tabindex="0"
+            role="button"
+            class="text-secondary-dodgerBlue-4 hover:underline"
+          >
+            {{
+              adoptionApplication.animal.shelter.name || ('UNKNOWN' | translate)
+            }}
+          </a>
+        </p>
+      }
+      @if (adoptionApplication.meetingDate) {
+        <p>
+          <span class="font-bold">{{ 'MEETING_DATE' | translate }}: </span>
+          {{ adoptionApplication.meetingDate | date: 'dd.MM.yyyy' }}
+        </p>
+      }
+      @if (adoptionApplication.adoptionDate) {
+        <p>
+          <span class="font-bold">{{ 'ADOPTION_DATE' | translate }}: </span>
+          {{ adoptionApplication.adoptionDate | date: 'dd.MM.yyyy' }}
+        </p>
+      }
+      @if (adoptionApplication.rejectionDate) {
+        <p>
+          <span class="font-bold">{{ 'REJECTION_DATE' | translate }}: </span>
+          {{ adoptionApplication.rejectionDate | date: 'dd.MM.yyyy' }}
+        </p>
+      }
+      @if (adoptionApplication.rejectionReason) {
+        <p>
+          <span class="font-bold">{{ 'REJECTION_REASON' | translate }}: </span>
+          {{ adoptionApplication.rejectionReason }}
+        </p>
+      }
+      @if (adoptionApplication.curatorName) {
+        <p>
+          <span class="font-bold">{{ 'СURATOR_NAME' | translate }}: </span>
+          {{ adoptionApplication.curatorName }}
+        </p>
+      }
+      @if (adoptionApplication.curatorPhone) {
+        <p>
+          <span class="font-bold">{{ 'СURATOR_PHONE' | translate }}: </span>
+          {{ adoptionApplication.curatorPhone }}
+        </p>
+      }
+    </div>
+    <!-- кнопки -->
+    <div class="flex flex-col gap-5 justify-start w-full items-center">
+      <app-primary-large-orange-button
+        class="w-[320px]"
+        buttonTitle="CONTACT"
+        (pressButton)="toContactUs()"
+      ></app-primary-large-orange-button>
+
+      @if (
+        adoptionApplication.status.toUpperCase() === 'PENDING' ||
+        adoptionApplication.status.toUpperCase() === 'APPROVED'
+      ) {
+        <a
+          (click)="toDeleteAdoptionApplication()"
+          (keyup.enter)="toDeleteAdoptionApplication()"
+          (keyup.space)="toDeleteAdoptionApplication()"
+          tabindex="0"
+          role="button"
+          class="cursor-pointer font-bold underline hover:text-primary-orange"
+        >
+          {{ 'CANCEL_ADOPTION_APPLICATION' | translate }}
+        </a>
+      }
+    </div>
+  }
+</div>
