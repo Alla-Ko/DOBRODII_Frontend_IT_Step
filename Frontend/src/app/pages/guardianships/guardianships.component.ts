@@ -82,17 +82,19 @@ export class GuardianshipsComponent {
 
   toDeleteGuardianship(id: string) {
     this.cancelationGuardianshipId.set(id);
+
     this.showModal.set(true);
   }
   toSubmitCancel($event: boolean) {
     if (!this.isAuthenticated()) return;
+    const id = this.cancelationGuardianshipId();
+    if (!id) return;
     if ($event) {
-      this.guardianshipService
-        .cancelGuardianship(this.cancelationGuardianshipId())
-        .subscribe({
-          next: () => this.loadGuardianships(),
-          error: err => console.error('Error deleting guardianship:', err),
-        });
+      this.rawGuardianships.update(list => list.filter(g => g.id !== id));
+      this.guardianshipService.cancelGuardianship(id).subscribe({
+        next: () => this.loadGuardianships(),
+        error: err => console.error('Error deleting guardianship:', err),
+      });
     }
     this.showModal.set(false);
     this.cancelationGuardianshipId.set('');
