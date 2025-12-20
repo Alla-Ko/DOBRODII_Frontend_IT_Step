@@ -95,7 +95,7 @@ export class GuardianshipsComponent {
         next: () => this.loadGuardianships(),
         error: err => console.error('Error deleting guardianship:', err),
       });
-    }g
+    }
     this.showModal.set(false);
     this.cancelationGuardianshipId.set('');
   }
