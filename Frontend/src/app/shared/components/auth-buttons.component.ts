@@ -22,6 +22,6 @@ export class AuthButtonsComponent {
 
   goToLogin() {
     this.modalService.openModal('welcome');
-    // this.router.navigate(['/login']);
+
   }
 }

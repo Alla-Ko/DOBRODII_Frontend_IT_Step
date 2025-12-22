@@ -46,10 +46,10 @@ export class DownloadOrangeButtonWithIconAndBorderComponent {
 
   @Input() loading?: WritableSignal<boolean> = signal(false);
 
-  // створюємо WritableSignal за замовчуванням
+
   disabledSignal: WritableSignal<boolean> = signal(false);
 
-  // дозволяємо передавати свій сигнал, якщо він є
+
   @Input({ required: false })
   set _disabledSignal(value: WritableSignal<boolean> | undefined) {
     if (value) {

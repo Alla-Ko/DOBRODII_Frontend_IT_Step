@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CareSubscriptionSuccesComponent } from './care-subscription-succes.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CareSubscriptionSuccesComponent', () => {
   let component: CareSubscriptionSuccesComponent;
@@ -8,7 +9,7 @@ describe('CareSubscriptionSuccesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CareSubscriptionSuccesComponent]
+      imports: [CareSubscriptionSuccesComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

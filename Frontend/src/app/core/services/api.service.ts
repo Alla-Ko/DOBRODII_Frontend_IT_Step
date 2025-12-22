@@ -9,12 +9,12 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root', // standalone (не потребує модуля)
+  providedIn: 'root', 
 })
 export class ApiService {
   private readonly BASE_URL = environment.apiUrl;
 
-  private readonly http = inject(HttpClient); // замість конструктора
+  private readonly http = inject(HttpClient); 
 
   get<T>(endpoint: string, params?: HttpParams): Observable<T> {
     return this.http
@@ -63,9 +63,7 @@ export class ApiService {
   uploadFile<T>(endpoint: string, file: File): Observable<T> {
     const formData = new FormData();
     formData.append('file', file);
-    // return this.http
-    //   .post<T>(`${this.BASE_URL}/${endpoint}`, formData)
-    //   .pipe(catchError(this.handleError));
+
     return this.http
       .post<T>(`${this.BASE_URL}/media/upload`, formData)
       .pipe(catchError(this.handleError));
@@ -76,10 +74,10 @@ export class ApiService {
       typeof ErrorEvent !== 'undefined' &&
       error.error instanceof ErrorEvent
     ) {
-      // Client-side error
+
       console.error('Client-side error:', error.error.message);
     } else {
-      // Server-side or HTTP error
+
       console.error(`Backend returned code, body was:`, error.error);
     }
     return throwError(() => new Error(''));

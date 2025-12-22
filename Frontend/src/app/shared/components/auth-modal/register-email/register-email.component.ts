@@ -57,7 +57,7 @@ export class RegisterEmailComponent {
   }
   constructor() {
     effect(() => {
-      // Тут беремо значення форми через signal-обгортку
+
       this.registerForm.valueChanges.subscribe(() => {
         this.isDisabled.set(!this.registerForm.valid);
       });

@@ -127,7 +127,7 @@ Edit
 
 5.  Якщо залишити метод ось так, то це перевірка варіанту, коли в куках є актуальний refresh token
     refreshToken(): Observable<{ accessToken: string }> {
-    // Імітація затримки відповіді, наприклад 500ms
+
     const fakeAccessToken = 'mocked-access-token-12345';
 
         return of({ accessToken: fakeAccessToken }).pipe(

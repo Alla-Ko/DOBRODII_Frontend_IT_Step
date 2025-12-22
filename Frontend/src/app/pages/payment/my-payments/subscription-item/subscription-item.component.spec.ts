@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubscriptionItemComponent } from './subscription-item.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SubscriptionItemComponent', () => {
   let component: SubscriptionItemComponent;
@@ -8,7 +9,7 @@ describe('SubscriptionItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SubscriptionItemComponent]
+      imports: [SubscriptionItemComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

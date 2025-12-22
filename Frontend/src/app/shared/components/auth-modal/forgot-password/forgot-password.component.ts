@@ -31,7 +31,7 @@ export class ForgotPasswordComponent {
   isDisabled = signal(true);
   constructor() {
     effect(() => {
-      // Тут беремо значення форми через signal-обгортку
+
       this.registerForm.valueChanges.subscribe(() => {
         this.isDisabled.set(!this.registerForm.valid);
       });

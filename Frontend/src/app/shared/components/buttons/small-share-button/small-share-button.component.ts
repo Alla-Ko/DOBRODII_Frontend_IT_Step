@@ -12,7 +12,7 @@ export class SmallShareButtonComponent {
 
   @Input() iconName = signal<IconName>('shareInsta');
 
-  disabled = signal(false); // <- новий Input
+  disabled = signal(false); 
   hovered = signal(false);
   active = signal(false);
   constructor() {
@@ -21,7 +21,7 @@ export class SmallShareButtonComponent {
     this.disabled.set(false);
   }
   async confirm() {
-    if (this.disabled()) return; // додатково блокування
+    if (this.disabled()) return; 
     this.pressButton.emit();
   }
 }

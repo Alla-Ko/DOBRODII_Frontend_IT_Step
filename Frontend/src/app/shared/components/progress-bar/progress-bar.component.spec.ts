@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProgressBarComponent } from './progress-bar.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ProgressBarComponent', () => {
   let component: ProgressBarComponent;
@@ -8,7 +9,7 @@ describe('ProgressBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProgressBarComponent]
+      imports: [ProgressBarComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

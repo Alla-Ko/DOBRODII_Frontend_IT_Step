@@ -30,10 +30,10 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     { provide: LOCALE_ID, useValue: 'uk-UA' },
 
-    //provideHttpClient(),
+
     provideHttpClient(withInterceptors([httpInterceptor])),
 
-    // 👇 Підключаємо TranslateModule через importProvidersFrom
+
     importProvidersFrom(
       TranslateModule.forRoot({
         defaultLanguage: 'uk',

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SetupTotpComponent } from './setup-totp.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SetupTotpComponent', () => {
   let component: SetupTotpComponent;
@@ -8,7 +9,7 @@ describe('SetupTotpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SetupTotpComponent]
+      imports: [SetupTotpComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

@@ -283,7 +283,7 @@ export class AuthModalComponent {
   }
   handleOption(option: ModalState['component']) {
     if (option === 'backup-codes') {
-      this.loadBackupCodes(); // завантажуємо коди перед відображенням
+      this.loadBackupCodes(); 
     }
     if (option === 'setup-totp') {
       this.authService.setupTotp().subscribe({
@@ -294,12 +294,12 @@ export class AuthModalComponent {
         },
         error: err => {
           console.error('Setup TOTP error:', err);
-          //відобразити модалку помилки
+        
         },
       });
     }
 
-    // Скидаємо дані при переході до welcome, login або register-email
+    
     if (
       option &&
       ['welcome', 'login', 'register-email', 'forgot-password'].includes(option)
@@ -388,7 +388,7 @@ export class AuthModalComponent {
               response.hiddenPhoneNumber !== undefined &&
               response.hiddenPhoneNumber !== ''
             ) {
-              this.hiddenPhoneNumber.set(response.hiddenPhoneNumber); //для прикладу
+              this.hiddenPhoneNumber.set(response.hiddenPhoneNumber); 
             }
             if (response.method === 'sms') {
               this.authService.sendSms2fa().subscribe({
@@ -582,7 +582,7 @@ export class AuthModalComponent {
       },
       error: err => {
         console.error('Setup SMS 2FA error:', err);
-        //відобразити модалку помилки
+
       },
     });
   }
@@ -593,7 +593,7 @@ export class AuthModalComponent {
     this.authService.regenerateTotpBackupCodes().subscribe({
       next: response => {
         this.isLoading.set(false);
-        this.backupCodes.set(response.backupCodes); // оновлюємо коди для компонента
+        this.backupCodes.set(response.backupCodes); 
       },
       error: err => {
         this.isLoading.set(false);

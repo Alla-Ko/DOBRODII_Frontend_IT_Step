@@ -9,21 +9,20 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   return from(Promise.resolve(authService.getAccessToken())).pipe(
     switchMap(token => {
-      // Запит з access token в Authorization, але без withCredentials
+
       const authReq = token
         ? req.clone({
             setHeaders: { Authorization: `Bearer ${token}` },
-            // without withCredentials, щоб не відправляти куки без потреби
           })
         : req;
 
       return next(authReq).pipe(
         catchError(error => {
           if (error.status === 401) {
-            // Тепер робимо запит оновлення токена з withCredentials: true (щоб браузер додав refresh token)
+
             return authService.refreshToken().pipe(
               switchMap(() => {
-                // Токен вже встановлений у refreshToken через tap
+
                 const newToken = authService.getAccessToken();
                 const retryReq = req.clone({
                   setHeaders: { Authorization: `Bearer ${newToken}` },

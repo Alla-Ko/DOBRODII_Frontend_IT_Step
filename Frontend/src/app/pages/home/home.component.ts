@@ -62,7 +62,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   private authService = inject(AuthService);
   private modalService = inject(ModalService);
   private queryParamsSubscription?: Subscription;
-  private isProcessed = false; // Флаг для запобігання повторної обробки
+  private isProcessed = false; 
   isImageChanging = false;
   currentWorkerIndex = 0;
   values = [12000, 14067, 10068];
@@ -109,7 +109,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
     });
   }
   ngOnInit() {
-    // Обробка query-параметрів у ngOnInit
+
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -130,7 +130,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
         const currentPath = this.route.snapshot.routeConfig?.path;
 
         if (email && token && currentPath === 'verify-email') {
-          this.isProcessed = true; // Помічаємо, що запит оброблено
+          this.isProcessed = true; 
           this.authService.verifyEmail(email, token).subscribe({
             next: response => {
               if (response.success) {
@@ -147,7 +147,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
             },
           });
         } else if (email && token && currentPath === 'reset-password') {
-          this.isProcessed = true; // Помічаємо, що запит оброблено
+          this.isProcessed = true; 
           this.modalService.setTokenForResettingPassword(token);
           this.modalService.setEmailForResettingPassword(email);
           this.modalService.openModal('reset-password');
@@ -156,7 +156,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
       });
   }
   ngOnDestroy() {
-    // Відписуємося від queryParams
+
     if (this.queryParamsSubscription) {
       this.queryParamsSubscription.unsubscribe();
     }
@@ -203,10 +203,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   }
   isCharityButtonHidden = signal<boolean>(false);
   selectWorker(index: number) {
-    this.isImageChanging = true; // робимо fade-out
-    this.currentWorkerIndex = index; // міняємо картинку після fade-out
+    this.isImageChanging = true; 
+    this.currentWorkerIndex = index; 
     setTimeout(() => {
-      this.isImageChanging = false; // запускаємо fade-in
+      this.isImageChanging = false; 
     }, 300);
   }
   onFindPetClick() {
@@ -218,7 +218,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   onAboutUsClick() {
     this.router.navigate(['/about']);
   }
-  //по платежах
+
   private selectedAmount: number | null = null;
   private isRecurring = false;
   private liqPay = inject(LiqPayService);
@@ -234,7 +234,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private startGlobalPayment() {
-    // Очищаємо старий контекст + записуємо новий глобальний
+
     this.liqPay.startPayment({
       scope: 'global' as PaymentScope,
       amount: this.selectedAmount!,
@@ -244,8 +244,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
         : 'Разова підтримка притулку',
     });
 
-    // Переходимо до форми з контактами
-    //поміняти потім
+
     this.router.navigate(['/payment/details']);
   }
 }

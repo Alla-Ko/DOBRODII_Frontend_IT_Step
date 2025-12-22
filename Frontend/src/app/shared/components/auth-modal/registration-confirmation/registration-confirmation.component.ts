@@ -38,18 +38,18 @@ export class RegistrationConfirmationComponent implements OnDestroy {
     this.selectOption.emit(option);
   }
   emitResendVerificationEmail() {
-    if (this.resendTimer() > 0) return; // поки таймер працює, не дозволяємо клік
+    if (this.resendTimer() > 0) return; 
     this.resendVerificationEmail.emit();
     this.startResendTimer();
   }
   private startResendTimer() {
-    this.resendTimer.set(30); // 30 секунд
+    this.resendTimer.set(30); 
     this.intervalId = window.setInterval(() => {
       this.resendTimer.update(v => v - 1);
       if (this.resendTimer() <= 0) {
         if (this.intervalId !== null) {
           clearInterval(this.intervalId);
-          this.intervalId = null; // обнуляємо після очищення
+          this.intervalId = null; 
         }
       }
     }, 1000);

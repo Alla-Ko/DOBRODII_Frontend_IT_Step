@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResetPasswordConfirmationComponent } from './reset-password-confirmation.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ResetPasswordConfirmationComponent', () => {
   let component: ResetPasswordConfirmationComponent;
@@ -8,7 +9,7 @@ describe('ResetPasswordConfirmationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ResetPasswordConfirmationComponent]
+      imports: [ResetPasswordConfirmationComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

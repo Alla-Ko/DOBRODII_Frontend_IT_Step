@@ -1,12 +1,3 @@
-// import { Routes } from '@angular/router';
-// import { HelloWorldComponent } from './hello-world/hello-world.component';
-
-// export const routes: Routes = [
-//   { path: 'hello/:show', component: HelloWorldComponent },
-//   { path: '', redirectTo: '/hello/true', pathMatch: 'full' },
-//   { path: '**', redirectTo: '/hello/true' }
-// ];
-
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { metaResolver } from './resolvers/meta.resolver';
@@ -209,6 +200,11 @@ export const routes: Routes = [
         c => c.SearchResultsComponent
       ),
     resolve: { meta: metaResolver },
+  },
+  {
+    path: 'social',
+    loadComponent: () =>
+      import('./pages/social/social.component').then(c => c.SocialComponent),
   },
   {
     path: 'profile',

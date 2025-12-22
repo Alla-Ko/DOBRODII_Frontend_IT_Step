@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SmallShareButtonComponent } from './small-share-button.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SmallShareButtonComponent', () => {
   let component: SmallShareButtonComponent;
@@ -8,7 +9,7 @@ describe('SmallShareButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SmallShareButtonComponent]
+      imports: [SmallShareButtonComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

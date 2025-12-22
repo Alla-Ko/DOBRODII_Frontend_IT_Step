@@ -35,21 +35,19 @@ import { IconComponent } from '../icon.component';
 })
 export class RoundFilledWhiteBlueButtonWithIconComponent {
   @Output() pressButton = new EventEmitter<void>();
-  //@Input() isChecked = signal(false);
 
-  disabled = signal(false); // <- новий Input
+
+  disabled = signal(false); 
   hovered = signal(false);
   active = signal(false);
   constructor() {
-    // effect(() => {
-    //   this.disabled.set(!this.isChecked());
-    // });
+
     this.hovered.set(false);
     this.active.set(false);
     this.disabled.set(false);
   }
   async confirm() {
-    if (this.disabled()) return; // додатково блокування
+    if (this.disabled()) return; 
     this.pressButton.emit();
   }
 }

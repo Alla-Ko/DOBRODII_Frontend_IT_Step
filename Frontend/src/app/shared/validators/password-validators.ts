@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-// Валідатор для перевірки вимог до пароля
+
 
 export function hasUpperCaseValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -31,7 +31,7 @@ export function hasSpecialCharValidator(): ValidatorFn {
   };
 }
 
-// Валідатор для перевірки збігу паролів
+
 export function passwordMatchValidator(): ValidatorFn {
   return (formGroup: AbstractControl): ValidationErrors | null => {
     const password = formGroup.get('password')?.value;

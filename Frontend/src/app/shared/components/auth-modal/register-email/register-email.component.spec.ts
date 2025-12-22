@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterEmailComponent } from './register-email.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('RegisterEmailComponent', () => {
   let component: RegisterEmailComponent;
@@ -8,7 +9,7 @@ describe('RegisterEmailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterEmailComponent]
+      imports: [RegisterEmailComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

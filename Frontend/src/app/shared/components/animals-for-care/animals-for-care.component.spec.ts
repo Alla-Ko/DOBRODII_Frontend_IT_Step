@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnimalsForCareComponent } from './animals-for-care.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('AnimalsForCareComponent', () => {
   let component: AnimalsForCareComponent;
@@ -8,7 +9,7 @@ describe('AnimalsForCareComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AnimalsForCareComponent]
+      imports: [AnimalsForCareComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

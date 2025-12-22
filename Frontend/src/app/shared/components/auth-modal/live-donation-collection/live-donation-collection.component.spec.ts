@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LiveDonationCollectionComponent } from './live-donation-collection.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('LiveDonationCollectionComponent', () => {
   let component: LiveDonationCollectionComponent;
@@ -8,7 +9,7 @@ describe('LiveDonationCollectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LiveDonationCollectionComponent]
+      imports: [LiveDonationCollectionComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

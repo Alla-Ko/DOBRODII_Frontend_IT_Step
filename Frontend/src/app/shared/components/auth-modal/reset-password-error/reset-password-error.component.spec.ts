@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResetPasswordErrorComponent } from './reset-password-error.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ResetPasswordErrorComponent', () => {
   let component: ResetPasswordErrorComponent;
@@ -8,7 +9,7 @@ describe('ResetPasswordErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ResetPasswordErrorComponent]
+      imports: [ResetPasswordErrorComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

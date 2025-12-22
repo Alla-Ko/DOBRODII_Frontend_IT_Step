@@ -52,7 +52,7 @@ export class PrimarySmallButtonComponent {
   @Input() iconName?: keyof typeof ICONS;
   @Output() pressButton = new EventEmitter<void>();
   @Input() loading? = signal(false);
-  @Input() disabled = signal(false); // <- новий Input
+  @Input() disabled = signal(false); 
 
   confirm(): void {
     if (this.disabled()) return;

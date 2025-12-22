@@ -59,7 +59,7 @@ export class ShelterAnimalsComponent {
   private shelterService = inject(ShelterService);
   private destroyRef = inject(DestroyRef);
 
-  // === Сигнали ===
+
   currentPage = signal(1);
   selectedSexOptions = signal<SexOption[]>([]);
   selectedSizeOptions = signal<SizeOption[]>([]);
@@ -79,7 +79,7 @@ export class ShelterAnimalsComponent {
 
   shelter = signal<Shelter | undefined>(undefined);
 
-  // === Дані ===
+ 
   private rawAnimals = signal<Animal[]>([]);
   private favoriteAnimalIds = signal<Set<string>>(new Set());
   totalCount = signal(0);
@@ -170,7 +170,7 @@ export class ShelterAnimalsComponent {
   constructor() {
     this.loadFiltersFromUrl();
 
-    // Завантажуємо притулок
+
     effect(() => {
       const slugValue = this.slug();
       if (!slugValue) return;
@@ -184,14 +184,14 @@ export class ShelterAnimalsComponent {
       });
     });
 
-    // Улюблені — один раз
+ 
     if (this.authService._currentUser()) {
       this.animalSubscriptionService.getFavoriteAnimals().subscribe(favs => {
         this.favoriteAnimalIds.set(new Set(favs.map(a => a.id)));
       });
     }
 
-    // Реакція на фільтри + притулок
+
     effect(() => {
       this.currentPage();
       this.selectedSexOptions();
@@ -201,7 +201,7 @@ export class ShelterAnimalsComponent {
       this.selectedSpeciesOptions();
       this.sterelisationOptions();
       this.availableForCareOptions();
-      this.shelter(); // для завантаження тварин після притулку
+      this.shelter(); 
 
       this.updateUrl();
       this.fetchAnimals();

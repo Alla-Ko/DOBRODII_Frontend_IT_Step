@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackupCodeLoginComponent } from './backup-code-login.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('BackupCodeLoginComponent', () => {
   let component: BackupCodeLoginComponent;
@@ -8,7 +9,7 @@ describe('BackupCodeLoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BackupCodeLoginComponent]
+      imports: [BackupCodeLoginComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

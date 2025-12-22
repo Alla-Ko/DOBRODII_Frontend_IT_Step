@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VolunteerApplicationConfirmationComponent } from './volunteer-application-confirmation.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('VolunteerApplicationConfirmationComponent', () => {
   let component: VolunteerApplicationConfirmationComponent;
@@ -8,7 +9,7 @@ describe('VolunteerApplicationConfirmationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VolunteerApplicationConfirmationComponent]
+      imports: [VolunteerApplicationConfirmationComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

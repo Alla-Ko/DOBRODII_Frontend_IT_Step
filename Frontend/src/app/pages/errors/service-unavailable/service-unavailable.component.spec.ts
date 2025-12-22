@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ServiceUnavailableComponent } from './service-unavailable.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ServiceUnavailableComponent', () => {
   let component: ServiceUnavailableComponent;
@@ -8,7 +9,7 @@ describe('ServiceUnavailableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ServiceUnavailableComponent]
+      imports: [ServiceUnavailableComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

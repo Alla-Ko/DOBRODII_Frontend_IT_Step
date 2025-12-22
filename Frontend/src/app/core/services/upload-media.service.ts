@@ -18,13 +18,13 @@ export class UploadMediaService {
   upload(file: File): Observable<UploadResponse> {
     if (!isPlatformBrowser(this.platformId)) {
 
-      // Відправляємо оригінальний файл у SSR
+
       const formData = new FormData();
       formData.append('file', file);
       return this.api.uploadFile(this.endpoint, file);
     }
 
-    // Обробка файлу перед відправкою
+
     return this.processFile(file).pipe(
       switchMap(processedFile => {
         const formData = new FormData();
@@ -34,25 +34,25 @@ export class UploadMediaService {
     );
   }
   private processFile(file: File): Observable<File> {
-    const maxSizeMB = 5; // Максимальний розмір файлу в МБ
-    const maxDimension = 1500; // Максимальна роздільна здатність по довшій стороні
-    const quality = 0.8; // Початкова якість стиснення (0-1)
+    const maxSizeMB = 5; 
+    const maxDimension = 1500; 
+    const quality = 0.8; 
 
     if (!file.type.startsWith('image/')) {
-      // Якщо файл не є зображенням, повертаємо оригінальний файл
+      
       return of(file);
     }
 
-    // Перевірка розміру файлу
+    
     if (file.size <= maxSizeMB * 1024 * 1024) {
-      // Якщо розмір у межах, перевіряємо лише роздільну здатність
+      
       return this.resizeImage(file, maxDimension);
     }
 
-    // Стискаємо файл, якщо він перевищує 5 МБ
+    
     return from(
       imageConversion.compressAccurately(file, {
-        size: maxSizeMB * 1024, // Розмір у кілобайтах
+        size: maxSizeMB * 1024, 
         type: file.type as EImageType,
         quality: quality,
       })
@@ -81,14 +81,14 @@ export class UploadMediaService {
           let width = img.width;
           let height = img.height;
 
-          // Перевірка, чи потрібно змінювати розмір
+  
           if (width <= maxDimension && height <= maxDimension) {
-            observer.next(file); // Розмір відповідає, повертаємо оригінальний файл
+            observer.next(file); 
             observer.complete();
             return;
           }
 
-          // Обчислюємо нові розміри, зберігаючи пропорції
+
           if (width > height) {
             height = Math.round((height / width) * maxDimension);
             width = maxDimension;
@@ -97,14 +97,14 @@ export class UploadMediaService {
             height = maxDimension;
           }
 
-          // Створюємо canvas для зміни розміру
+
           const canvas = document.createElement('canvas');
           canvas.width = width;
           canvas.height = height;
           const ctx = canvas.getContext('2d')!;
           ctx.drawImage(img, 0, 0, width, height);
 
-          // Конвертуємо canvas у Blob
+
           canvas.toBlob(
             blob => {
               if (blob) {
@@ -119,7 +119,7 @@ export class UploadMediaService {
               }
             },
             file.type,
-            0.8 // Якість для JPEG
+            0.8 
           );
         };
 

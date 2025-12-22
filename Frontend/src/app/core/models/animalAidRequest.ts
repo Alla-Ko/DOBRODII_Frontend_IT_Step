@@ -9,8 +9,7 @@ export type AidRequestStatus =
 export interface AnimalAidRequest {
   id: string;
   slug: string;
-  // userId: string;
-  // user?: User; // якщо потрібно
+
   shelterId?: string;
   shelter?: Shelter;
   title: string;
@@ -18,13 +17,12 @@ export interface AnimalAidRequest {
   description?: string;
   category: AidCategory;
   status: AidRequestStatus;
-  estimatedCost: number; // Орієнтовна  вартість
+  estimatedCost: number; 
   allreadyDonated?: number;
   collectedAmount?: number;
   donationsCount?: number;
   photo?: string;
-  photos?: string[]; // Масив URL або ідентифікаторів фото
+  photos?: string[]; 
 
-  // createdAt: string; // ISO дата рядка
-  // updatedAt: string; // ISO дата рядка
+
 }

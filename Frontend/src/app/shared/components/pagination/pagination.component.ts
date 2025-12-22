@@ -24,7 +24,7 @@ export class PaginationComponent implements OnChanges {
   }
   @Input() totalPages = 1;
   @Input() currentPage = 1;
-  // локальна копія, щоб не відставала
+
   localPage = 1;
   @Output() pageChange = new EventEmitter<number>();
   ngOnChanges(changes: SimpleChanges) {
@@ -48,14 +48,14 @@ export class PaginationComponent implements OnChanges {
       return pages;
     }
 
-    // Перша сторінка завжди
+
     pages.push(1);
 
     if (this.localPage > 3) {
-      pages.push(null); // ...
+      pages.push(null); 
     }
 
-    // Діапазон навколо поточної
+
     const start = Math.max(2, this.localPage - 1);
     const end = Math.min(this.totalPages - 1, this.localPage + 1);
 
@@ -67,7 +67,7 @@ export class PaginationComponent implements OnChanges {
       pages.push(null);
     }
 
-    // Остання сторінка
+
     pages.push(this.totalPages);
 
     return pages;

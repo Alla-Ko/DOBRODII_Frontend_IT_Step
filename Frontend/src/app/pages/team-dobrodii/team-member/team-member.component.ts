@@ -25,7 +25,7 @@ export class TeamMemberComponent {
   @Output() favoriteChange = new EventEmitter();
   openLinkedin(): void {
     window.open(this.member.linkedInUrl, '_blank');
-    // або: location.href = url; // якщо потрібно в тій самій вкладці
+
   }
 
   onBlankHeartClick() {

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MultiSelectDropdownComponent } from './multi-select-dropdown.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('MultiSelectDropdownComponent', () => {
   let component: MultiSelectDropdownComponent;
@@ -8,7 +9,7 @@ describe('MultiSelectDropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MultiSelectDropdownComponent]
+      imports: [MultiSelectDropdownComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistrationFailedComponent } from './registration-failed.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('RegistrationFailedComponent', () => {
   let component: RegistrationFailedComponent;
@@ -8,7 +9,7 @@ describe('RegistrationFailedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegistrationFailedComponent]
+      imports: [RegistrationFailedComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

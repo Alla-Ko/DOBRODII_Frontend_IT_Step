@@ -30,14 +30,14 @@ import { IconComponent } from '../../icon.component';
   styleUrl: './two-factor.component.css',
 })
 export class TwoFactorComponent implements OnDestroy {
-  @Output() selectOption = new EventEmitter<ModalState['component']>(); //+
-  @Output() submitButton = new EventEmitter<string>(); //+
-  @Output() backupCode = new EventEmitter<string>(); //+
-  @Output() resendCode = new EventEmitter<void>(); //+
+  @Output() selectOption = new EventEmitter<ModalState['component']>(); 
+  @Output() submitButton = new EventEmitter<string>(); 
+  @Output() backupCode = new EventEmitter<string>(); 
+  @Output() resendCode = new EventEmitter<void>(); 
   @Input() twoFaStatus!: Signal<TwoFaStatus | null>;
-  @Input() errorMessage = signal<string>(''); //+
-  @Input() loading = signal(false); //+
-  @Input() hiddenPhoneNumber = signal<string>(''); //+
+  @Input() errorMessage = signal<string>(''); 
+  @Input() loading = signal(false); 
+  @Input() hiddenPhoneNumber = signal<string>(''); 
   showBackupCodeInput = false;
 
   isDisabled = signal(true);
@@ -74,18 +74,18 @@ export class TwoFactorComponent implements OnDestroy {
   }
 
   emitResendCode() {
-    if (this.resendTimer() > 0 || this.loading()) return; // поки таймер працює, не дозволяємо клік
+    if (this.resendTimer() > 0 || this.loading()) return; 
     this.resendCode.emit();
     this.startResendTimer();
   }
   private startResendTimer() {
-    this.resendTimer.set(30); // 30 секунд
+    this.resendTimer.set(30); 
     this.intervalId = window.setInterval(() => {
       this.resendTimer.update(v => v - 1);
       if (this.resendTimer() <= 0) {
         if (this.intervalId !== null) {
           clearInterval(this.intervalId);
-          this.intervalId = null; // обнуляємо після очищення
+          this.intervalId = null; 
         }
       }
     }, 1000);

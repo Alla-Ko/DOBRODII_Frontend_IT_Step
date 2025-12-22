@@ -136,7 +136,7 @@ export class AdoptionApplicationsComponent {
             });
           },
           error: () => {
-            // можна показати тост
+            // нічого не робимо
           },
         });
     } else {
@@ -147,7 +147,7 @@ export class AdoptionApplicationsComponent {
             this.favoriteAnimalIds.update(set => new Set([...set, animalId]));
           },
           error: () => {
-            // можна показати тост
+            // нічого не робимо
           },
         });
     }

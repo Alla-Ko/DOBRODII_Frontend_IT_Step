@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SuccessStoryCardComponent } from './success-story-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SuccesStoryCardComponent', () => {
   let component: SuccessStoryCardComponent;
@@ -8,7 +9,7 @@ describe('SuccesStoryCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SuccessStoryCardComponent]
+      imports: [SuccessStoryCardComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

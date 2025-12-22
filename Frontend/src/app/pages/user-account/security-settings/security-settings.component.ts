@@ -39,7 +39,7 @@ export class SecuritySettingsComponent {
       error: err => {
         console.error('Setup TOTP error:', err);
         this.errorMessage.set('FAILED_TO_SETUP_TOTP');
-        //відобразити модалку помилки
+
       },
     });
   }
@@ -69,13 +69,13 @@ export class SecuritySettingsComponent {
     this.modal.openModal('backup-codes');
   }
 
-  // залишаємо для повного відключення
+
   openDisableConfirm() {
     this.auth.disableAll2fa();
   }
   toggleTotp() {
     if (!this.status()?.isTwoFactorEnabled) {
-      // ? — optional chaining
+
       this.openSetupTotp();
     } else {
       this.auth.disableTotp().subscribe({

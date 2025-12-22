@@ -25,7 +25,7 @@ import { PrimaryLargeOrangeButtonComponent } from '../../buttons/orange/primary-
   styleUrl: './setup-sms.component.css',
 })
 export class SetupSmsComponent implements OnInit, OnDestroy {
-  hiddenPhoneNumber = ''; // маскований телефон
+  hiddenPhoneNumber = ''; 
   @Input() loading = signal(false);
   @Input() errorMessage = signal('');
 
@@ -58,18 +58,18 @@ export class SetupSmsComponent implements OnInit, OnDestroy {
   }
 
   onResend() {
-    if (this.resendTimer() > 0 || this.loading()) return; // поки таймер працює, не дозволяємо клік
+    if (this.resendTimer() > 0 || this.loading()) return; 
     this.resendCode.emit();
     this.startResendTimer();
   }
   private startResendTimer() {
-    this.resendTimer.set(30); // 30 секунд
+    this.resendTimer.set(30); 
     this.intervalId = window.setInterval(() => {
       this.resendTimer.update(v => v - 1);
       if (this.resendTimer() <= 0) {
         if (this.intervalId !== null) {
           clearInterval(this.intervalId);
-          this.intervalId = null; // обнуляємо після очищення
+          this.intervalId = null; 
         }
       }
     }, 1000);

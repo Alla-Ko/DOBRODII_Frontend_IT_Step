@@ -31,7 +31,7 @@ export class AnimalAidRequestService {
   }
   getLastPayments(): Observable<ProjectPayment[]> {
     return this.api.get<ProjectPayment[]>(`payments/donations/all`).pipe(
-      map(payments => payments.slice(0, 4)) // беремо лише перші 4
+      map(payments => payments.slice(0, 4)) 
     );
   }
   getLastPaymentsByAnimalAidRequestId(
@@ -40,7 +40,7 @@ export class AnimalAidRequestService {
     return this.api
       .get<ProjectPayment[]>(`payments/donations/project/${id}`)
       .pipe(
-        map(payments => payments.slice(0, 4)) // беремо лише перші 4
+        map(payments => payments.slice(0, 4)) 
       );
   }
 }

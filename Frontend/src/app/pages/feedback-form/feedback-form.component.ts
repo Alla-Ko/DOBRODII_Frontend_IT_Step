@@ -37,7 +37,7 @@ export class FeedbackFormComponent {
   platformId = inject(PLATFORM_ID);
   constructor() {
     effect(() => {
-      // Тут беремо значення форми через signal-обгортку
+ 
       this.feedbackForm.valueChanges.subscribe(() => {
         this.isDisabled.set(!this.feedbackForm.valid);
       });
@@ -93,7 +93,7 @@ export class FeedbackFormComponent {
       return;
     }
 
-    // Тут виклик API для збереження даних
+
   }
   refillForm() {
     this.submitted.set(false);

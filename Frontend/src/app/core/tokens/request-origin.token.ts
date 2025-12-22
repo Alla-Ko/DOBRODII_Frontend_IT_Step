@@ -6,8 +6,8 @@ export const REQUEST_ORIGIN = new InjectionToken<string>('REQUEST_ORIGIN', {
   factory: () => {
     const platformId = inject(PLATFORM_ID);
     if (isPlatformBrowser(platformId)) {
-      return window.location.origin; // для браузера
+      return window.location.origin; 
     }
-    return ''; // дефолт для сервера, але сервер все одно оверрайдить
+    return ''; 
   },
 });

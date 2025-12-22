@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CareRulesComponent } from './care-rules.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CareRulesComponent', () => {
   let component: CareRulesComponent;
@@ -8,7 +9,7 @@ describe('CareRulesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CareRulesComponent]
+      imports: [CareRulesComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

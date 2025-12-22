@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdoptionApplicationsFailedComponent } from './adoption-applications-failed.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('AdoptionApplicationsFailedComponent', () => {
   let component: AdoptionApplicationsFailedComponent;
@@ -8,7 +9,7 @@ describe('AdoptionApplicationsFailedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdoptionApplicationsFailedComponent]
+      imports: [AdoptionApplicationsFailedComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

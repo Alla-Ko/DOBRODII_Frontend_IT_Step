@@ -17,7 +17,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   return authService.refreshToken().pipe(
-    // <-- async refresh
+
     map(data => {
       if (!data) {
         authService.setReturnUrl(state.url);
@@ -38,11 +38,7 @@ export const authGuard: CanActivateFn = (route, state) => {
         modalService.openModal('welcome');
         return of(false);
       }
-      // of(
-      //   router.createUrlTree(['/'], {
-      //     queryParams: { returnUrl: state.url },
-      //   })
-      // )
+
     )
   );
 };

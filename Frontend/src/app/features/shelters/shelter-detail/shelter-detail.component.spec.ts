@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShelterDetailComponent } from './shelter-detail.component';
+import { TranslateModule } from '@ngx-translate/core';
 
-/*describe('ShelterDetailComponent', () => {
+describe('ShelterDetailComponent', () => {
   let component: ShelterDetailComponent;
   let fixture: ComponentFixture<ShelterDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShelterDetailComponent]
+      imports: [ShelterDetailComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 
@@ -20,4 +21,4 @@ import { ShelterDetailComponent } from './shelter-detail.component';
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});*/
+});

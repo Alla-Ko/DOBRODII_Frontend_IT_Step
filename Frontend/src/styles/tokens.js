@@ -1,8 +1,8 @@
 module.exports = {
   colors: {
-    // 🎨 Primary palette
+
     primary: {
-      orange: '#F86F03', // коли пишеш bg-primary-orange → цей колір
+      orange: '#F86F03', 
       light: {
         orange: '#FFA41B',
       },
@@ -11,7 +11,7 @@ module.exports = {
       lightBlue: '#90B6F4',
     },
 
-    // Secondary palette
+
     secondary: {
       chileanFire: {
         1: '#FFF1E6',

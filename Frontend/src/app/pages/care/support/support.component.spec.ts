@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SupportComponent } from './support.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SupportComponent', () => {
   let component: SupportComponent;
@@ -8,7 +9,7 @@ describe('SupportComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SupportComponent]
+      imports: [SupportComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

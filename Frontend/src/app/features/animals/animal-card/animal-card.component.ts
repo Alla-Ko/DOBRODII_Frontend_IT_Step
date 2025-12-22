@@ -34,11 +34,7 @@ export class AnimalCardComponent {
       'bg-secondary-jordyBlue-1 text-primary-blue': s !== 'available',
     };
   }
-  // readonly isChecked = computed(() => {
-  //   const checked = this.animal.isChecked;
 
-  //   return checked;
-  // });
 
   onAnimalDetailClick() {
     this.animalDetailClick.emit();

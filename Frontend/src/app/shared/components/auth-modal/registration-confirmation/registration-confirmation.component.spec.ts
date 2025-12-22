@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistrationConfirmationComponent } from './registration-confirmation.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('RegistrationConfirmationComponent', () => {
   let component: RegistrationConfirmationComponent;
@@ -8,7 +9,7 @@ describe('RegistrationConfirmationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegistrationConfirmationComponent]
+      imports: [RegistrationConfirmationComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

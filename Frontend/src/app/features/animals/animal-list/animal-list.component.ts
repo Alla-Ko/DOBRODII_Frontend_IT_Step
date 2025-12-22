@@ -49,7 +49,7 @@ export class AnimalListComponent {
   private authModalService = inject(ModalService);
   private animalSubscriptionService = inject(AnimalSubscriptionService);
 
-  // === Фільтри ===
+
   currentPage = signal(1);
   selectedSexOptions = signal<SexOption[]>([]);
   selectedSizeOptions = signal<SizeOption[]>([]);
@@ -60,7 +60,7 @@ export class AnimalListComponent {
   availableForCareOptions = signal(true);
   filtersOpen = signal(true);
 
-  // === Дані ===
+
   private rawAnimals = signal<Animal[]>([]);
   private favoriteAnimalIds = signal<Set<string>>(new Set<string>());
   totalCount = signal(0);
@@ -151,14 +151,14 @@ export class AnimalListComponent {
   constructor() {
     this.loadFiltersFromUrl();
 
-    // Завантажуємо улюблені один раз при вході
+
     if (this.authService._currentUser()) {
       this.animalSubscriptionService.getFavoriteAnimals().subscribe(favs => {
         this.favoriteAnimalIds.set(new Set(favs.map(a => a.id)));
       });
     }
 
-    // Реакція на зміна будь-якого фільтра
+
     effect(() => {
       this.currentPage();
       this.selectedSexOptions();
@@ -373,7 +373,7 @@ export class AnimalListComponent {
     });
   }
 
-  // === Сердечко — миттєве, без помилок типів ===
+
   onHeartClick(animal: Animal) {
     if (!this.authService._currentUser()) {
       this.authModalService.openModal('welcome');
@@ -409,7 +409,7 @@ export class AnimalListComponent {
     this.router.navigate(['/animals', animal.slug]);
   }
 
-  // === Фільтри ===
+  
   setPage(page: number) {
     this.currentPage.set(page);
   }

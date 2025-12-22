@@ -35,7 +35,6 @@ export class FooterComponent {
   showTakeCareModalWindow = signal(false);
   constructor() {
     effect(() => {
-      // Тут беремо значення форми через signal-обгортку
       this.subscriptionForm.valueChanges.subscribe(() => {
         this.isDisabled.set(!this.subscriptionForm.valid);
       });

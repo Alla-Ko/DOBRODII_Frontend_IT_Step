@@ -45,7 +45,7 @@ export class PublicOfferComponent {
     this.http
       .get(`/assets/i18n/publicOffer/${lang}.html`, { responseType: 'text' })
       .subscribe(html => {
-        // замінюємо плейсхолдер {{siteName}} на реальне значення
+
         this.publicOfferHtml = html.replace(/{{\s*siteName\s*}}/g, this.origin);
       });
   }

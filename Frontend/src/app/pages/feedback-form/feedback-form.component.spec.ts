@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedbackFormComponent } from './feedback-form.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('FeedbackFormComponent', () => {
   let component: FeedbackFormComponent;
@@ -8,7 +9,7 @@ describe('FeedbackFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FeedbackFormComponent]
+      imports: [FeedbackFormComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

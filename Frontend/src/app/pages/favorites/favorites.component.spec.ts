@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FavoritesComponent } from './favorites.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('FavouritesComponent', () => {
   let component: FavoritesComponent;
@@ -8,7 +9,7 @@ describe('FavouritesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FavoritesComponent]
+      imports: [FavoritesComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

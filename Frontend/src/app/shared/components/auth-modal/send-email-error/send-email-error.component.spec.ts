@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SendEmailErrorComponent } from './send-email-error.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SendEmailErrorComponent', () => {
   let component: SendEmailErrorComponent;
@@ -8,7 +9,7 @@ describe('SendEmailErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SendEmailErrorComponent]
+      imports: [SendEmailErrorComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

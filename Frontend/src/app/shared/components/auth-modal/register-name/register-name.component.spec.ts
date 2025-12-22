@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterNameComponent } from './register-name.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('RegisterNameComponent', () => {
   let component: RegisterNameComponent;
@@ -8,7 +9,7 @@ describe('RegisterNameComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterNameComponent]
+      imports: [RegisterNameComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

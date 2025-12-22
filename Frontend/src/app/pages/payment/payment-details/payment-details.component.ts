@@ -40,24 +40,24 @@ export class PaymentDetailsComponent implements OnInit {
 
   liqPay = inject(LiqPayService);
   ngOnInit(): void {
-    // 1. Підтягуємо збережені дані з сервісу (якщо людина повернулася назад)
+ 
     const data = this.liqPay.data();
     if (data) {
       this.registerForm.patchValue({
         fullName: data.payerName ?? '',
         phoneNumber: data.payerPhone ?? '',
         email: data.payerEmail ?? '',
-        termsAndConditions: false, // чекбокс завжди скидаємо — безпека
+        termsAndConditions: false, 
       });
     }
 
-    // 2. Слухаємо зміни форми → вмикаємо кнопку, коли все валідно
+
     this.registerForm.valueChanges.subscribe(() => {
       this.isDisabled.set(!this.registerForm.valid || this.loading());
       if (this.errorMessage()) this.errorMessage.set(null);
     });
 
-    // Оновлюємо стан кнопки одразу (на випадок, якщо дані вже були)
+
     this.isDisabled.set(!this.registerForm.valid);
   }
 
@@ -109,7 +109,7 @@ export class PaymentDetailsComponent implements OnInit {
       next: response => {
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = response.gatewayUrl; // → https://www.liqpay.ua/api/3/checkout
+        form.action = response.gatewayUrl; 
         form.style.display = 'none';
 
         const dataInput = document.createElement('input');
@@ -123,7 +123,7 @@ export class PaymentDetailsComponent implements OnInit {
         form.appendChild(signatureInput);
 
         document.body.appendChild(form);
-        form.submit(); // Відкриває LiqPay у тій самій вкладці — ідеально!
+        form.submit(); 
       },
       error: err => {
         console.error('LiqPay error:', err);

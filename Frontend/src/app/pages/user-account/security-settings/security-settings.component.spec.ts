@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SecuritySettingsComponent } from './security-settings.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SecuritySettingsComponent', () => {
   let component: SecuritySettingsComponent;
@@ -8,7 +9,7 @@ describe('SecuritySettingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SecuritySettingsComponent]
+      imports: [SecuritySettingsComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

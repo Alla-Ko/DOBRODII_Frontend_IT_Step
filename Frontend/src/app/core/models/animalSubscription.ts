@@ -9,5 +9,5 @@ export interface AnimalSubscription {
   user?: User;
   animal?: Animal;
 
-  subscribedAt: string; // ISO дата рядка
+  subscribedAt: string;
 }

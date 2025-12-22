@@ -80,8 +80,8 @@ export class AnimalSubscriptionCardComponent {
   }
 
   confirmUnsubscribe(event: MouseEvent): void {
-    event.stopPropagation(); // Зупиняємо спливання кліку, щоб не викликати goToAnimal
-    event.preventDefault(); // Для надійності, щоб браузер нічого не виконував по замовчуванню
+    event.stopPropagation(); 
+    event.preventDefault(); 
 
     const message = this.translate.instant('CONFIRM_UNSUBSCRIBE');
     if (confirm(message)) {
@@ -90,7 +90,7 @@ export class AnimalSubscriptionCardComponent {
   }
   onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault(); // щоб уникнути прокрутки при Space
+      event.preventDefault(); 
       this.goToAnimal();
     }
   }

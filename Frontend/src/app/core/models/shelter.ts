@@ -8,23 +8,23 @@ export interface Coordinates {
 export type SocialMedia = Record<string, string>;
 
 export interface Shelter {
-  id: string;//+
-  slug: string;//+
-  name: string;//+
-  address: string;//+
-  coordinates: Coordinates;//+
+  id: string;
+  slug: string;
+  name: string;
+  address: string;
+  coordinates: Coordinates;
   contactPhone: string;
-  contactEmail: string;//+
-  description: string;//+
-  capacity: number;//+
-  currentOccupancy: number;//+
+  contactEmail: string;
+  description: string;
+  capacity: number;
+  currentOccupancy: number;
 	hasFreeCapacity?: boolean;
-  photos: string[]; // масив URL або шляхів до фото
+  photos: string[]; 
   virtualTourUrl: string | null;
   workingHours: string;
   socialMedia: SocialMedia;
   managerId: string;
   manager?: User;
-  createdAt: string; // ISO 8601
+  createdAt: string; 
   updatedAt: string;
 }

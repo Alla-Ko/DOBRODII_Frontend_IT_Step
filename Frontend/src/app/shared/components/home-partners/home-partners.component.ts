@@ -32,29 +32,29 @@ export class HomePartnersComponent implements OnInit {
   offset = signal(0);
   animating = false;
   platformId = inject(PLATFORM_ID);
-  // слухаємо ресайз вікна
+
   @HostListener('window:resize')
   onResize() {
     if (isPlatformBrowser(this.platformId)) {
-      this.updateVisibleCount(); // встановлюємо одразу при завантаженні
+      this.updateVisibleCount(); 
     }
   }
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.updateVisibleCount(); // встановлюємо одразу при завантаженні
+      this.updateVisibleCount(); 
     }
   }
   private updateVisibleCount() {
     const width = window.innerWidth;
 
     if (width >= 1280) {
-      // xl і більше
+
       this.visibleCount.set(4);
     } else if (width >= 640) {
-      // lg
+
       this.visibleCount.set(2);
     } else {
-      // мобільні/середні екрани
+
       this.visibleCount.set(1);
     }
   }
@@ -63,7 +63,7 @@ export class HomePartnersComponent implements OnInit {
 
     if (this.animating) return;
     this.animating = true;
-    // права стрілка
+
     const move = vis === 1 ? 120 : vis === 2 ? 49.3 : 25;
     this.offset.set(-move);
   }
@@ -71,21 +71,21 @@ export class HomePartnersComponent implements OnInit {
   prev() {
     if (this.animating) return;
 
-    // переміщаємо останню картку на початок масиву
+
     const arr = [...this.items()];
     const last = arr.pop();
     if (last) arr.unshift(last);
     this.items.set(arr);
 
-    // одразу зсуваємо на -1 картку
+
     const move =
       this.visibleCount() === 1 ? 120 : this.visibleCount() === 2 ? 49.3 : 25;
     this.offset.set(-move);
 
-    // невелика затримка, щоб анімація спрацювала
+
     setTimeout(() => {
       this.animating = true;
-      this.offset.set(0); // плавний рух вправо на 1 картку
+      this.offset.set(0); 
     }, 10);
   }
 
@@ -102,7 +102,7 @@ export class HomePartnersComponent implements OnInit {
 
     this.items.set(arr);
 
-    // обнуляємо offset без анімації
+
 
     this.offset.set(0);
   }

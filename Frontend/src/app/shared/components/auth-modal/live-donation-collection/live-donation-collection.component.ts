@@ -89,7 +89,7 @@ export class LiveDonationCollectionComponent {
       console.error(err);
     }
 
-    //реалізувати
+
     this.modalService.closeModal();
   }
   toAnimalAidRequests() {

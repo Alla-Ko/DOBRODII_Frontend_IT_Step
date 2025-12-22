@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SocialMediaComponent } from './social-media.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SocialMediaComponent', () => {
   let component: SocialMediaComponent;
@@ -8,7 +9,7 @@ describe('SocialMediaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SocialMediaComponent]
+      imports: [SocialMediaComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

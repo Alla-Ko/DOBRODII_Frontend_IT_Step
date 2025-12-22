@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SetupSmsComponent } from './setup-sms.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SetupSmsComponent', () => {
   let component: SetupSmsComponent;
@@ -8,7 +9,7 @@ describe('SetupSmsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SetupSmsComponent]
+      imports: [SetupSmsComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

@@ -1,17 +1,18 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
+    baseUrl: 'https://localhost:4200',
+    setupNodeEvents() {
       // implement node event listeners here
     },
   },
 
   component: {
     devServer: {
-      framework: "angular",
-      bundler: "webpack",
+      framework: 'angular',
+      bundler: 'webpack',
     },
-    specPattern: "**/*.cy.ts",
+    specPattern: '**/*.cy.ts',
   },
 });

@@ -20,7 +20,7 @@ import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { Shelter } from '../../../core/models/shelter';
 import { User } from '../../../core/models/user';
 import { AuthService } from '../../../core/services/auth.service';
-import { MetaSsrService } from '../../../core/services/meta-ssr.service'; // Новий сервіс
+import { MetaSsrService } from '../../../core/services/meta-ssr.service'; 
 import { ModalService } from '../../../core/services/modal.service';
 import { ShelterSubscriptionService } from '../../../core/services/shelter-subscription.service';
 import { ShelterService } from '../../../core/services/shelter.service';
@@ -64,7 +64,7 @@ export class ShelterDetailComponent {
   );
   private modalService = inject(ModalService);
   private destroyRef = inject(DestroyRef);
-  private metaSsr = inject(MetaSsrService); // Новий сервіс
+  private metaSsr = inject(MetaSsrService); 
 
   mapUrl = signal<SafeResourceUrl | null>(null);
 
@@ -97,7 +97,7 @@ export class ShelterDetailComponent {
 
           this.shelter.set(shelter);
 
-          // НОВІ МЕТА-ТЕГИ — заміна всього старого setMetaTags
+
           this.updateMetaTags(shelter);
 
           if (isPlatformBrowser(this.platformId)) {
@@ -130,7 +130,7 @@ export class ShelterDetailComponent {
     });
   }
 
-  // НОВА ФУНКЦІЯ — заміна старого setMetaTags
+
   private updateMetaTags(shelter: Shelter) {
     const title = `${shelter.name} — Добродій`;
     const description =

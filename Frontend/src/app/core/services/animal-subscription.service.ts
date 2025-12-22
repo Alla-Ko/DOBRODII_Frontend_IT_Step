@@ -38,7 +38,7 @@ export class AnimalSubscriptionService {
           ...animal,
           age: animal.birthday
             ? this.calculateAgeParts(animal.birthday)
-            : undefined, // ← undefined, а не null!
+            : undefined, 
           isChecked: false,
           isFavorite: true,
         }));

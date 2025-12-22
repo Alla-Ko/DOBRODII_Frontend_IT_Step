@@ -38,7 +38,7 @@ export class RegisterNameComponent {
     effect(() => {
       this.registerForm.valueChanges.subscribe(() => {
         this.isDisabled.set(!this.registerForm.valid);
-        // Оновлюємо помилки
+        
         this.updateErrors();
       });
     });
@@ -57,7 +57,7 @@ export class RegisterNameComponent {
       errors.push('ZIP_CODE_REQUIRED');
     }
 
-    // Оновлюємо помилки
+   
     this.errorMessage.set(errors.join('. '));
   }
   onSubmit() {

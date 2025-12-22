@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnimalCardComponent } from './animal-card.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('AnimalCardComponent', () => {
   let component: AnimalCardComponent;
@@ -8,7 +10,10 @@ describe('AnimalCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AnimalCardComponent]
+      imports: [AnimalCardComponent,TranslateModule.forRoot()],
+			 providers: [provideHttpClientTesting()],
+
+
     })
     .compileComponents();
 

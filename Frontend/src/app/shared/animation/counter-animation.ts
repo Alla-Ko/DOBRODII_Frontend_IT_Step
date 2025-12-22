@@ -1,4 +1,4 @@
-// counter-animation.ts
+
 export function animateCounter(
   element: HTMLElement,
   targetValue: number,

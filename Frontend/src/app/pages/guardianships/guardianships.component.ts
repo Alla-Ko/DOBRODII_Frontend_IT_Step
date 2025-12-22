@@ -111,7 +111,7 @@ export class GuardianshipsComponent {
         next: response => {
           const form = document.createElement('form');
           form.method = 'POST';
-          form.action = response.gatewayUrl; // → https://www.liqpay.ua/api/3/checkout
+          form.action = response.gatewayUrl;
           form.style.display = 'none';
 
           const dataInput = document.createElement('input');
@@ -125,7 +125,7 @@ export class GuardianshipsComponent {
           form.appendChild(signatureInput);
 
           document.body.appendChild(form);
-          form.submit(); // Відкриває LiqPay у тій самій вкладці — ідеально!
+          form.submit();
         },
         error: err => {
           console.error('LiqPay error:', err);
@@ -193,7 +193,7 @@ export class GuardianshipsComponent {
             });
           },
           error: () => {
-            // можна показати тост
+            // нічого не робимо
           },
         });
     } else {
@@ -204,7 +204,7 @@ export class GuardianshipsComponent {
             this.favoriteAnimalIds.update(set => new Set([...set, animalId]));
           },
           error: () => {
-            // можна показати тост
+            // нічого не робимо
           },
         });
     }

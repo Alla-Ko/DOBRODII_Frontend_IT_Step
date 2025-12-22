@@ -67,7 +67,7 @@ export class ModalService {
     return this.tokenForResettingPassword();
   }
 
-  // Публічний доступ до сигналу
+
   readonly modalStateReadonly = this.modalState.asReadonly();
 
   openModal(component: ModalState['component']) {

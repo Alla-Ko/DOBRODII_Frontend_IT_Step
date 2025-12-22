@@ -53,10 +53,10 @@ export class SecondarySmallButtonComponent {
   @Input() iconName?: keyof typeof ICONS;
   @Output() pressButton = new EventEmitter<void>();
   @Input() loading? = signal(false);
-  @Input() disabled = signal(false); // <- новий Input
+  @Input() disabled = signal(false); 
 
   async confirm() {
-    if (this.disabled()) return; // додатково блокування
+    if (this.disabled()) return; 
     this.pressButton.emit();
   }
 }

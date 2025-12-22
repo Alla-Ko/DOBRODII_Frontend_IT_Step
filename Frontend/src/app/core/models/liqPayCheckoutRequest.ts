@@ -8,7 +8,7 @@ export interface LiqPayCheckoutRequest {
   description?: string;
   isRecurring?: boolean;
   scope: PaymentScope;
-  entityId?: string; // id запиту на допомогу або id опіки
+  entityId?: string; 
   payerName?: string;
   payerPhone?: string;
   payerEmail?: string;
@@ -21,11 +21,11 @@ export interface LiqPayCheckoutResponse {
   gatewayUrl: string;
   orderId: string;
   resultUrl: string;
-  // інші поля, які повертає бекенд
+
 }
 export interface PaymentStatusResponse {
   orderId: string;
-  status: PaymentStatus; //перевірити
+  status: PaymentStatus; 
   success: boolean;
   providerPaymentId?: string;
   scope?: PaymentScope;
@@ -37,7 +37,7 @@ export interface PaymentStatusResponse {
   anonymous?: boolean;
   donation: Partial<Payment>;
   guardianship?: Partial<Guardianship>;
-  animalAidRequest?: Partial<AnimalAidRequest>; //додала
+  animalAidRequest?: Partial<AnimalAidRequest>; 
   subscription?: Partial<PaymentSubscription>;
   createdAt?: string;
   updatedAt?: string;
@@ -49,34 +49,32 @@ export type PaymentSubscriptionStatus =
   | 'requirespayment'
   | 'active'
   | 'canceled';
-// | 'in_progress'
-// | 'reversed'
-// | 'expired'
+
 export interface Payment {
-  id: string; // внутрішній ID (наприклад: ORD-2025-11-123)
+  id: string; 
   amount: number;
   currency: 'UAH';
   purpose?: string;
   status: PaymentStatus;
-  transactionId: string; // payment_id від LiqPay (наприклад: 1234567890)
+  transactionId: string; 
   targetEntityId?: string;
-  //targetEntity?: або проект або опіка
-  orderId?: string; // старий orderId, якщо був (можна задепрекейтити)
+ 
+  orderId?: string; 
 
   isRecurring: boolean;
   scope: PaymentScope;
-  entityId: string; // ID тварини, заявки тощо
+  entityId: string; 
   description: string;
   payerEmail?: string;
   payerName?: string;
   payerPhone?: string;
   isAnonymous: boolean;
-  createdAt: string; // ISO string
+  createdAt: string; 
   completedAt?: string;
-  nextPaymentDate?: string; // тільки для recurring
+  nextPaymentDate?: string;
   cancelledAt?: string;
 }
-/** Список платежів / історія */
+
 export interface PaymentHistoryResponse {
   id: string;
   providerSubscriptionId?: string;
@@ -94,14 +92,14 @@ export interface PaymentSubscription {
 
   amount: number;
   currency: 'UAH';
-  provider?: string; //це що?
-  providerSubscriptionId?: string; //нема такого
+  provider?: string;
+  providerSubscriptionId?: string; 
   status: PaymentSubscriptionStatus;
   guardianship?: Guardianship;
   aidRequest?: AnimalAidRequest;
   scopeType: PaymentScope;
   scopeId?: string;
-  createdAt: string; //"2025-12-04T20:25:42.841Z"
+  createdAt: string; 
   lastChargeAt: string;
   nextChargeAt: string;
   purpose?: string;

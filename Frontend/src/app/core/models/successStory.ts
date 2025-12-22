@@ -6,8 +6,8 @@ export interface SuccessStory {
   title: string;
   adoptionApplicationId?: string;
   adoptionApplication?: AdoptionApplication;
-  photos: string[]; // Масив URL або ідентифікаторів фото
-  videos: string[]; // Масив URL або ідентифікаторів відео
+  photos: string[]; 
+  videos: string[]; 
   description: string;
   shortDescription?: string;
   createdAt: string;

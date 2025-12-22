@@ -13,7 +13,7 @@ export function roleGuard(allowedRoles: string[]): CanActivateFn {
       return true;
     }
 
-    // Якщо роль не підходить — редірект на "Доступ заборонено"
+
     return router.createUrlTree(['/access-denied']);
   };
 }

@@ -79,12 +79,7 @@ export class EditUserComponent {
       this.isDisabled.set(!this.editForm.valid);
       this.updateErrors();
     });
-    // effect(() => {
-    //   this.editForm.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
-    //     this.isDisabled.set(!this.editForm.valid);
-    //     this.updateErrors();
-    //   });
-    // });
+
   }
 
   updateErrors() {
@@ -143,7 +138,7 @@ export class EditUserComponent {
     let upload$: Observable<Partial<User>>;
 
     if (this.selectedFile) {
-      // файл завантажуємо на сервер і отримуємо URL
+
       upload$ = this.api
         .uploadFile<{ url: string }>('media/upload', this.selectedFile)
         .pipe(
@@ -153,7 +148,7 @@ export class EditUserComponent {
           })
         );
     } else {
-      // немає файлу — просто беремо уже зібрані зміни
+
       upload$ = of(changedFields);
     }
 
@@ -194,7 +189,7 @@ export class EditUserComponent {
     const input = event.target as HTMLInputElement;
     if (input?.files?.length) {
       const file = input.files[0];
-      this.selectedFile = file; // нове поле для збереження File
+      this.selectedFile = file; 
       const reader = new FileReader();
       reader.onload = () => this.profilePhoto.set(reader.result);
       reader.readAsDataURL(file);

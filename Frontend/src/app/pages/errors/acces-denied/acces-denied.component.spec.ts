@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccesDeniedComponent } from './acces-denied.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('AccesDeniedComponent', () => {
   let component: AccesDeniedComponent;
@@ -8,7 +9,7 @@ describe('AccesDeniedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AccesDeniedComponent]
+      imports: [AccesDeniedComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

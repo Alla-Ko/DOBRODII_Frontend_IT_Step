@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GuardianshipCardComponent } from './guardianship-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('GuardianshipCardComponent', () => {
   let component: GuardianshipCardComponent;
@@ -8,7 +9,7 @@ describe('GuardianshipCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GuardianshipCardComponent]
+      imports: [GuardianshipCardComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

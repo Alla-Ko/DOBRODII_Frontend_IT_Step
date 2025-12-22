@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PublicOfferComponent } from './public-offer.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('PublicOfferComponent', () => {
   let component: PublicOfferComponent;
@@ -8,7 +9,7 @@ describe('PublicOfferComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PublicOfferComponent]
+      imports: [PublicOfferComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

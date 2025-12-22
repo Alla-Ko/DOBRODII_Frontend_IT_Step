@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TwoFactorComponent } from './two-factor.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('TwoFactorComponent', () => {
   let component: TwoFactorComponent;
@@ -8,7 +9,7 @@ describe('TwoFactorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TwoFactorComponent]
+      imports: [TwoFactorComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

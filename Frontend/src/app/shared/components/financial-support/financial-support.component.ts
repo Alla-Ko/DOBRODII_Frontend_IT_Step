@@ -31,7 +31,7 @@ export class FinancialSupportComponent implements OnInit {
   @Input() sums: number[] = [50, 100, 200, 500, 1000];
   @Output() selectionConfirmed = new EventEmitter<{
     amount: number;
-    isOnce: boolean; // true = разово, false = щомісяця
+    isOnce: boolean; // true = разово
   }>();
   chosenSum = signal<number | null>(null);
   customSum = signal<number | null>(null);
@@ -44,13 +44,13 @@ export class FinancialSupportComponent implements OnInit {
     this.donateOnce.set(this.initialIsOnce);
 
     if (this.initialSum !== null && this.initialSum > 0) {
-      // Якщо сума є в стандартному списку — підсвічуємо кнопку
+
       if (this.sums.includes(this.initialSum)) {
         this.chosenSum.set(this.initialSum);
         this.customSum.set(null);
         this.registerForm.patchValue({ customSum: '' });
       }
-      // Інакше — це кастомна сума → кладемо в інпут
+
       else {
         this.customSum.set(this.initialSum);
         this.chosenSum.set(null);
@@ -75,7 +75,7 @@ export class FinancialSupportComponent implements OnInit {
   selectSum(sum: number) {
     this.chosenSum.set(sum);
 
-    this.customSum.set(null); // очистити кастомну суму
+    this.customSum.set(null); 
     this.registerForm.patchValue({ customSum: '' });
   }
   onCustomSumChange() {
@@ -85,7 +85,7 @@ export class FinancialSupportComponent implements OnInit {
     );
     if (!isNaN(num) && num > 0) {
       this.customSum.set(num);
-      this.chosenSum.set(null); // очистити вибрану суму
+      this.chosenSum.set(null); 
     } else {
       this.customSum.set(null);
     }

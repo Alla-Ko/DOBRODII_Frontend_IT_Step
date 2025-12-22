@@ -19,11 +19,11 @@ export class CareRulesComponent {
   origin = inject(REQUEST_ORIGIN);
   platformId = inject(PLATFORM_ID);
 
-  // сигнал для мови
+
   lang = signal(this.translate.currentLang || this.translate.getDefaultLang());
 
   constructor() {
-    // слухаємо зміну мови
+ 
     this.translate.onLangChange.subscribe(() => {
       this.lang.set(this.translate.currentLang);
     });

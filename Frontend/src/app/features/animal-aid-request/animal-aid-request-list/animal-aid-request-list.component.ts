@@ -40,15 +40,15 @@ export class AnimalAidRequestListComponent {
   animalAidRequests = toSignal(
     this.animalAidRequestService.getAnimalAidRequests().pipe(
       tap(() => {
-        this.loading.set(true); // на старті потоку (при підписці)
+        this.loading.set(true); 
       }),
       finalize(() => {
-        this.loading.set(false); // коли потік завершується (успішно або з помилкою)
+        this.loading.set(false); 
       }),
       catchError(err => {
         this.error.set('FAILED_TO_LOAD_ANIMAL_AID_REQUESTS');
         console.error('Error loading animalAidRequests:', err);
-        return of([]); // Повертаємо порожній список, щоб Signal не впав
+        return of([]); 
       })
     ),
     { initialValue: [] }

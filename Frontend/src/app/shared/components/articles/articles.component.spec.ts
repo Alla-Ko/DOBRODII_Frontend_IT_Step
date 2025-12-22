@@ -8,12 +8,14 @@ describe('ArticlesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArticlesComponent]
-    })
-    .compileComponents();
+      imports: [ArticlesComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ArticlesComponent);
     component = fixture.componentInstance;
+
+    // Передаємо строго типізований сигнал
+
     fixture.detectChanges();
   });
 

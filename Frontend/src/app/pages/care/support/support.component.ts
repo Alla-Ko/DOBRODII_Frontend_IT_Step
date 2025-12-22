@@ -46,7 +46,7 @@ export class SupportComponent {
     }
   }
   private startGlobalPayment() {
-    // Очищаємо старий контекст + записуємо новий глобальний
+
     this.liqPay.startPayment({
       scope: 'global' as PaymentScope,
       amount: this.selectedAmount!,
@@ -56,8 +56,7 @@ export class SupportComponent {
         : 'Разова підтримка притулку',
     });
 
-    // Переходимо до форми з контактами
-    //поміняти потім
+
     this.router.navigate(['/payment/details']);
   }
   callEventSpecialist() {
@@ -117,7 +116,7 @@ export class SupportComponent {
       class: 'bg-secondary-chileanFire-2',
     },
   ];
-  hovered = signal<number | null>(null); // зберігає id елемента, на якому hover
+  hovered = signal<number | null>(null); 
 
   onMouseEnter(id: number) {
     this.hovered.set(id);

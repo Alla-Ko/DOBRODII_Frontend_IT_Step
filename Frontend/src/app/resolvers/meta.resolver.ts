@@ -7,7 +7,7 @@ export const metaResolver: ResolveFn<null> = (
 ) => {
   const meta = inject(MetaSsrService);
 
-  // Беремо дані з route.data (ти їх сам задаси в роутах нижче)
+
   const title =
     (route.data['title'] as string) ?? 'Добродій — притулок для тварин';
   const description =

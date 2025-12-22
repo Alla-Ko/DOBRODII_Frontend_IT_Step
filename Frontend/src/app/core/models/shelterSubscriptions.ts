@@ -9,5 +9,5 @@ export interface ShelterSubscription {
   user?: User;
   shelter?: Shelter;
 
-  subscribedAt: string; // ISO дата рядка
+  subscribedAt: string; 
 }

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SupportVolunteeringComponent } from './support-volunteering.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SupportVolunteeringComponent', () => {
   let component: SupportVolunteeringComponent;
@@ -8,7 +9,7 @@ describe('SupportVolunteeringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SupportVolunteeringComponent]
+      imports: [SupportVolunteeringComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

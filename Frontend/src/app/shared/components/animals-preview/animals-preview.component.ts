@@ -37,11 +37,11 @@ export class AnimalsPreviewComponent {
   private animalService = inject(AnimalService);
   private animalSubscriptionService = inject(AnimalSubscriptionService);
 
-  // === Дані ===
+
   private rawAnimals = signal<Animal[]>([]);
   private favoriteAnimalIds = signal<Set<string>>(new Set());
 
-  // Головний computed — тварини з актуальним isFavorite
+ 
   displayedAnimals = computed(() => {
     const favIds = this.favoriteAnimalIds();
     return this.rawAnimals().map(animal => ({
@@ -54,12 +54,12 @@ export class AnimalsPreviewComponent {
   constructor() {
     this.loadAnimals();
 
-    // Завантажуємо улюблені один раз (якщо користувач залогінений)
+
     if (this.authService._currentUser()) {
       this.loadFavorites();
     }
 
-    // Реакція на логін/вихід
+
     effect(() => {
       const user = this.authService._currentUser();
       if (user) {
@@ -87,7 +87,7 @@ export class AnimalsPreviewComponent {
     });
   }
 
-  // === Сердечко — миттєве ===
+
   onHeartClick(animal: Animal) {
     if (!this.authService._currentUser()) {
       this.authModalService.openModal('welcome');

@@ -37,13 +37,13 @@ export class LiqPayService {
   readonly scope = computed(() => this._data()?.scope ?? null);
 
   constructor() {
-    // відновлення після F5
+
     if (typeof window !== 'undefined') {
       const saved = sessionStorage.getItem(this.STORAGE_KEY);
       if (saved) this._data.set(JSON.parse(saved));
     }
 
-    // автозбереження при будь-якій зміні
+ 
     effect(() => {
       const data = this._data();
       if (typeof window !== 'undefined') {
@@ -92,7 +92,7 @@ export class LiqPayService {
       !current?.scope ||
       (current.scope !== 'guardianship' && !current.amount)
     ) {
-      //console.log('current', current);
+ 
       throw new Error('Дані платежу не заповнені');
     }
 
@@ -126,7 +126,7 @@ export class LiqPayService {
   getPaymentHistory(): Observable<[PaymentHistoryResponse]> {
     return this.api.get<[PaymentHistoryResponse]>(`payments/me/history`);
   }
-  // 4. Активні підписки - доопрацювати
+
   getActiveSubscriptions(): Observable<PaymentSubscription[]> {
     return this.api
       .get<PaymentSubscription[]>(`payments/me/subscriptions`)

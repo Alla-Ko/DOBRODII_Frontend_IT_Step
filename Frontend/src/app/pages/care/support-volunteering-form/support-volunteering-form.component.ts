@@ -70,7 +70,7 @@ export class SupportVolunteeringFormComponent {
   platformId = inject(PLATFORM_ID);
   constructor() {
     effect(() => {
-      // Тут беремо значення форми через signal-обгортку
+  
       this.registerForm.valueChanges.subscribe(() => {
         this.isDisabled.set(!this.registerForm.valid);
       });
@@ -92,7 +92,7 @@ export class SupportVolunteeringFormComponent {
       return;
     }
 
-    // Тут виклик API для збереження даних
+
     this.router.navigate(['volunteer-application-confirmation']);
   }
 }

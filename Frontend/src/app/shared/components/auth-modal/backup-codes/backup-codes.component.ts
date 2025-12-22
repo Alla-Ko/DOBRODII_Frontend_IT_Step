@@ -42,7 +42,7 @@ export class BackupCodesComponent {
 
   showMessage(msg: string) {
     this.message.set(msg);
-    setTimeout(() => this.message.set(''), 5000); // приховати через 5 сек
+    setTimeout(() => this.message.set(''), 5000); 
   }
 
   onClose() {

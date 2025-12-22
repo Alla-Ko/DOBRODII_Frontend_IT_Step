@@ -23,7 +23,7 @@ import { AnimalService } from '../../../core/services/animal.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { GuardianshipService } from '../../../core/services/guardianship.service';
 import { LiqPayService } from '../../../core/services/liq-pay-service.service';
-import { MetaSsrService } from '../../../core/services/meta-ssr.service'; // Новий сервіс
+import { MetaSsrService } from '../../../core/services/meta-ssr.service'; 
 import { ModalService } from '../../../core/services/modal.service';
 import { PrimaryLargeButtonComponent } from '../../../shared/components/buttons/blue/primary-large-button.component';
 import { SecondaryLargeButtonComponent } from '../../../shared/components/buttons/blue/secondary-large-button.component';
@@ -74,7 +74,7 @@ export class AnimalDetailComponent implements OnInit {
   private authModalService = inject(ModalService);
   private authService = inject(AuthService);
   private translate = inject(TranslateService);
-  private metaSsr = inject(MetaSsrService); // Новий сервіс для SSR-мета-тегів
+  private metaSsr = inject(MetaSsrService); 
   private platformId = inject(PLATFORM_ID);
   private adoptionApplicationService = inject(AdoptionApplicationService);
 
@@ -228,7 +228,7 @@ export class AnimalDetailComponent implements OnInit {
   }
 
   getAnimals() {
-    const currentAnimal = this.animal(); // забираємо сигнал один раз
+    const currentAnimal = this.animal(); 
     this.animalService
       .getAnimals({
         pageSize: 5,
@@ -237,7 +237,7 @@ export class AnimalDetailComponent implements OnInit {
       })
       .subscribe(result => {
         const animals = result.animals
-          .filter(a => !currentAnimal || a.id !== currentAnimal.id) // безпечна перевірка
+          .filter(a => !currentAnimal || a.id !== currentAnimal.id) 
           .slice(0, 4)
           .map(a => ({
             ...a,

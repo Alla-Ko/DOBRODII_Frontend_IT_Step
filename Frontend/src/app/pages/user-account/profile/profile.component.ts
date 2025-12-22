@@ -69,11 +69,11 @@ export class ProfileComponent {
     this.router.navigate(['my-payments']);
   }
   toNotifications() {
-    //дописати компонент з нотифікаціями
+
     throw new Error('Method not implemented.');
   }
   toApplications() {
-    //дописати компонент заявки на усиновлення і заявки на волонтерство
+
     this.router.navigate(['profile/adoption-applications']);
   }
   toGuardianships() {

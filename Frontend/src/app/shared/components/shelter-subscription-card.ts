@@ -48,7 +48,7 @@ export class ShelterSubscriptionCardComponent {
   @Output() deleteSubscription = new EventEmitter<void>();
 
   confirmUnsubscribe(event: MouseEvent): void {
-    event.stopPropagation(); // зупиняємо спливання події, щоб не спрацював клік на <a>
+    event.stopPropagation(); 
     const message = this.translate.instant('CONFIRM_UNSUBSCRIBE');
     if (confirm(message)) {
       this.deleteSubscription.emit();
@@ -56,7 +56,7 @@ export class ShelterSubscriptionCardComponent {
   }
   onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault(); // щоб уникнути прокрутки при Space
+      event.preventDefault(); 
       this.goToShelter();
     }
   }

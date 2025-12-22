@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Animal, AnimalListResult } from '../models/animal';
 
-import { ApiService } from './api.service'; // оновлена адреса
+import { ApiService } from './api.service'; 
 
 import { AnimalFiltersDto } from '../models/animalFiltersDto';
 import { BreedService } from './breed.service';
@@ -36,7 +36,7 @@ export class AnimalService {
   }
 
   getAnimals(filters: AnimalFiltersDto): Observable<AnimalListResult> {
-    // clean перед відправкою — видаляємо undefined
+
     const payload = this.cleanObject(filters);
 
     return this.api

@@ -92,7 +92,7 @@ export class NewsDetailComponent implements OnInit {
     this.news.set(currentNews || null);
     this.textForShare.set(currentNews?.title ?? '');
 
-    // НОВІ МЕТА-ТЕГИ — заміна всього старого коду
+
     if (currentNews) {
       this.updateMetaTags(currentNews);
     }

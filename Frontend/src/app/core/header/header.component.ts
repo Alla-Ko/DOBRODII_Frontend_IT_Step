@@ -67,9 +67,7 @@ export class HeaderComponent {
   private el = inject(ElementRef);
 
   menuItems: Record<string, string> = {
-    // '/animals': 'ANIMALS',
-    // '/articles': 'ARTICLES',
-    // '/lost-pets': 'LOST_PETS',
+
 
     '/about': 'ABOUT',
     '/projects': 'PROJECTS',
@@ -109,15 +107,15 @@ export class HeaderComponent {
 
     this.accumulatedDelta += delta;
 
-    const threshold = 10; // наприклад 10px
+    const threshold = 10; 
 
     if (this.accumulatedDelta > threshold) {
-      // скрол вниз
+
       this.isHidden.set(true);
       this.isFloating.set(false);
       this.accumulatedDelta = 0;
     } else if (this.accumulatedDelta < -threshold) {
-      // скрол вгору
+
       this.isFloating.set(true);
       this.isHidden.set(false);
       this.accumulatedDelta = 0;
@@ -138,7 +136,7 @@ export class HeaderComponent {
   }
   constructor() {
     effect(() => {
-      // Тут беремо значення форми через signal-обгортку
+
       this.searchForm.valueChanges.subscribe(() => {
         this.isSearchButtonDisabled.set(!this.searchForm.valid);
       });
@@ -150,7 +148,7 @@ export class HeaderComponent {
           window.scrollTo({ top: 0, behavior: 'auto' });
         });
     }
-    // Підписка на кліки по документу
+
     if (isPlatformBrowser(this.platformId)) {
       fromEvent<MouseEvent>(document, 'click')
         .pipe(

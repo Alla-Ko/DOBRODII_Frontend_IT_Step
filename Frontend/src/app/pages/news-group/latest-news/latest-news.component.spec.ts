@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LatestNewsComponent } from './latest-news.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('LatestNewsComponent', () => {
   let component: LatestNewsComponent;
@@ -8,7 +9,7 @@ describe('LatestNewsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LatestNewsComponent]
+      imports: [LatestNewsComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

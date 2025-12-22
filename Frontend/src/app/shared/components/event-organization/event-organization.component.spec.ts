@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventOrganizationComponent } from './event-organization.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('EventOrganizationComponent', () => {
   let component: EventOrganizationComponent;
@@ -8,7 +9,7 @@ describe('EventOrganizationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventOrganizationComponent]
+      imports: [EventOrganizationComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

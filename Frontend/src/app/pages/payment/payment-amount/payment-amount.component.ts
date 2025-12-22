@@ -32,25 +32,25 @@ export class PaymentAmountComponent implements OnInit {
     const data = this.liqPay.data();
     this.initialIsOnce.set(!data?.isRecurring);
     if (data?.amount && data?.amount > 0) this.initialSum.set(data?.amount);
-    // 1. Якщо взагалі немає контексту — викидаємо
+
     if (!data?.scope) {
       this.liqPay.clear();
       this.router.navigate(['/']);
       return;
     }
 
-    // 2. Особливий випадок: опіка (guardianship)
+
     if (data.scope === 'guardianship') {
       this.router.navigate(['/payment/details']);
       return;
     }
 
-    // 3. Для всіх інших — залишаємось на сторінці вибору суми
+ 
   }
   onSelectionConfirmed(selection: { amount: number; isOnce: boolean }) {
     this.liqPay.update({
       amount: selection.amount,
-      isRecurring: !selection.isOnce, // true → false, false → true
+      isRecurring: !selection.isOnce, 
     });
     this.next();
   }
@@ -63,7 +63,7 @@ export class PaymentAmountComponent implements OnInit {
       (data.scope === 'guardianship' && !data.entityId) ||
       (data.scope === 'aidRequest' && !data.entityId)
     ) {
-      // можна додати toast: "Будь ласка, оберіть суму"
+
       return;
     }
     this.router.navigate(['/payment/details']);

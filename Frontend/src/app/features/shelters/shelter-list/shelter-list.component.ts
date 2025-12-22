@@ -1,4 +1,4 @@
-// features/shelters/shelter-list.component.ts
+
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -9,7 +9,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { catchError, map, of } from 'rxjs'; // 🛠️ Додано import
+import { catchError, map, of } from 'rxjs'; 
 import { Shelter } from '../../../core/models/shelter';
 import { ShelterService } from '../../../core/services/shelter.service';
 import { SecondaryLargeButtonComponent } from '../../../shared/components/buttons/blue/secondary-large-button.component';
@@ -40,7 +40,7 @@ export class ShelterListComponent {
       catchError(err => {
         this.error.set('FAILED_TO_LOAD_SHELTERS');
         console.error('Error loading shelters:', err);
-        return of([]); // Повертаємо порожній список, щоб Signal не впав
+        return of([]); 
       })
     ),
     { initialValue: [] }

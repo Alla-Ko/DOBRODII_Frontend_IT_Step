@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmailConfirmedComponent } from './email-confirmed.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('EmailConfirmedComponent', () => {
   let component: EmailConfirmedComponent;
@@ -8,7 +9,7 @@ describe('EmailConfirmedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmailConfirmedComponent]
+      imports: [EmailConfirmedComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 

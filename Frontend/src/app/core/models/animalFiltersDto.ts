@@ -1,15 +1,15 @@
 export interface AnimalFiltersDto {
   page?: number;
   pageSize?: number;
-  genders?: string[]; // ["male"]
-  sizes?: string[]; // ["small"]
-  statuses?: string[]; // ["available"]
+  genders?: string[]; 
+  sizes?: string[]; 
+  statuses?: string[]; 
   isSterilized?: boolean;
   isUndercare?: boolean;
   minAge?: number;
   maxAge?: number;
-  careCosts?: string[]; // ["sixHundred"]
-  animalTypeFilter?: string; // "cats" | "dogs" | "others"
+  careCosts?: string[]; 
+  animalTypeFilter?: string; 
   shelterId?: string;
   specieId?: string;
   breedId?: string;

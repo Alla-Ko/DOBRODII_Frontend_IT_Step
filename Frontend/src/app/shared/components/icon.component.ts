@@ -21,7 +21,7 @@ export class IconComponent {
   private sanitizer = inject(DomSanitizer);
   private translate = inject(TranslateService);
 
-  // сигнал для іконки
+
   svg = signal<SafeHtml | null>(null);
 
   constructor() {
@@ -40,7 +40,7 @@ export class IconComponent {
         }
       });
     });
-    // ефект реагує на зміни name
+
     effect(() => {
       const iconName = this.signalName() || '';
       if (iconName && ICONS[iconName]) {

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdoptionApplicationCardComponent } from './adoption-application-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('AdoptionApplicationCardComponent', () => {
   let component: AdoptionApplicationCardComponent;
@@ -8,7 +9,7 @@ describe('AdoptionApplicationCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdoptionApplicationCardComponent]
+      imports: [AdoptionApplicationCardComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
 
