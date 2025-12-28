@@ -20,7 +20,8 @@
     <div
       #searchInput
       class="fixed top-[90px] m-4 left-0 w-[calc(100vw-20px)] sm:w-[calc(100vw-40px)] z-50 rounded-[40px] font-inter p-[15px] bg-opacity-80 transition-all duration-300 bg-primary-beige text-secondary-neutral-mineShaft shadow-md"
-      [class.hidden]="!isSearchOpen()"
+      [class.opacity-0]="!isSearchOpen()"
+      [class.pointer-events-none]="!isSearchOpen()"
     >
       <div class="flex justify-between items-center">
         <form
@@ -32,9 +33,11 @@
           <!-- searchString -->
           <div class="flex flex-1 w-full">
             <input
+              #searchLineInput
               id="searchString"
               type="text"
               formControlName="searchString"
+              (keydown.enter)="onEnterPress()"
               [placeholder]=""
               class="rounded-[40px] h-10 focus:outline-none mr-2 w-full text-center bg-transparent"
             />

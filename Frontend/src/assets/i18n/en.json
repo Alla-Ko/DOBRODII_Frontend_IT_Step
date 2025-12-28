@@ -722,5 +722,8 @@
   "REJECTION_DATE": "Rejection date",
   "REJECTION_REASON": "Rejection reason",
   "СURATOR_NAME": "Curator",
-  "СURATOR_PHONE": "Phone"
+  "СURATOR_PHONE": "Phone",
+  "SEARCH_RESULTS": "Search results",
+  "OTHER_SEARCH_PAGES": "Other search results",
+  "NO_SEARCH_RESULTS": "No search results"
 }

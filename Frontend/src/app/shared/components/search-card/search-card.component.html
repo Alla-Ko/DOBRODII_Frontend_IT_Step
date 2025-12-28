@@ -1,0 +1,14 @@
+<div class="group flex flex-col w-full items-start justify-start gap-1 my-2">
+  <a
+    [routerLink]="item().route"
+    routerLinkActive="underline  font-semibold"
+    class="transition hover:underline flex items-center justify-center cursor-pointer"
+  >
+    <h2
+      class="text-primary-blue group-hover:text-primary-orange underline cursor-pointer"
+    >
+      {{ item().title }}
+    </h2>
+  </a>
+  <p class="text-sm text-secondary-neutral-doveGray">{{ item().snippet }}...</p>
+</div>

@@ -1,1 +1,220 @@
-<p>search-results works!</p>
+<div
+  class="flex flex-col pt-[150px] pb-4 md:pb-[50px] min-h-[100vh] bg-primary-lightBlue w-full px-4 md:px-[50px] gap-2"
+>
+  <!-- Кнопка назад -->
+  <div class="inline-flex items-center w-full">
+    <div
+      class="hover:text-primary-orange inline-flex items-center cursor-pointer -translate-y-1/2 focus:outline-none focus:ring-2 focus:ring-primary-orange focus:ring-opacity-50"
+      (click)="backBottomClick()"
+      (keyup.enter)="backBottomClick()"
+      (keyup.space)="backBottomClick()"
+      tabindex="0"
+      role="button"
+      [attr.aria-label]="'BACK' | translate"
+    >
+      <app-icon [name]="'arrowLeft'" class=""></app-icon>
+      <span class="ml-2">{{ 'BACK' | translate | uppercase }}</span>
+    </div>
+  </div>
+  <div class="flex flex-col gap-2 md:gap-4 justify-start items-center w-full">
+    <h1
+      class="w-full font-bold font-fixel text-center break-words"
+      style="font-size: clamp(16px, 6.5vw, 40px)"
+    >
+      {{ 'SEARCH_RESULTS' | translate }}:&nbsp;
+      <span class="text-primary-orange"> "{{ searchString() }}"</span>
+    </h1>
+  </div>
+  @if (inProcess()) {
+    <app-loading-spinner></app-loading-spinner>
+  } @else {
+    @if (
+      searchResults().projects.length === 0 &&
+      searchResults().shelters.length === 0 &&
+      searchResults().animals.length === 0 &&
+      searchResults().news.length === 0 &&
+      searchResults().stories.length === 0 &&
+      searchResults().pages.length === 0
+    ) {
+      <div
+        class="flex flex-col flex-1 justify-center items-center w-ful h-full"
+      >
+        <app-icon
+          [name]="'logoFailure'"
+          class="relative -top-5 text-secondary-neutral-mineShaft"
+        ></app-icon>
+        <div class="w-full text-center mt-5">
+          {{ 'NO_SEARCH_RESULTS' | translate }}
+        </div>
+      </div>
+    }
+    <!-- Animals -->
+    @if (searchResults().animals.length > 0) {
+      <div
+        class="flex flex-col bg-primary-beige p-4 md:p-[40px] gap-2 md:gap-3 rounded-40"
+      >
+        <div class="flex flex-row justify-start items-center gap-2">
+          <span class="font-bold font-fixel text-start">
+            {{ 'ANIMALS' | translate }} ({{
+              searchResults().animals.length
+            }})</span
+          >
+          <button
+            type="button"
+            (click)="toggleAnimals()"
+            class="relative w-8 h-8 flex items-center justify-center transform scale-50"
+          >
+            <div [class.rotate-180]="!animalsOpen()">
+              <app-icon [name]="'togleFilters'"></app-icon>
+            </div>
+          </button>
+        </div>
+        @if (animalsOpen()) {
+          @for (result of searchResults().animals; track result.slug) {
+            <app-search-card [item]="result"></app-search-card>
+          }
+        }
+      </div>
+    }
+    <!-- Shelters -->
+    @if (searchResults().shelters.length > 0) {
+      <div
+        class="flex flex-col bg-primary-beige p-4 md:p-[40px] gap-2 md:gap-3 rounded-40"
+      >
+        <div class="flex flex-row justify-start items-center gap-2">
+          <span class="font-bold font-fixel text-start">
+            {{ 'SHELTERS' | translate }} ({{
+              searchResults().shelters.length
+            }})</span
+          >
+          <button
+            type="button"
+            (click)="toggleShelters()"
+            class="relative w-8 h-8 flex items-center justify-center transform scale-50"
+          >
+            <div [class.rotate-180]="!sheltersOpen()">
+              <app-icon [name]="'togleFilters'"></app-icon>
+            </div>
+          </button>
+        </div>
+        @if (sheltersOpen()) {
+          @for (result of searchResults().shelters; track result.slug) {
+            <app-search-card [item]="result"></app-search-card>
+          }
+        }
+      </div>
+    }
+    <!-- Projects -->
+    @if (searchResults().projects.length > 0) {
+      <div
+        class="flex flex-col bg-primary-beige p-4 md:p-[40px] gap-2 md:gap-3 rounded-40"
+      >
+        <div class="flex flex-row justify-start items-center gap-2">
+          <span class="font-bold font-fixel text-start">
+            {{ 'PROJECTS' | translate }} ({{
+              searchResults().projects.length
+            }})</span
+          >
+          <button
+            type="button"
+            (click)="toggleProjects()"
+            class="relative w-8 h-8 flex items-center justify-center transform scale-50"
+          >
+            <div [class.rotate-180]="!projectsOpen()">
+              <app-icon [name]="'togleFilters'"></app-icon>
+            </div>
+          </button>
+        </div>
+        @if (projectsOpen()) {
+          @for (result of searchResults().projects; track result.slug) {
+            <app-search-card [item]="result"></app-search-card>
+          }
+        }
+      </div>
+    }
+    <!-- News -->
+    @if (searchResults().news.length > 0) {
+      <div
+        class="flex flex-col bg-primary-beige p-4 md:p-[40px] gap-2 md:gap-3 rounded-40"
+      >
+        <div class="flex flex-row justify-start items-center gap-2">
+          <span class="font-bold font-fixel text-start">
+            {{ 'NEWS' | translate }} ({{ searchResults().news.length }})</span
+          >
+          <button
+            type="button"
+            (click)="toggleNews()"
+            class="relative w-8 h-8 flex items-center justify-center transform scale-50"
+          >
+            <div [class.rotate-180]="!newsOpen()">
+              <app-icon [name]="'togleFilters'"></app-icon>
+            </div>
+          </button>
+        </div>
+        @if (newsOpen()) {
+          @for (result of searchResults().news; track result.slug) {
+            <app-search-card [item]="result"></app-search-card>
+          }
+        }
+      </div>
+    }
+    <!-- Stories -->
+    @if (searchResults().stories.length > 0) {
+      <div
+        class="flex flex-col bg-primary-beige p-4 md:p-[40px] gap-2 md:gap-3 rounded-40"
+      >
+        <div class="flex flex-row justify-start items-center gap-2">
+          <span class="font-bold font-fixel text-start">
+            {{ 'ABOUT_US_HISTORIES_TITLE' | translate }} ({{
+              searchResults().stories.length
+            }})</span
+          >
+          <button
+            type="button"
+            (click)="toggleStories()"
+            class="relative w-8 h-8 flex items-center justify-center transform scale-50"
+          >
+            <div
+              [class.rotate-180]="!storiesOpen()"
+              class="transform transition-transform duration-200"
+            >
+              <app-icon [name]="'togleFilters'" class="w-4 h-4" />
+            </div>
+          </button>
+        </div>
+        @if (storiesOpen()) {
+          @for (result of searchResults().stories; track result.slug) {
+            <app-search-card [item]="result"></app-search-card>
+          }
+        }
+      </div>
+    }
+    <!-- Pages -->
+    @if (searchResults().pages.length > 0) {
+      <div
+        class="flex flex-col bg-primary-beige p-4 md:p-[40px] gap-2 md:gap-3 rounded-40"
+      >
+        <div class="flex flex-row justify-start items-center gap-2">
+          <span class="font-bold font-fixel text-start">
+            {{ 'OTHER_SEARCH_PAGES' | translate }} ({{
+              searchResults().pages.length
+            }})</span
+          ><button
+            type="button"
+            (click)="togglePages()"
+            class="relative w-8 h-8 flex items-center justify-center transform scale-50"
+          >
+            <div [class.rotate-180]="!pagesOpen()">
+              <app-icon [name]="'togleFilters'"></app-icon>
+            </div>
+          </button>
+        </div>
+        @if (pagesOpen()) {
+          @for (result of searchResults().pages; track result.slug) {
+            <app-search-card [item]="result"></app-search-card>
+          }
+        }
+      </div>
+    }
+  }
+</div>

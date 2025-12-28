@@ -6,15 +6,17 @@ import {
   ElementRef,
   HostListener,
   inject,
+  NgZone,
   PLATFORM_ID,
   signal,
   Signal,
+  ViewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { filter, fromEvent } from 'rxjs';
+import { filter, fromEvent, take } from 'rxjs';
 import { AuthButtonsComponent } from '../../shared/components/auth-buttons.component';
 import { PrimarySmallButtonComponent } from '../../shared/components/buttons/blue/primary-small-button.component';
 import { RoundButtonWithIconComponent } from '../../shared/components/buttons/round-button-with-icon.component';
@@ -41,6 +43,16 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  @ViewChild('searchLineInput') searchInputRef!: ElementRef<HTMLInputElement>;
+  private ngZone = inject(NgZone);
+  onEnterPress() {
+    const query = this.searchForm.get('searchString')?.value;
+    if (query && query.length >= 3) {
+      this.router.navigate(['/search-results'], {
+        queryParams: { searchString: query },
+      });
+    }
+  }
   onSubmitSearchButton() {
     this.router.navigate(['search-results'], {
       queryParams: this.searchForm.value,
@@ -59,6 +71,15 @@ export class HeaderComponent {
   }
   openSearch() {
     this.isSearchOpen.set(!this.isSearchOpen());
+    this.searchForm.reset();
+    if (isPlatformBrowser(this.platformId)) {
+      this.ngZone.onStable
+        .asObservable()
+        .pipe(take(1))
+        .subscribe(() => {
+          this.searchInputRef?.nativeElement.focus();
+        });
+    }
   }
   private authService = inject(AuthService);
   private translate = inject(TranslateService);
@@ -67,8 +88,6 @@ export class HeaderComponent {
   private el = inject(ElementRef);
 
   menuItems: Record<string, string> = {
-
-
     '/about': 'ABOUT',
     '/projects': 'PROJECTS',
     '/support': 'SUPPORT',
@@ -107,15 +126,13 @@ export class HeaderComponent {
 
     this.accumulatedDelta += delta;
 
-    const threshold = 10; 
+    const threshold = 10;
 
     if (this.accumulatedDelta > threshold) {
-
       this.isHidden.set(true);
       this.isFloating.set(false);
       this.accumulatedDelta = 0;
     } else if (this.accumulatedDelta < -threshold) {
-
       this.isFloating.set(true);
       this.isHidden.set(false);
       this.accumulatedDelta = 0;
@@ -136,7 +153,6 @@ export class HeaderComponent {
   }
   constructor() {
     effect(() => {
-
       this.searchForm.valueChanges.subscribe(() => {
         this.isSearchButtonDisabled.set(!this.searchForm.valid);
       });

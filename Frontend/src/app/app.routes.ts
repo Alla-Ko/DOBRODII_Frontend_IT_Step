@@ -309,7 +309,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/news-group/news-detail/news-detail.component').then(
         c => c.NewsDetailComponent
-      ),
+      ),	
     resolve: { meta: metaResolver },
   },
 
