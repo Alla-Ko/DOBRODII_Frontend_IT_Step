@@ -27,7 +27,7 @@ export class ShareComponent {
   onShareFacebookClick() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    const url = encodeURIComponent(window.location.href);
+    const url = window.location.href;
     const text = this.translate.instant(this.text());
     const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`;
 
@@ -37,7 +37,7 @@ export class ShareComponent {
   onShareInstaClick() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    const url = encodeURIComponent(window.location.href);
+    const url = window.location.href;
     navigator.clipboard.writeText(url).then(() => {
       alert(this.translate.instant('LINK_COPIED'));
     });
@@ -45,7 +45,7 @@ export class ShareComponent {
   onShareXClick() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    const url = encodeURIComponent(window.location.href);
+    const url = window.location.href;
     const text = encodeURIComponent(this.translate.instant(this.text()));
     const shareUrl = `https://x.com/intent/tweet?text=${text}&url=${url}`;
 
@@ -54,7 +54,7 @@ export class ShareComponent {
   onShareTikTokClick() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    const url = encodeURIComponent(window.location.href);
+    const url = window.location.href;
     navigator.clipboard.writeText(url).then(() => {
       alert(this.translate.instant('LINK_COPIED'));
     });
