@@ -152,7 +152,7 @@ export class AnimalDetailComponent implements OnInit {
     const currentAnimal = this.animal();
     if (!currentAnimal) return;
 
-    const url = encodeURIComponent(window.location.href);
+    const url = window.location.href;
     const text = encodeURIComponent(
       `Check out ${currentAnimal.name} on PetCare!`
     );
@@ -167,7 +167,7 @@ export class AnimalDetailComponent implements OnInit {
     const currentAnimal = this.animal();
     if (!currentAnimal) return;
 
-    const url = encodeURIComponent(window.location.href);
+    const url = window.location.href;
     navigator.clipboard.writeText(url).then(() => {
       alert(this.translate.instant('LINK_COPIED'));
     });
